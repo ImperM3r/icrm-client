@@ -29,7 +29,7 @@
       callback.call()
 
     else
-      window.ICRMClient.Utils.loadScript @assets.jQuery, ->
+      window.ICRMClient.Utils.loadScript window.ICRMClient.Assets.jQuery, ->
 
         unless jQuery?
           console.error "Error loading jQuery"
