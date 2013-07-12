@@ -5,7 +5,6 @@
 #= require controllers/chat_controller
 #= require controllers/notification_controller
 #= require controllers/root_controller
-#= require jquery/jquery.min
 
 if window.attachEvent
   window.attachEvent 'onload', new @ICRMClient.RootController
