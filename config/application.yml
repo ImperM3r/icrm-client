@@ -1,4 +1,4 @@
 development:
-  url:        'http://widget.3009.vkontraste.ru/'
+  url:        'http://3007.vkontraste.ru/'
   faye_url:   'http://3009.vkontraste.ru:8808/faye'
   api_url:    'http://api.3009.vkontraste.ru/v1/'
