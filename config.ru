@@ -1,6 +1,10 @@
 require './config/environment' #File.expand_path('../config/boot', __FILE__)
 require './app'
 require './assets'
+require 'sass/plugin/rack'
+
+Sass::Plugin.options[:style] = :compressed
+use Sass::Plugin::Rack
 
 use Rack::Cors do
   allow do

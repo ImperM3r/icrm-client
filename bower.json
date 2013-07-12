@@ -2,7 +2,8 @@
   "name": "icrm-client",
   "version": "0.1",
   "dependencies": {
-    "brandymint-easyXDM": "latest"
+    "brandymint-easyXDM": "latest",
+    "jquery": "latest"
   },
   "ignore": [
     "**/.*",
