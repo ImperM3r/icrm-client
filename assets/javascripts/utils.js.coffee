@@ -25,6 +25,7 @@
     if window.ICRMClient.Utils.currentjQueryIsOk()
       window.ICRMClient.jQuery = jQuery
       window.ICRMClient.Base::$ = window.ICRMClient.jQuery
+      window.ICRMClient.Base::$.support.cors = true
 
       callback.call()
 
@@ -37,8 +38,10 @@
         # if there is no previously loaded jQuery versions in stack we are not going to delete exising one
         window.ICRMClient.jQuery = jQuery.noConflict true
         window.ICRMClient.Base::$ = window.ICRMClient.jQuery
+        window.ICRMClient.Base::$.support.cors = true
 
         callback.call()
+
 
 
 ## Debug logger for Faye

@@ -5,14 +5,13 @@ class @ICRMClient.Controllers.Informer extends @ICRMClient.Base
     @jqueryRequest()
 
   jqueryRequest: =>
-    @$.support.cors = true
-
     post =
+      crossDomain: true
+      xhrFields:
+        withCredentials: true
       type: 'POST'
       url: @logger_url
       data: @data()
-      xhrFields:
-        withCredentials: true
       success: @callback
       error: (e) ->
         console.error e

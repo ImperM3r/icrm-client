@@ -6,6 +6,8 @@ class @ICRMClient.Models.Notification extends @ICRMClient.Base
     @content = attrs.content
     @id = attrs.id
 
+    @read_url = window.ICRMClient.Assets.api_url + 'notifications/mark_read'
+
     # Settings
     #
     @timeToClose = 15000
@@ -38,20 +40,23 @@ class @ICRMClient.Models.Notification extends @ICRMClient.Base
     setTimeout @markAsRead, @timeToRead
 
   markAsRead: =>
+    return if @_read
 
-    unless @_read
-      @_read = true
-      # TODO send ajax to mark notification as read
-      @log "Mark notification #{@id} as read"
-      # TODO make POST request to assets.api.notification_url
-      window.ICRMClient.xhr.request
-        url: window.ICRMClient.Assets.api_url + 'notifications/mark_read'
-        data: { app_key: window.ICRMClient.app_key, id: @id }
-      , =>
-        console.log "Successful marked"
-      , (response) => #error function
-        console.error response
-        @
+    @_read = true
+    # TODO send ajax to mark notification as read
+    @log "Mark notification #{@id} as read"
+
+    post =
+      type: 'POST'
+      url: @read_url
+      data: { app_key: window.ICRMClient.app_key, id: @id }
+      xhrFields:
+        withCredentials: true
+      success: (d) ->
+        console.log d
+      error: (e) ->
+        console.error e
+    @$.ajax post
 
   close: =>
     @log "Close notification #{@id}"
