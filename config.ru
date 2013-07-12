@@ -1,9 +1,6 @@
-require 'sprockets'
+require './config/environment' #File.expand_path('../config/boot', __FILE__)
 require './app'
-require './settings'
+require './assets'
 
-map '/widget' do
-  run Application.assets
-end
-
+use Assets
 run Application

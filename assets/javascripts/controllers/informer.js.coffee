@@ -2,8 +2,8 @@ class @ICRMClient.Controllers.Informer
   constructor: (callback) ->
 
     window.ICRMClient.xhr.request
-      url: window.ICRMClient.Assets.logger_url
-      data: @user_data()
+      url: window.ICRMClient.Assets.api_url + 'logger'
+      data: @data()
       headers: { "Content-Type" : "application/x-www-form-urlencoded" }
 
     , callback
@@ -12,7 +12,7 @@ class @ICRMClient.Controllers.Informer
       console.error response
     @
 
-  user_data: ->
+  data: ->
     window.ICRMClient.app_key = window.ICRM_Settings.app_key
     delete window.ICRM_Settings.app_key
 
