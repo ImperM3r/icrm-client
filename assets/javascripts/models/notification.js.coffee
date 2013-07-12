@@ -36,8 +36,8 @@ class @ICRMClient.Models.Notification extends @ICRMClient.Base
     @$el.fadeIn(400)
     @$notificationsNode.append @$el
 
-    setTimeout @close, @timeToClose
-    setTimeout @markAsRead, @timeToRead
+    @closeTimer = setTimeout @close, @timeToClose
+    @readTimer = setTimeout @markAsRead, @timeToRead
 
   markAsRead: =>
     return if @_read
@@ -60,6 +60,8 @@ class @ICRMClient.Models.Notification extends @ICRMClient.Base
 
   close: =>
     @log "Close notification #{@id}"
+    clearTimeout @closeTimer
+    clearTimeout @readTimer
     @markAsRead()
     @$el.fadeOut 400, =>
       @$el.remove()

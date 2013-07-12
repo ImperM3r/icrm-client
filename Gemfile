@@ -15,6 +15,9 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'unicorn'
 
 group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+
   gem 'pry'
   gem 'pry-nav'
   gem 'capistrano'
