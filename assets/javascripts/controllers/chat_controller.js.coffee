@@ -1,4 +1,4 @@
-class @ICRMClient.Controllers.ChatController
+class @ICRMClient.Controllers.ChatController extends @ICRMClient.Base
 
   constructor: (visitor_id) ->
     @isLoaded = false
