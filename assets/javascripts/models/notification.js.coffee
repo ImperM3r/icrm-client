@@ -46,7 +46,7 @@ class @ICRMClient.Models.Notification extends @ICRMClient.Base
       # TODO make POST request to assets.api.notification_url
       window.ICRMClient.xhr.request
         url: window.ICRMClient.Assets.api_url + 'notifications/mark_read'
-        data: { id: @id }
+        data: { app_key: window.ICRMClient.app_key, id: @id }
       , =>
         console.log "Successful marked"
       , (response) => #error function

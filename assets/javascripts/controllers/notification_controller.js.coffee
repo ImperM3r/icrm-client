@@ -10,6 +10,7 @@ class @ICRMClient.Controllers.NotificationController extends @ICRMClient.Base
 
     window.ICRMSendTestNotify= =>
       @_notificationHandler notification:
+        id: 1
         subject: 'Subject',
         content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
 
