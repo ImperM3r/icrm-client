@@ -54,6 +54,6 @@ class @ICRMClient.RootController extends @ICRMClient.Base
         window.ICRMClient.faye.setHeader 'ICRM-Visitor', @visitor_id
         window.ICRMClient.faye.addExtension window.ICRMClient.FayeLogger
 
-        @chat_controller = new window.ICRMClient.Controllers.ChatController @visitor_id
+        #@chat_controller = new window.ICRMClient.Controllers.ChatController @visitor_id
         @notification_controller = new window.ICRMClient.Controllers.NotificationController @visitor_id
 
