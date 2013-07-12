@@ -1,4 +1,5 @@
-asset_url:          'http://widget.icrm.icfdev.ru/widget'
+self_host:          'widget.icrm.icfdev.ru'
+asset_url:          'http://icrm.icfdev.ru/assets'
 system_logger_url:  'http://icrm.icfdev.ru/logger'
 system_chat_url:    'http://icrm.icfdev.ru/chat'
-faye_url:           'http://icrm.icfdev.ru:8808/faye'
+faye_url:           'http://icrm.icfdev.ru:8809/faye'

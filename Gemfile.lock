@@ -40,6 +40,7 @@ GEM
     rack-protection (1.5.0)
       rack
     raindrops (0.11.0)
+    sass (3.2.9)
     settingslogic (2.0.9)
     sinatra (1.4.3)
       rack (~> 1.4)
@@ -66,6 +67,7 @@ DEPENDENCIES
   capistrano-rbenv
   capistrano-recipes0 (>= 1.1.0)!
   coffee-script
+  sass
   settingslogic
   sinatra
   sprockets
