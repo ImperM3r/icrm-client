@@ -10,7 +10,7 @@ class @ICRMClient.Controllers.Informer
 
     , (response) => #error function
       console.error response
-      @
+    @
 
   user_data: ->
     window.ICRMClient.app_key = window.ICRM_Settings.app_key

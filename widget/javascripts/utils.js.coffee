@@ -1,4 +1,4 @@
-@ICRMClient.Utils=
+@ICRMClient.Utils =
   currentjQueryIsOk: ->
     return false unless jQuery?
     jq_ver = jQuery.fn.jquery.split '.' # jQuery.fn.jquery returns version as "1.10.2" string
