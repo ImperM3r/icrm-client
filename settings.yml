@@ -1,0 +1,4 @@
+asset_url:          'http://example.com'
+system_logger_url:  'http://example.com'
+system_chat_url:    'http://example.com'
+faye_url:           'http://faye.com'

@@ -1,4 +1,4 @@
-class @ICRMClient.Controllers.ChatController
+class @ICRMClient.Controllers.ChatController extends @ICRMClient.Base
 
   constructor: (data) ->
     return
@@ -7,7 +7,7 @@ class @ICRMClient.Controllers.ChatController
     @data = data
     @faye.subscribe "/chat/#{@visitor_id}", @messageHandler
 
-  drawChatStarter: (usingCurrentJQ)->
+  drawChatStarter: ->
     jq = window.ICRMClient.jQuery
     jq('#icrm_chat .starter').on 'click', @$.proxy(window.ICRMClient.Chat, 'drawChat')
 
@@ -23,7 +23,7 @@ class @ICRMClient.Controllers.ChatController
     return unless @xhr? and @jq? and !@isLoaded
 
     @xhr.request
-      url: "<%= ICRM::Application.routes.url_helpers.system_chat_url %>"
+      url: @assets.system_chat_url
       data: @data
       headers: { "Content-Type" : "application/x-www-form-urlencoded" }
     , (response) => #success function
@@ -37,11 +37,11 @@ class @ICRMClient.Controllers.ChatController
     return unless @xhr? and !@isSubscribed
 
     @xhr.request
-      url: "<%= ICRM::Application.routes.url_helpers.system_logger_url %>"
+      url: @assets.system_logger_url
       data: @data
       headers: { "Content-Type" : "application/x-www-form-urlencoded" }
     , (response) => #success function
-      @faye = new Faye.Client "<%= Settings.faye.remote_url %>"
+      @faye = new Faye.Client @assets.faye_url
 
       visitor_id = parseInt JSON.parse(response.data).visitor_id
       if isNaN(visitor_id) # unless visitor_id is a number
