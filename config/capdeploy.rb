@@ -24,7 +24,16 @@ set :keep_releases, 3
 set :rbenv_ruby_version, "2.0.0-p195"
 set :bundle_flags, "--deployment --quiet --binstubs"
 
-after 'deploy', "deploy:cleanup"
+after 'deploy', 'bower:install'
+after 'bower', "deploy:cleanup"
+
+namespace :bower do
+  desc "Installing bower components"
+  task :install do
+    run "cd #{latest_release} && bower install"
+  end
+end
+
 
 require "bundler/capistrano"
 require "capistrano-rbenv"

@@ -9,6 +9,7 @@ class Application < Sinatra::Base
   configure do
     assets.append_path File.join(root, 'widget', 'stylesheets')
     assets.append_path File.join(root, 'widget', 'javascripts')
+    assets.append_path File.join(root, 'vendor', 'assets', 'components')
 
     Sprockets::Helpers.configure do |config|
       config.environment = assets
