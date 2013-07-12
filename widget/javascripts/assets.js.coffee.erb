@@ -1,16 +1,17 @@
 @ICRMClient.Assets =
 
   # static assets
-  swf:          "<%= asset_url 'brandymint-easyXDM/easyxdm.swf' %>"
-  remote:       "<%= asset_url 'brandymint-easyXDM/cors/index.html' %>"
-  remoteHelper: "<%= asset_url 'brandymint-easyXDM/name.html' %>"
-  easyXDM:      "<%= asset_url 'brandymint-easyXDM/easyXDM.min.js' %>"
-  json:         "<%= asset_url 'brandymint-easyXDM/json2.js' %>"
-  faye_js:      "<%= Settings.faye.remote_url %>/faye/client.js"
-  jQuery:       "<%= asset_url "widget/javascripts/jquery.#{Rails.env.production? ? 'min.' : '' }js" %>"
+  swf:          "<%= Settings.asset_url %>/brandymint-easyXDM/easyxdm.swf"
+  remote:       "<%= Settings.asset_url %>/brandymint-easyXDM/cors/index.html"
+  remoteHelper: "<%= Settings.asset_url %>/brandymint-easyXDM/name.html"
+  easyXDM:      "<%= Settings.asset_url %>/brandymint-easyXDM/easyXDM.min.js"
+  json:         "<%= Settings.asset_url %>/brandymint-easyXDM/json2.js"
+  faye_js:      "<%= Settings.faye_url %>/faye/client.js"
+  jQuery:       "<%= Settings.asset_url %>/widget/javascripts/jquery.js"
 
-  css:          "<%= asset_url "widget/v1.css" %>"
+  css:          "<%= Settings.asset_url %>/widget/v1.css"
 
   # request urls
-  logger_url:   "<%= ICRM::Application.routes.url_helpers.system_logger_url %>"
-  faye_url:     "<%= Settings.faye.remote_url %>"
+  logger_url:   "<%= Settings.system_logger_url %>"
+  chat_url:     "<%= Settings.system_chat_url %>"
+  faye_url:     "<%= Settings.faye_url %>"

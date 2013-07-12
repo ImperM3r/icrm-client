@@ -12,6 +12,7 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
+    settingslogic (2.0.9)
     sinatra (1.4.3)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -30,6 +31,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-script
+  settingslogic
   sinatra
   sprockets
   sprockets-helpers

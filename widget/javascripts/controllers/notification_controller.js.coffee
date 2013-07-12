@@ -1,4 +1,4 @@
-#= require widget/models/notification
+#= require ../models/notification
 
 class @ICRMClient.Controllers.NotificationController extends @ICRMClient.Base
   constructor: (visitor_id) ->
