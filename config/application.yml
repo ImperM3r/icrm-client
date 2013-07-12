@@ -1,4 +1,5 @@
 development:
-  url:        'http://3007.vkontraste.ru/'
-  faye_url:   'http://3009.vkontraste.ru:8808/faye'
-  api_url:    'http://api.3009.vkontraste.ru/v1/'
+  url:         'http://3007.vkontraste.ru/'
+  faye_url:    'http://3009.vkontraste.ru:8808/faye'
+  easyxdm_url: 'http://3009.vkontraste.ru/assets/brandymint-easyXDM/'
+  api_url:     'http://api.3009.vkontraste.ru/v1/'
