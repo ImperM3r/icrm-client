@@ -43,7 +43,8 @@ class @ICRMClient.RootController extends @ICRMClient.Base
   _runInformer: =>
     @log "Run Informer"
     @informer = new window.ICRMClient.Controllers.Informer (response) =>
-      @visitor_id = parseInt JSON.parse(response.data).visitor_id
+      #@visitor_id = parseInt JSON.parse(response.data).visitor_id
+      @visitor_id = response.visitor_id
 
       if isNaN(@visitor_id) # unless visitor_id is a number
         @log "Problem with visitor_id: #{response.data}"

@@ -1,12 +1,32 @@
-class @ICRMClient.Controllers.Informer
+class @ICRMClient.Controllers.Informer extends @ICRMClient.Base
   constructor: (callback) ->
+    @logger_url = window.ICRMClient.Assets.api_url + 'logger'
+    @callback = callback
+    @jqueryRequest()
 
+  jqueryRequest: =>
+    @$.support.cors = true
+
+    post =
+      type: 'POST'
+      url: @logger_url
+      data: @data()
+      xhrFields:
+        withCredentials: true
+      success: @callback
+      error: (e) ->
+        console.error e
+        #throw 'error'
+
+    @$.ajax post
+
+  easyRequest: =>
     window.ICRMClient.xhr.request
-      url: window.ICRMClient.Assets.api_url + 'logger'
+      url: @logger_url
       data: @data()
       headers: { "Content-Type" : "application/x-www-form-urlencoded" }
 
-    , callback
+    , @callback
 
     , (response) => #error function
       console.error response
