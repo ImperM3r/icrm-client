@@ -4,10 +4,12 @@ gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'sprockets'
 gem 'sprockets-helpers'
+gem 'rack-contrib'
 gem 'sass'
 gem 'haml'
 gem 'coffee-script'
 gem 'settingslogic'
+gem 'rack-cors', :require => 'rack/cors'
 
 gem 'unicorn'
 

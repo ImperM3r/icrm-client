@@ -20,10 +20,14 @@ class Assets < Sinatra::Base
     })
   end
 
-  get "/assets/:file.:ext" do |file, ext|
-    a = settings.assets["#{file}.#{ext}"]
-    content_type a.content_type
+  get "/assets/*" do |file|
+    begin
+      a = settings.assets[file]
+      content_type a.content_type
 
-    a
+      a
+    rescue
+      [404]
+    end
   end
 end
