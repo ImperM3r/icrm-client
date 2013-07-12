@@ -1,0 +1,12 @@
+{
+  "name": "icrm-client",
+  "version": "0.1",
+  "dependencies": {
+    "brandymint-easyXDM": "latest"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ]
+}
