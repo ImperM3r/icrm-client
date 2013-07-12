@@ -6,16 +6,16 @@ dapi:
 
 development:
   url:         'http://widget.icrm.icfdev.ru/'
-  faye_url:    'http://icrm.icfdev.ru:8808/faye'
+  faye_url:    'http://icrm.icfdev.ru:8809/faye'
   easyxdm_url: 'http://icrm.icfdev.ru/assets/brandymint-easyXDM/'
   api_url:     'http://api.icrm.icfdev.ru/v1/'
 production:
   url:         'http://widget.icrm.icfdev.ru/'
-  faye_url:    'http://icrm.icfdev.ru:8808/faye'
+  faye_url:    'http://icrm.icfdev.ru:8809/faye'
   easyxdm_url: 'http://icrm.icfdev.ru/assets/brandymint-easyXDM/'
   api_url:     'http://api.icrm.icfdev.ru/v1/'
 stage:
   url:         'http://widget.icrm.icfdev.ru/'
-  faye_url:    'http://icrm.icfdev.ru:8808/faye'
+  faye_url:    'http://icrm.icfdev.ru:8809/faye'
   easyxdm_url: 'http://icrm.icfdev.ru/assets/brandymint-easyXDM/'
   api_url:     'http://api.icrm.icfdev.ru/v1/'
