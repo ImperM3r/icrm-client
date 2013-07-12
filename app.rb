@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'sprockets'
 require 'sprockets-helpers'
+require 'coffee_script'
 
 class Application < Sinatra::Base
   set :assets, Sprockets::Environment.new(root)
@@ -17,5 +18,9 @@ class Application < Sinatra::Base
 
   helpers do
     include Sprockets::Helpers
+  end
+
+  get '/' do
+    erb :index
   end
 end
