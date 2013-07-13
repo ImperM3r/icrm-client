@@ -9,9 +9,8 @@ class @ICRMClient.RootController extends @ICRMClient.Base
     # TODO include faye_client into this script
     window.ICRMClient.Utils.loadScript @assets.faye_js, @_tryInitFaye
 
-    window.ICRMClient.Utils.preparejQuery =>
-      @_createRootNode()
-      @_runInformer()
+    @_createRootNode()
+    @_runInformer()
 
   _createRootNode: =>
     # TODO rename icrm_chat to icrm_client

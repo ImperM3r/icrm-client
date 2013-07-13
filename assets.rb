@@ -1,9 +1,9 @@
 class Assets < Sinatra::Base
   configure do
     set :assets, (Sprockets::Environment.new { |env|
+      env.append_path File.join(root, 'assets', 'components')
       env.append_path File.join(root, 'assets', 'stylesheets')
       env.append_path File.join(root, 'assets', 'javascripts')
-      env.append_path File.join(root, 'assets', 'components')
 
       Sprockets::Helpers.configure do |config|
         config.environment = env

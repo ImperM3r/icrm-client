@@ -1,5 +1,7 @@
 #= require namespaces
 #= require assets
+#= require base
+#= require jquery
 #= require utils
 #= require controllers/informer
 #= require controllers/chat_controller
