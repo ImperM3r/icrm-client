@@ -2,6 +2,7 @@
 #= require assets
 #= require base
 #= require jquery
+#= require backbone
 #= require utils
 #= require controllers/informer
 #= require controllers/chat_controller

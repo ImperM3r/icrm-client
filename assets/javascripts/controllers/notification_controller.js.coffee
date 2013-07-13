@@ -2,7 +2,7 @@
 
 class @ICRMClient.Controllers.NotificationController extends @ICRMClient.Base
   constructor: (visitor_id) ->
-    unless window.ICRMClient.jQuery?
+    unless window.ICRMClient.$?
       console.error "Can't initalize NotificationController"
       return
 
