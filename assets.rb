@@ -4,6 +4,7 @@ class Assets < Sinatra::Base
       env.append_path File.join(root, 'vendor')
       env.append_path File.join(root, 'assets', 'stylesheets')
       env.append_path File.join(root, 'assets', 'javascripts')
+      env.cache = Sass::CacheStores::Memory.new
 
       Sprockets::Helpers.configure do |config|
         config.environment = env
@@ -22,12 +23,17 @@ class Assets < Sinatra::Base
 
   get "/assets/*" do |file|
     begin
-      a = settings.assets[file]
-      content_type a.content_type
+      if a = settings.assets[file]
+        content_type a.content_type
 
-      a
-    rescue
-      [404]
+        return a
+      else
+        return [404, {"Content-Type" => "text/html"}, ["Not Found"]]
+      end
+
+    rescue StandardError => err
+      logger.error err
+      [404, {"Content-Type" => "text/html"}, [err.to_s]]
     end
   end
 end

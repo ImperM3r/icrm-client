@@ -1,20 +1,21 @@
 require './config/environment' #File.expand_path('../config/boot', __FILE__)
 require './app'
 require './assets'
-require 'sass/plugin/rack'
+#require 'sass/plugin/rack'
 
-Sass::Plugin.options[:style] = :compressed
-use Sass::Plugin::Rack
+puts "My url is #{Settings.url}"
 
-use Rack::Cors do
-  allow do
-    origins '*'
-    resource '*', :headers => :any, :methods => [:get, :post, :options]
-  end
+if development?
+  Sprockets::Sass.options[:line_comments] = true
+else
+  Sass::Plugin.options[:style] = :compressed
 end
 
-#use Rack::ResponseHeaders do |headers|
-  #headers['X-Frame-Options'] = 'bar'
+#use Rack::Cors do
+  #allow do
+    #origins '*'
+    #resource '*', :headers => :any, :methods => [:get, :post, :options]
+  #end
 #end
 
 use Assets
