@@ -13,7 +13,7 @@ class Assets < Sinatra::Base
       end
 
       # compress everything in production
-      if ENV["RACK_ENV"] == "production"
+      if ENV["RACK_ENV"] == "production" || ENV["RACK_ENV"] == "stage"
         env.js_compressor  = YUI::JavaScriptCompressor.new
         env.css_compressor = YUI::CssCompressor.new
       end

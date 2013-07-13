@@ -11,7 +11,7 @@ gem 'haml'
 gem 'coffee-script'
 gem 'settingslogic'
 gem 'rack-cors', :require => 'rack/cors'
-
+gem 'yui-compressor'
 gem 'unicorn'
 
 group :development do
