@@ -8,19 +8,19 @@
   /* Positioning */ 
   .notifications.top-right 
     right: 10px
-    top: 25px
+    top: 10px
 
   .notifications.top-left 
     left: 10px
-    top: 25px
+    top: 10px
 
   .notifications.bottom-left 
     left: 10px
-    bottom: 25px
+    bottom: 10px
 
   .notifications.bottom-right 
     right: 10px
-    bottom: 25px
+    bottom: 10px
 
   /* Notification Element */
   .notifications > div 
@@ -28,3 +28,10 @@
     z-index: 9999
     margin: 5px 0px
 
+  .notifications
+    &.top-right, &.top-left, &.bottom-right, &.bottom-left
+      @media (max-width: 979px)
+        top: 10px
+        left: 10px
+        right: 10px
+        bottom: auto

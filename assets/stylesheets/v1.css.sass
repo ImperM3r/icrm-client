@@ -10,7 +10,10 @@ $avatarSize: 32px
   @extend %icrm_chat
   .frame
     display: none
-  max-width: 320px
+  width: 320px
+  @media (max-width: 979px)
+    width: 100%
+    margin: 0 auto
   padding: 10px 16px 10px ($avatarSize + 20px)
   font-size: 13px
   line-height: 16px
@@ -25,7 +28,7 @@ $avatarSize: 32px
     font-size: 14px
     margin-bottom: 4px
   
-  .close
+  .icrm_chat_close
     position: absolute
     top: 0
     right: 4px

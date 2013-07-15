@@ -1,3 +1,4 @@
 vendor/*
+assets/components
 .sass-cache
 config/application.local.yml

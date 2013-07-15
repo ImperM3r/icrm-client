@@ -14,7 +14,7 @@ class @ICRMClient.Models.Notification extends @ICRMClient.Base
 
   _prepareHtml: ->
     el = @$ "<div id='icrm_chat'>"+
-      "<a class='close' href='#'>&times;</a>"+
+      "<a class='icrm_chat_close' href='#'>&times;</a>"+
       "<img src='http://lorempixel.com/32/32/cats/' class='icrm_chat_avatar pull-left' width='32' height='32' />"+
       "<div class='pull-right'>"+
       "<div class='icrm_chat_subject'><strong>#{@subject}</strong></div>"+

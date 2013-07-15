@@ -17,7 +17,7 @@ class @ICRMClient.RootController extends @ICRMClient.Base
     root =  @$('
       <div id="icrm_chat">
         <div class="starter"></div>
-        <div class="notifications bottom-right"></div>
+        <div class="notifications top-right"></div>
       </div>
     ')
 
