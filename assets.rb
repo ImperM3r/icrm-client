@@ -4,6 +4,7 @@ class Assets < Sinatra::Base
       env.append_path File.join(root, 'vendor')
       env.append_path File.join(root, 'assets', 'stylesheets')
       env.append_path File.join(root, 'assets', 'javascripts')
+      env.append_path File.join(root, 'assets', 'templates')
       env.cache = Sass::CacheStores::Memory.new
 
       Sprockets::Helpers.configure do |config|

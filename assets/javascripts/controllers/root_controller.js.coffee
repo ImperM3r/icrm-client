@@ -1,4 +1,6 @@
 class @ICRMClient.RootController extends @ICRMClient.Base
+  chat_init_template: JST['chat/init_template']
+
   isLoaded = false
 
   constructor: (options) ->
@@ -14,12 +16,7 @@ class @ICRMClient.RootController extends @ICRMClient.Base
 
   _createRootNode: =>
     # TODO rename icrm_chat to icrm_client
-    root =  @$('
-      <div id="icrm_chat">
-        <div class="starter"></div>
-        <div class="notifications top-right"></div>
-      </div>
-    ')
+    root =  @$ @chat_init_template()
 
     @$('body').eq(0).append root
     window.ICRMClient.Base::$rootNode = root
