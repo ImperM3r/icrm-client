@@ -7,8 +7,6 @@ puts "My url is #{Settings.url}"
 
 if development?
   Sprockets::Sass.options[:line_comments] = true
-else
-  Sass::Plugin.options[:style] = :compressed
 end
 
 use Rack::Cors do
