@@ -19,18 +19,6 @@ class @ICRMClient.Controllers.Informer extends @ICRMClient.Base
 
     @$.ajax post
 
-  easyRequest: =>
-    window.ICRMClient.xhr.request
-      url: @logger_url
-      data: @data()
-      headers: { "Content-Type" : "application/x-www-form-urlencoded" }
-
-    , @callback
-
-    , (response) => #error function
-      console.error response
-    @
-
   data: ->
     window.ICRMClient.app_key = window.ICRM_Settings.app_key
     delete window.ICRM_Settings.app_key

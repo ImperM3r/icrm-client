@@ -1,0 +1,15 @@
+<div id="icrm_chat">
+  <div class="starter"></div>
+  <div class="notifications bottom-right"></div>
+
+  <div class="icrm-chat-frame">
+    <div class="icrm-chat-messages">
+      <ul class="icrm-chat-messages-list">
+      </ul>
+    </div>
+    <div class="icrm-input-message">
+      <input type="text" name="icrm-client-message" />
+      <input type="submit" name="icrm-client-message-submit" value="send" />
+    </div>
+  </div>
+</div>
