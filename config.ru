@@ -11,12 +11,12 @@ else
   Sass::Plugin.options[:style] = :compressed
 end
 
-#use Rack::Cors do
-  #allow do
-    #origins '*'
-    #resource '*', :headers => :any, :methods => [:get, :post, :options]
-  #end
-#end
+use Rack::Cors do
+  allow do
+    origins '*'
+    resource '*', :headers => :any, :methods => [:get, :post, :options]
+  end
+end
 
 use Assets
 run Application

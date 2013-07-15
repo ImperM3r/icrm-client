@@ -39,8 +39,9 @@ class @ICRMClient.RootController extends @ICRMClient.Base
     @notification_controller = new window.ICRMClient.Controllers.NotificationController @visitor_id
 
   _runInformer: =>
-    @log "Run Informer"
+    @log "Try to _runInformer"
     return if @informer
+    @log "Run _runInformer"
 
     @informer = new window.ICRMClient.Controllers.Informer (response) =>
       #@visitor_id = parseInt JSON.parse(response.data).visitor_id
