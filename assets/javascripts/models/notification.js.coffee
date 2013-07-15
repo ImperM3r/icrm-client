@@ -8,11 +8,6 @@ class @ICRMClient.Models.Notification extends @ICRMClient.Base
 
     @read_url = window.ICRMClient.Assets.api_url + 'notifications/mark_read'
 
-    # Settings
-    #
-    @timeToClose = 15000
-    @timeToRead = 3000
-
     @_read = false
 
     @$el = @_prepareHtml()
@@ -36,9 +31,6 @@ class @ICRMClient.Models.Notification extends @ICRMClient.Base
     @$el.fadeIn(400)
     @$notificationsNode.append @$el
 
-    @closeTimer = setTimeout @close, @timeToClose
-    @readTimer = setTimeout @markAsRead, @timeToRead
-
   markAsRead: =>
     return if @_read
 
@@ -60,8 +52,6 @@ class @ICRMClient.Models.Notification extends @ICRMClient.Base
 
   close: =>
     @log "Close notification #{@id}"
-    clearTimeout @closeTimer
-    clearTimeout @readTimer
     @markAsRead()
     @$el.fadeOut 400, =>
       @$el.remove()
