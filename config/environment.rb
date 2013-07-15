@@ -10,5 +10,6 @@ require "sinatra/reloader" if development?
 require 'sprockets'
 require 'sprockets-helpers'
 require 'coffee_script'
+require 'eco'
 
 require './config/settings'

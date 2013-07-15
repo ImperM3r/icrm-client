@@ -35,6 +35,11 @@ GEM
       execjs
     coffee-script-source (1.6.2)
     debug_inspector (0.0.2)
+    eco (1.0.0)
+      coffee-script
+      eco-source
+      execjs
+    eco-source (1.1.0.rc.1)
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (1.4.0)
@@ -112,6 +117,7 @@ DEPENDENCIES
   capistrano-rbenv
   capistrano-recipes0 (>= 1.1.0)!
   coffee-script
+  eco
   haml
   pry
   pry-nav
