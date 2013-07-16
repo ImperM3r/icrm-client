@@ -1,20 +1,27 @@
 class @ICRMClient.Controllers.ChatController extends @ICRMClient.Base
 
   constructor: (visitor_id) ->
-    @drawChatStarter()
+    @el =
+      $starter:      @$rootNode.find '.icrm_button_starter'
+      $chat_holder:  @$rootNode.find '.chat_holder'
+      messages_list: 'ul.icrm_chat_messages_list'
+      $input_text:   @$rootNode.find 'textarea[name="icrm_message_text"]'
+      $submit:       @$rootNode.find 'input[name="icrm_message_submit"]'
+
+    @_showStarter()
     @chat_subscription = window.ICRMClient.faye.subscribe "/chat/#{visitor_id}", @_messageHandler
 
     @messages_collection = new ICRMClient.Collections.Messages()
     new ICRMClient.Views.MessagesView
       collection: @messages_collection
       model_view: ICRMClient.Views.MessageView
-      el: 'ul.icrm-chat-messages-list'
+      el: @el.messages_list
 
 
-    @$('input[name="icrm-client-message-submit"]').click =>
-      $text_input = @$('input[name="icrm-client-message"]')
-      @_composeMessage($text_input.val())
-      $text_input.val('')
+    @el.$submit.click (event) =>
+      @_composeMessage @el.$input_text.val()
+      @el.$input_text.val('')
+      false
 
     _id = 0
 
@@ -25,11 +32,17 @@ class @ICRMClient.Controllers.ChatController extends @ICRMClient.Base
         sender: 'Freddy Mercury'
         content: 'Show must go on'
 
-  drawChatStarter: =>
-    @$rootNode.find('.starter').on 'click', @_showChat
+  _showStarter: =>
+    if window.ICRM_Settings.chat == true
+      @el.$starter.show()
+      @el.$starter.on 'click', @_showChat
+      @el.$chat_holder.find('.icrm_chat_close').click @_closeChat
 
   _showChat: =>
-    true
+    @el.$chat_holder.show()
+
+  _closeChat: =>
+    @el.$chat_holder.hide()
 
   _composeMessage: (content) =>
     @messages_collection.add
