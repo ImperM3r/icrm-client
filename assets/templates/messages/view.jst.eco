@@ -1,5 +1,5 @@
 <span class="icrm-message-datetime">
-  <%= @timestamp %>
+  <%= @created_at %>
 </span>
 <span class="icrm-message-owner">
   <%= @sender_name %>

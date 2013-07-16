@@ -33,15 +33,17 @@ class @ICRMClient.Controllers.ChatController extends @ICRMClient.Base
     _id = 0
 
     window.ICRMSendServerMessage = =>
-      @_messageHandler message:
-        visitor_id: @visitor_id
-        id: _id++
-        timestamp: new Date()
-        from_type: 'Manager'
-        from_id: 123
-        from:
-          name: 'John Birman'
-        content: 'Show must go on'
+      @_messageHandler
+        method: 'create'
+        message:
+          visitor_id: @visitor_id
+          id: _id++
+          created_at: new Date()
+          from_type: 'Manager'
+          from_id: 123
+          from:
+            name: 'John Birman'
+          content: 'Show must go on'
 
   _showStarter: =>
     if window.ICRM_Settings.chat == true
