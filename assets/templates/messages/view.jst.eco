@@ -2,6 +2,6 @@
   <%= @timestamp %>
 </span>
 <span class="icrm-message-owner">
-  <%= @sender %>
+  <%= @sender_name %>
 </span>
 <%= @content %>
