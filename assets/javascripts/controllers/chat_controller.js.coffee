@@ -1,4 +1,5 @@
 class @ICRMClient.Controllers.ChatController extends @ICRMClient.Base
+  messages_url: window.ICRMClient.Assets.api_url + 'chat/messages'
 
   constructor: (visitor_id) ->
     @el =
@@ -9,17 +10,23 @@ class @ICRMClient.Controllers.ChatController extends @ICRMClient.Base
       $submit:       @$rootNode.find 'input[name="icrm_message_submit"]'
 
     @_showStarter()
-    @chat_subscription = window.ICRMClient.faye.subscribe "/chat/#{visitor_id}", @_messageHandler
+
+    @visitor_id = visitor_id
+    # @drawChatStarter()
+
+    @from_type = 'Visitor'
+    @from_id = visitor_id
 
     @messages_collection = new ICRMClient.Collections.Messages()
-    new ICRMClient.Views.MessagesView
+
+    @messages_view = new ICRMClient.Views.MessagesView
       collection: @messages_collection
-      model_view: ICRMClient.Views.MessageView
       el: @el.messages_list
 
+    window.ICRMClient.faye.subscribe "/chat/#{visitor_id}", @_messageHandler
 
     @el.$submit.click (event) =>
-      @_composeMessage @el.$input_text.val()
+      @_postMessage @el.$input_text.val()
       @el.$input_text.val('')
       false
 
@@ -27,9 +34,13 @@ class @ICRMClient.Controllers.ChatController extends @ICRMClient.Base
 
     window.ICRMSendServerMessage = =>
       @_messageHandler message:
+        visitor_id: @visitor_id
         id: _id++
         timestamp: new Date()
-        sender: 'Freddy Mercury'
+        from_type: 'Manager'
+        from_id: 123
+        from:
+          name: 'John Birman'
         content: 'Show must go on'
 
   _showStarter: =>
@@ -44,12 +55,20 @@ class @ICRMClient.Controllers.ChatController extends @ICRMClient.Base
   _closeChat: =>
     @el.$chat_holder.hide()
 
-  _composeMessage: (content) =>
-    @messages_collection.add
-      timestamp: new Date()
-      sender: '__client__'
+  _postMessage: (content) =>
+    message = new window.ICRMClient.Models.Message
+      visitor_id: @visitor_id
+      from_type: @from_type
+      from_id: @from_id
       content: content
 
+    @ajax
+      url: @messages_url
+      data: message.attributes
+      success: (message) =>
+        @messages_collection.add message
+
   _messageHandler: (message) =>
-    @messages_collection.add message.message
-    @log message
+    if message.method == 'create'
+      # Collection is smart to detect the existed message
+      @messages_collection.add message.message
