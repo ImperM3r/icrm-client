@@ -1,0 +1,7 @@
+<span class="icrm-message-datetime">
+  <%= @timestamp %>
+</span>
+<span class="icrm-message-owner">
+  <%= @sender %>
+</span>
+<%= @content %>

@@ -5,12 +5,12 @@
 #= require backbone
 #= require utils
 #= require_tree ../templates
-#= require controllers/informer
+#= require models/message
+#= require_tree ./collections
+#= require_tree ./views
 #= require controllers/chat_controller
+#= require controllers/informer
 #= require controllers/notification_controller
 #= require controllers/root_controller
 
-if window.attachEvent
-  window.attachEvent 'onload', new @ICRMClient.RootController
-else
-  window.addEventListener 'load', new @ICRMClient.RootController, false
+new @ICRMClient.RootController

@@ -1,28 +1,42 @@
 class @ICRMClient.Controllers.ChatController extends @ICRMClient.Base
 
   constructor: (visitor_id) ->
-    @isLoaded = false
-    @data =
-      app_key: window.ICRMClient.app_key
-      visitor_id: visitor_id
     @drawChatStarter()
-    window.ICRMClient.faye.subscribe "/chat/#{visitor_id}", @messageHandler
+    @chat_subscription = window.ICRMClient.faye.subscribe "/chat/#{visitor_id}", @_messageHandler
+
+    @messages_collection = new ICRMClient.Collections.Messages()
+    new ICRMClient.Views.MessagesView
+      collection: @messages_collection
+      model_view: ICRMClient.Views.MessageView
+      el: 'ul.icrm-chat-messages-list'
+
+
+    @$('input[name="icrm-client-message-submit"]').click =>
+      $text_input = @$('input[name="icrm-client-message"]')
+      @_composeMessage($text_input.val())
+      $text_input.val('')
+
+    _id = 0
+
+    window.ICRMSendServerMessage = =>
+      @_messageHandler message:
+        id: _id++
+        timestamp: new Date()
+        sender: 'Freddy Mercury'
+        content: 'Show must go on'
 
   drawChatStarter: =>
-    @$rootNode.find('.starter').on 'click', @drawChat
+    @$rootNode.find('.starter').on 'click', @_showChat
 
-  messageHandler: (message) =>
+  _showChat: =>
+    true
+
+  _composeMessage: (content) =>
+    @messages_collection.add
+      timestamp: new Date()
+      sender: '__client__'
+      content: content
+
+  _messageHandler: (message) =>
+    @messages_collection.add message.message
     @log message
-
-  drawChat: =>
-    return unless window.ICRMClient.xhr? and @$? and !@isLoaded
-
-    window.ICRMClient.xhr.request
-      url: @assets.chat_url
-      data: @data
-      headers: { "Content-Type" : "application/x-www-form-urlencoded" }
-    , (response) => #success function
-      @isLoaded = true
-      @$rootNode.append response.data
-    , (response) => #error function
-      @log response

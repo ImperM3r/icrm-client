@@ -1,5 +1,5 @@
 class @ICRMClient.RootController extends @ICRMClient.Base
-  chat_init_template: JST['chat/init_template']
+  chat_init_template: JST['root_template']
 
   isLoaded = false
 
@@ -7,6 +7,7 @@ class @ICRMClient.RootController extends @ICRMClient.Base
     window.ICRMClient.head = document.getElementsByTagName('head')[0]
 
     window.ICRMClient.Utils.loadStyle  @assets.css
+
 
     # TODO include faye_client into this script
     window.ICRMClient.Utils.loadScript @assets.faye_js, @_tryInitFaye
