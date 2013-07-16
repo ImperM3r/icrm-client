@@ -1,14 +1,13 @@
 # TODO Move views methods to the View
 
 class @ICRMClient.Models.Notification extends @ICRMClient.Base
+  read_url: window.ICRMClient.Assets.api_url + 'notifications/mark_read'
+  _read: false
+
   constructor: (attrs) ->
     @subject = attrs.subject
     @content = attrs.content
     @id = attrs.id
-
-    @read_url = window.ICRMClient.Assets.api_url + 'notifications/mark_read'
-
-    @_read = false
 
     @$el = @_prepareHtml()
 
@@ -38,17 +37,11 @@ class @ICRMClient.Models.Notification extends @ICRMClient.Base
     # TODO send ajax to mark notification as read
     @log "Mark notification #{@id} as read"
 
-    post =
-      type: 'POST'
+    @ajax
       url: @read_url
-      data: { app_key: window.ICRMClient.app_key, id: @id }
-      xhrFields:
-        withCredentials: true
+      data: { id: @id }
       success: (d) ->
-        console.log d
-      error: (e) ->
-        console.error e
-    @$.ajax post
+        console.log JSON.stringify(d)
 
   close: =>
     @log "Close notification #{@id}"

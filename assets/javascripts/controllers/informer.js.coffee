@@ -1,30 +1,14 @@
 class @ICRMClient.Controllers.Informer extends @ICRMClient.Base
-  constructor: (callback) ->
-    @logger_url = window.ICRMClient.Assets.api_url + 'logger'
-    @callback = callback
-    @jqueryRequest()
+  logger_url: window.ICRMClient.Assets.api_url + 'logger'
 
-  jqueryRequest: =>
-    post =
-      crossDomain: true
-      xhrFields:
-        withCredentials: true
-      type: 'POST'
+  constructor: (callback) ->
+    @ajax
       url: @logger_url
       data: @data()
-      success: @callback
-      error: (e) ->
-        console.error e
-        #throw 'error'
-
-    @$.ajax post
+      success: callback
 
   data: ->
-    window.ICRMClient.app_key = window.ICRM_Settings.app_key
-    delete window.ICRM_Settings.app_key
-
     data =
-      app_key:        window.ICRMClient.app_key,
       current_url:    document.URL,
       referrer:       document.referrer,
       document_title: document.title || ''

@@ -4,10 +4,12 @@ class @ICRMClient.RootController extends @ICRMClient.Base
   isLoaded = false
 
   constructor: (options) ->
+    window.ICRMClient.app_key = window.ICRM_Settings.app_key
+    delete window.ICRM_Settings.app_key
+
     window.ICRMClient.head = document.getElementsByTagName('head')[0]
 
     window.ICRMClient.Utils.loadStyle  @assets.css
-
 
     # TODO include faye_client into this script
     window.ICRMClient.Utils.loadScript @assets.faye_js, @_tryInitFaye
