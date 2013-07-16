@@ -1,0 +1,155 @@
+@import cleanslate
+@import alert-bangtidy
+@import icrm-notify
+
+$avatarSize: 32px
+
+#icrm_chat
+  @extend .clearslate
+  @extend .alert-bangTidy
+  @extend %icrm_chat
+  width: 320px
+  @media (max-width: 979px)
+    width: 100%
+    margin: 0 auto
+  padding: 10px 16px 10px ($avatarSize + 20px)
+  font-size: 13px
+  line-height: 16px
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+
+  .chat_holder
+    display: none
+    top: 50%
+    left: 50%
+    width: 572px
+    height: 338px
+    margin: -169px 0 0 -286px
+    position: fixed
+    z-index: 9999
+
+  .lightbox
+    width: 572px
+    height: 338px
+    background-color: #fff
+    -webkit-box-shadow: 0 7px 16px rgba(2,2,2,.49)
+    -moz-box-shadow: 0 7px 16px rgba(2,2,2,.49)
+    box-shadow: 0 7px 16px rgba(2,2,2,.49)
+    border: solid 2px #f18000
+    padding: 14px 14px 17px
+
+  .icrm_chat_messages_list
+    padding: 12px
+    margin: 0
+    list-style: none
+    height: 240px
+    overflow: auto
+    font: 13px/16px Arial, Helvetica, sans-serif
+    color: #5d5d5d
+    border: 1px solid #cacaca
+
+  form.respond_form
+    width: 100%
+    border-bottom: 1px solid #cacaca
+    &:after
+      display: block
+      clear: both
+      content: ""
+    textarea
+      font-size: 13px
+      color: #cacaca
+      width: 517px !important
+      height: 61px !important
+      max-height: 61px
+      padding: 6px 4px 8px 7px
+      float: left
+      overflow: auto
+      border-left: 1px solid #cacaca
+      border-top: 0
+      border-right: 0
+      border-bottom: none
+
+      .text-active
+        color: #333
+
+    input[type="submit"]
+      float: right
+      width: 42px
+      height: 75px
+      border: 0
+      border-left: solid 1px #cacaca
+      background: url(<%= Settings.url %>images/sprite.png) no-repeat -259px -175px
+      padding: 0
+      text-indent: -9999px
+      overflow: hidden
+      cursor: pointer
+      font-size: 0
+      line-height: 0
+      border-right: 1px solid #cacaca
+      border-left: 1px solid #cacaca
+
+  .icrm_button_starter
+    display: none
+    position: fixed
+    bottom: 0
+    left: 50%
+    margin-left: 400px
+    text-shadow: 0 1px rgba(2,2,2,.13)
+    background: #ef970c url(<%= Settings.url %>images/bg-fixed-button.png) repeat-x top left
+    -moz-border-radius: 3px 3px 0 0
+    border-radius: 3px 3px 0 0
+    -webkit-border-top-left-radius: 3px
+    -webkit-border-top-right-radius: 3px
+    -webkit-box-shadow: 0 0 5px rgba(2,2,2,.68)
+    -moz-box-shadow: 0 0 5px rgba(2,2,2,.68)
+    box-shadow: 0 0 5px rgba(2,2,2,.68)
+    cursor: pointer
+    text-align: left
+    z-index: 1000
+    text-decoration: none
+
+    .inner
+      background: url(<%= Settings.url %>images/ico-ask.png) no-repeat right
+      padding: 6px 40px 4px 14px
+      width: 124px
+      display: block
+      color: white
+      font: 14px/26px 'Arial', sans-serif
+
+    &:hover
+      text-decoration: none
+      background: #ef970c url(<%= Settings.url %>images/bg-fixed-button-hover.png) repeat-x top left
+    &:active
+      background-color: #ef970c
+
+  .icrm_chat_avatar
+    margin:
+      left: - ($avatarSize + 10px)
+      right: 10px
+
+  .icrm_chat_subject
+    font-size: 14px
+    margin-bottom: 4px
+
+  .icrm_chat_close
+    position: absolute
+    top: 0
+    right: 4px
+    font-size: 20px
+    font-weight: bold
+    line-height: 25px
+    color: #000
+    text-decoration: none
+
+  .pull-right
+    float: right
+  .pull-left
+    float: left
+
+  .clearfix
+    &:before,
+    &:after
+      content: " "
+      display: table
+    &:after
+      clear: both
+
