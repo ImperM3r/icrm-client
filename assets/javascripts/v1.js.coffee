@@ -5,12 +5,9 @@
 #= require backbone
 #= require utils
 #= require_tree ../templates
-#= require models/message
+#= require_tree ./models
 #= require_tree ./collections
 #= require_tree ./views
-#= require controllers/chat_controller
-#= require controllers/informer
-#= require controllers/notification_controller
-#= require controllers/root_controller
+#= require_tree ./controllers
 
 new @ICRMClient.RootController

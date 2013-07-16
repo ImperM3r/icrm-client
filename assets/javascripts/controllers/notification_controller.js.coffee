@@ -15,7 +15,7 @@ class @ICRMClient.Controllers.NotificationController extends @ICRMClient.Base
         content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
 
   _notificationHandler: (message) =>
-    console.log "Receive notifiction #{message}"
+    console.log "Receive notifiction", JSON.stringify(message)
 
     noty = new window.ICRMClient.Models.Notification message.notification
     noty.show()

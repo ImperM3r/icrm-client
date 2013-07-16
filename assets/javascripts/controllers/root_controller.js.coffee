@@ -4,6 +4,9 @@ class @ICRMClient.RootController extends @ICRMClient.Base
   isLoaded = false
 
   constructor: (options) ->
+    window.ICRMClient.app_key = window.ICRM_Settings.app_key
+    delete window.ICRM_Settings.app_key
+
     window.ICRMClient.head = document.getElementsByTagName('head')[0]
 
     window.ICRMClient.Utils.loadStyle  @assets.css
