@@ -62,15 +62,21 @@ class @ICRMClient.Controllers.ChatController extends @ICRMClient.Base
       visitor_id: @visitor_id
       from_type: @from_type
       from_id: @from_id
+      created_at: 'sending..'
       content: content
+
+    @messages_collection.add message
 
     @ajax
       url: @messages_url
       data: message.attributes
-      success: (message) =>
-        @messages_collection.add message
+      success: (response) =>
+        message.set response
 
-  _messageHandler: (message) =>
-    if message.method == 'create'
+  _messageHandler: (msg) =>
+    if msg.method == 'create'
       # Collection is smart to detect the existed message
-      @messages_collection.add message.message
+      if msg.message.from_id == @from_id && msg.message.from_type == @from_type
+        console.log "message from me"
+      else
+        @messages_collection.add msg.message

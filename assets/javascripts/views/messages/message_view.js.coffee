@@ -5,6 +5,10 @@ class ICRMClient.Views.MessageView extends @ICRMClient.Backbone.View
   className: ->
     'convead-sender-' + @model.get('from_type')
 
+  initialize: (options) ->
+    @listenTo @model, 'change', (model) =>
+      @render()
+
   template: JST['messages/view']
 
   render: ->
