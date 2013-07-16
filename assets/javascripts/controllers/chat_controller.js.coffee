@@ -4,7 +4,7 @@ class @ICRMClient.Controllers.ChatController extends @ICRMClient.Base
     @drawChatStarter()
     @chat_subscription = window.ICRMClient.faye.subscribe "/chat/#{visitor_id}", @_messageHandler
 
-    @messages_collection = new ICRMClient.Collections.Messages {}
+    @messages_collection = new ICRMClient.Collections.Messages()
     new ICRMClient.Views.MessagesView
       collection: @messages_collection
       model_view: ICRMClient.Views.MessageView
@@ -12,7 +12,9 @@ class @ICRMClient.Controllers.ChatController extends @ICRMClient.Base
 
 
     @$('input[name="icrm-client-message-submit"]').click =>
-      @_composeMessage()
+      $text_input = @$('input[name="icrm-client-message"]')
+      @_composeMessage($text_input.val())
+      $text_input.val('')
 
     _id = 0
 
@@ -29,11 +31,11 @@ class @ICRMClient.Controllers.ChatController extends @ICRMClient.Base
   _showChat: =>
     true
 
-  _composeMessage: =>
+  _composeMessage: (content) =>
     @messages_collection.add
       timestamp: new Date()
       sender: '__client__'
-      content: @$('input[name="icrm-client-message"]').val()
+      content: content
 
   _messageHandler: (message) =>
     @messages_collection.add message.message
