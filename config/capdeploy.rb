@@ -1,5 +1,9 @@
+set :stages, %w(production staging)
+set :default_stage, "staging"
+require 'capistrano/ext/multistage'
+
 #Приложение
-set :application, "widget.icrm.icfdev.ru"
+set :application, "widget.convead.com"
 
 #Репозиторий
 set :scm, :git
@@ -11,13 +15,6 @@ ssh_options[:forward_agent] = true
 set :user,      'wwwicrm'
 set :deploy_to,  defer { "/home/#{user}/#{application}" }
 set :use_sudo,   false
-
-server 'icfdev.ru', :app, :web, :db, :primary => true
-
-set(:current_branch) { `git branch`.match(/\* (\S+)\s/m)[1] || raise("Couldn't determine current branch") }
-set :branch, defer { current_branch } unless exists?(:branch)
-
-set :rails_env, "stage"
 
 set :keep_releases, 3
 

@@ -1,14 +1,34 @@
 rails_env = ENV['RACK_ENV'] || 'production'
 puts "Unicorn env: #{rails_env}"
 
-worker_processes 3
-APP_PATH = ENV['APP_PATH'] || '/home/wwwicrm/widget.icrm.icfdev.ru/'
-working_directory APP_PATH + "current"
+if rails_env=='production'
+    worker_processes 3
+    APP_PATH = ENV['APP_PATH'] || '/home/wwwicrm/widget.convead.com/'
+    working_directory APP_PATH + "current"
 
-listen APP_PATH + "shared/pids/unicorn.sock"
-pid APP_PATH + "shared/pids/unicorn.pid"
-stderr_path APP_PATH + "shared/log/unicorn.stderr.log"
-stdout_path APP_PATH + "shared/log/unicorn.stdout.log"
+    listen APP_PATH + "shared/pids/unicorn.sock"
+    pid APP_PATH + "shared/pids/unicorn.pid"
+    stderr_path APP_PATH + "shared/log/unicorn.stderr.log"
+    stdout_path APP_PATH + "shared/log/unicorn.stdout.log"
+elsif rails_env=='stage'
+    worker_processes 3
+    APP_PATH = ENV['APP_PATH'] || '/home/wwwicrm/widget.icrm.icfdev.ru/'
+    working_directory APP_PATH + "current"
+
+    listen APP_PATH + "shared/pids/unicorn.sock"
+    pid APP_PATH + "shared/pids/unicorn.pid"
+    stderr_path APP_PATH + "shared/log/unicorn.stderr.log"
+    stdout_path APP_PATH + "shared/log/unicorn.stdout.log"
+else
+    worker_processes 3
+    APP_PATH = ENV['APP_PATH'] || '/home/wwwicrm/widget.icrm.icfdev.ru/'
+    working_directory APP_PATH + "current"
+
+    listen APP_PATH + "shared/pids/unicorn.sock"
+    pid APP_PATH + "shared/pids/unicorn.pid"
+    stderr_path APP_PATH + "shared/log/unicorn.stderr.log"
+    stdout_path APP_PATH + "shared/log/unicorn.stdout.log"
+end
 
 # Helps ensure the correct unicorn binary is used when upgrading with USR2
 # # See http://unicorn.bogomips.org/Sandbox.html
