@@ -8,12 +8,12 @@ class @ICRMClient.Chat.ChatController extends @ICRMClient.Base
     @from_id = visitor_id
 
     @messages_collection = new ICRMClient.Chat.MessagesCollection()
-
     @messages_view = new ICRMClient.Chat.MessagesView
       collection: @messages_collection
 
-    @form = new ICRMClient.Chat.FormView
+    new ICRMClient.Chat.FormView
       collection: @messages_collection
+      parent: @
 
     window.ICRMClient.faye.subscribe "/chat/#{visitor_id}", @_messageHandler
 
@@ -32,7 +32,7 @@ class @ICRMClient.Chat.ChatController extends @ICRMClient.Base
             name: 'John Birman'
           content: 'Show must go on'
 
-  _postMessage: (content) =>
+  postMessage: (content) =>
     message = new window.ICRMClient.Chat.MessageModel
       visitor_id: @visitor_id
       from_type: @from_type

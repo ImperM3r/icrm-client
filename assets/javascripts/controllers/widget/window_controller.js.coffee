@@ -1,8 +1,6 @@
 class @ICRMClient.Widget.WindowController extends @ICRMClient.Base
 
   constructor: (options) ->
-    new ICRMClient.Chat.ChatController options.visitor_id
-
     @window         = new ICRMClient.Widget.WindowView()
     @starter_button = new ICRMClient.Widget.StarterButtonView
       window: @window
@@ -10,6 +8,8 @@ class @ICRMClient.Widget.WindowController extends @ICRMClient.Base
     @visible = options.visible
     @parent_el = options.parent_el
     @_render()
+
+    new ICRMClient.Chat.ChatController options.visitor_id
 
   _render: ->
     if @visible
