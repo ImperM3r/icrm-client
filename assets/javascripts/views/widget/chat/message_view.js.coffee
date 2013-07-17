@@ -1,4 +1,4 @@
-class ICRMClient.Views.MessageView extends @ICRMClient.Backbone.View
+class ICRMClient.Widget.Chat.MessageView extends @ICRMClient.Backbone.View
   tagName: 'li'
   id: ->
     'convead-message-' + @model.get('id')

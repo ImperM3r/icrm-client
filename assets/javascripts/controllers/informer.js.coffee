@@ -1,4 +1,4 @@
-class @ICRMClient.Controllers.Informer extends @ICRMClient.Base
+class @ICRMClient.InformerController extends @ICRMClient.Base
   logger_url: window.ICRMClient.Assets.api_url + 'logger'
 
   constructor: (callback) ->

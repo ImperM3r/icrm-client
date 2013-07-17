@@ -1,5 +1,5 @@
-class ICRMClient.Views.MessagesView extends @ICRMClient.Backbone.View
-  model_view: ICRMClient.Views.MessageView
+class ICRMClient.Widget.Chat.MessagesView extends @ICRMClient.Backbone.View
+  model_view: ICRMClient.Widget.Chat.MessageView
   el: 'ul.icrm-chat-messages-list'
 
   initialize: (options) ->

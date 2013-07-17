@@ -1,7 +1,5 @@
 class @ICRMClient.RootController extends @ICRMClient.Base
-  chat_init_template: JST['root_template']
-
-  isLoaded = false
+  template: JST['root_template']
 
   constructor: (options) ->
     window.ICRMClient.app_key = window.ICRM_Settings.app_key
@@ -11,11 +9,11 @@ class @ICRMClient.RootController extends @ICRMClient.Base
 
     window.ICRMClient.Utils.loadStyle  @assets.css
 
-
     # TODO include faye_client into this script
     window.ICRMClient.Utils.loadScript @assets.faye_js, @_tryInitFaye
 
-    @_createRootNode()
+    @el = @render
+
     @_runInformer()
 
   _createRootNode: =>
@@ -36,15 +34,18 @@ class @ICRMClient.RootController extends @ICRMClient.Base
     window.ICRMClient.faye.setHeader 'ICRM-Visitor', @visitor_id
     # window.ICRMClient.faye.addExtension window.ICRMClient.FayeLogger
 
-    @chat_controller = new window.ICRMClient.Controllers.ChatController @visitor_id
-    @notification_controller = new window.ICRMClient.Controllers.NotificationController @visitor_id
+    @widget_controller = new ICRMClient.Widget.WindowController
+      visitor_id: @visitor_id
+      parent_el: @el
+
+    @notification_controller = new window.ICRMClient.NotificationController @visitor_id
 
   _runInformer: =>
     @log "Try to _runInformer"
     return if @informer
     @log "Run _runInformer"
 
-    @informer = new window.ICRMClient.Controllers.Informer (response) =>
+    @informer = new window.ICRMClient.InformerController (response) =>
       #@visitor_id = parseInt JSON.parse(response.data).visitor_id
       @visitor_id = response.visitor_id
 

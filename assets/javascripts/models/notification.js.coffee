@@ -1,6 +1,6 @@
 # TODO Move views methods to the View
 
-class @ICRMClient.Models.Notification extends @ICRMClient.Base
+class @ICRMClient.NotificationModel extends @ICRMClient.Base
   read_url: window.ICRMClient.Assets.api_url + 'notifications/mark_read'
   _read: false
 
