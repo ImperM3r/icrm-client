@@ -5,7 +5,6 @@ class @ICRMClient.Controllers.ChatController extends @ICRMClient.Base
     @el =
       $starter:      @$rootNode.find '.icrm_button_starter'
       $chat_holder:  @$rootNode.find '.chat_holder'
-      messages_list: 'ul.icrm_chat_messages_list'
       $input_text:   @$rootNode.find 'textarea[name="icrm_message_text"]'
       $submit:       @$rootNode.find 'input[name="icrm_message_submit"]'
 
@@ -21,7 +20,6 @@ class @ICRMClient.Controllers.ChatController extends @ICRMClient.Base
 
     @messages_view = new ICRMClient.Views.MessagesView
       collection: @messages_collection
-      el: @el.messages_list
 
     window.ICRMClient.faye.subscribe "/chat/#{visitor_id}", @_messageHandler
 
