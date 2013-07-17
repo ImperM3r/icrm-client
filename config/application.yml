@@ -1,21 +1,14 @@
-development_dapi:
+development: # use application.local.yml for custom settings
   url:         'http://3007.vkontraste.ru/'
   faye_url:    'http://3009.vkontraste.ru:8808/faye'
-  easyxdm_url: 'http://3009.vkontraste.ru/assets/brandymint-easyXDM/'
   api_url:     'http://api.3009.vkontraste.ru/v1/'
 
-development:
-  url:         'http://widget.icrm.icfdev.ru/'
-  faye_url:    'http://icrm.icfdev.ru:8809/faye'
-  easyxdm_url: 'http://icrm.icfdev.ru/assets/brandymint-easyXDM/'
-  api_url:     'http://api.icrm.icfdev.ru/v1/'
 production:
-  url:         'http://widget.icrm.icfdev.ru/'
-  faye_url:    'http://icrm.icfdev.ru:8809/faye'
-  easyxdm_url: 'http://icrm.icfdev.ru/assets/brandymint-easyXDM/'
-  api_url:     'http://api.icrm.icfdev.ru/v1/'
+  url:         'http://widget.convead.com/'
+  faye_url:    'http://convead.com:8809/faye'
+  api_url:     'http://api.convead.com/v1/'
+
 stage:
   url:         'http://widget.icrm.icfdev.ru/'
   faye_url:    'http://icrm.icfdev.ru:8809/faye'
-  easyxdm_url: 'http://icrm.icfdev.ru/assets/brandymint-easyXDM/'
   api_url:     'http://api.icrm.icfdev.ru/v1/'
