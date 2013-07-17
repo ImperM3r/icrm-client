@@ -1,4 +1,4 @@
-class @ICRMClient.Widget.Chat.ChatController extends @ICRMClient.Base
+class @ICRMClient.Chat.ChatController extends @ICRMClient.Base
   messages_url: window.ICRMClient.Assets.api_url + 'chat/messages'
 
   constructor: (visitor_id) ->
@@ -16,9 +16,9 @@ class @ICRMClient.Widget.Chat.ChatController extends @ICRMClient.Base
     @from_type = 'Visitor'
     @from_id = visitor_id
 
-    @messages_collection = new ICRMClient.Widget.Chat.MessagesCollection()
+    @messages_collection = new ICRMClient.Chat.MessagesCollection()
 
-    @messages_view = new ICRMClient.Widget.Chat.MessagesView
+    @messages_view = new ICRMClient.Chat.MessagesView
       collection: @messages_collection
 
     window.ICRMClient.faye.subscribe "/chat/#{visitor_id}", @_messageHandler
@@ -56,7 +56,7 @@ class @ICRMClient.Widget.Chat.ChatController extends @ICRMClient.Base
     @el.$chat_holder.hide()
 
   _postMessage: (content) =>
-    message = new window.ICRMClient.Widget.Chat.MessageModel
+    message = new window.ICRMClient.Chat.MessageModel
       visitor_id: @visitor_id
       from_type: @from_type
       from_id: @from_id
