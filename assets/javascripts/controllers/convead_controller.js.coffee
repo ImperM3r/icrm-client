@@ -1,4 +1,4 @@
-class @ICRMClient.RootController extends @ICRMClient.Base
+class @ICRMClient.ConveadController extends @ICRMClient.Base
   template: JST['root_template']
 
   constructor: (options) ->
@@ -35,7 +35,7 @@ class @ICRMClient.RootController extends @ICRMClient.Base
     window.ICRMClient.faye.setHeader 'ICRM-Visitor', @visitor_id
     # window.ICRMClient.faye.addExtension window.ICRMClient.FayeLogger
 
-    @widget_controller = new ICRMClient.Widget.WindowController
+    @widget_controller = new ICRMClient.Widget.RootController
       visitor_id: @visitor_id
       parent_el: @el
       visible: window.ICRM_Settings.chat == true

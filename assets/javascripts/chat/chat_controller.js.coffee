@@ -1,6 +1,4 @@
 class @ICRMClient.Chat.ChatController extends @ICRMClient.Base
-  messages_url: window.ICRMClient.Assets.api_url + 'chat/messages'
-
   constructor: (visitor_id) ->
     @visitor_id = visitor_id
 

@@ -1,5 +1,6 @@
 class ICRMClient.Chat.FormView extends @ICRMClient.Backbone.View
   el: '#icrm_chat form.respond_form'
+  messages_url: window.ICRMClient.Assets.api_url + 'chat/messages'
 
   initialize: (options) ->
     @$content = @$('textarea[name="content"]')
@@ -23,7 +24,7 @@ class ICRMClient.Chat.FormView extends @ICRMClient.Backbone.View
 
     @$content.val ''
 
-    @ajax
+    window.ICRMClient.Base::ajax
       url: @messages_url
       data: message.attributes
       success: (response) =>

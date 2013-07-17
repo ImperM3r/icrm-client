@@ -1,4 +1,4 @@
-class @ICRMClient.Widget.WindowController extends @ICRMClient.Base
+class @ICRMClient.Widget.RootController extends @ICRMClient.Base
 
   constructor: (options) ->
     @window         = new ICRMClient.Widget.WindowView()
