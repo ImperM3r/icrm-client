@@ -2,12 +2,7 @@ class @ICRMClient.Chat.ChatController extends @ICRMClient.Base
   messages_url: window.ICRMClient.Assets.api_url + 'chat/messages'
 
   constructor: (visitor_id) ->
-    @el =
-      $input_text:   @$rootNode.find 'textarea[name="icrm_message_text"]'
-      $submit:       @$rootNode.find 'input[name="icrm_message_submit"]'
-
     @visitor_id = visitor_id
-    # @drawChatStarter()
 
     @from_type = 'Visitor'
     @from_id = visitor_id
@@ -17,12 +12,10 @@ class @ICRMClient.Chat.ChatController extends @ICRMClient.Base
     @messages_view = new ICRMClient.Chat.MessagesView
       collection: @messages_collection
 
-    window.ICRMClient.faye.subscribe "/chat/#{visitor_id}", @_messageHandler
+    @form = new ICRMClient.Chat.FormView
+      collection: @messages_collection
 
-    @el.$submit.click (event) =>
-      @_postMessage @el.$input_text.val()
-      @el.$input_text.val('')
-      false
+    window.ICRMClient.faye.subscribe "/chat/#{visitor_id}", @_messageHandler
 
     _id = 0
 

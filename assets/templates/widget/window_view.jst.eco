@@ -1,14 +1,15 @@
 <div class="lightbox icrm_window_holder">
   <div class="icrm_window_close pull-right">&times;</div>
 
-  <div class="conversation">
+  <div class="icrm_chat_holder">
     <ul class="icrm_chat_messages_list">
     </ul>
     <form action="#" class="respond_form">
       <div class="textarea">
-        <textarea cols="30" rows="10" name="icrm_message_text"></textarea>
+        <textarea cols="30" rows="10" name="content"></textarea>
       </div>
-      <input class="close" name="icrm_message_submit" value="Send" type="submit">
+      <input type="hidden" name="from_type" value="Visitor" />
+      <input class="close" value="Send" type="submit" />
     </form>
   </div>
 

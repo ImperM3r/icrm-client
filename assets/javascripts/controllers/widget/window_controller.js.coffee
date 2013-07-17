@@ -9,9 +9,9 @@ class @ICRMClient.Widget.WindowController extends @ICRMClient.Base
 
     @visible = options.visible
     @parent_el = options.parent_el
-    @render()
+    @_render()
 
-  render: ->
+  _render: ->
     if @visible
       @$(@parent_el).append @window.render().el
       @$(@parent_el).append @starter_button.render().el

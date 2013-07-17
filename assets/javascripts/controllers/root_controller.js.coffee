@@ -47,9 +47,6 @@ class @ICRMClient.RootController extends @ICRMClient.Base
     return if @informer
     @log "Run _runInformer"
 
-    @visitor_id = 777
-    return # for testing purposes
-
     @informer = new window.ICRMClient.InformerController (response) =>
       #@visitor_id = parseInt JSON.parse(response.data).visitor_id
       @visitor_id = response.visitor_id
