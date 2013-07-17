@@ -1,5 +1,6 @@
-<div class="lightbox chat_holder">
-  <div class="icrm_chat_close pull-right">&times;</div>
+<div class="lightbox icrm_window_holder">
+  <div class="icrm_window_close pull-right">&times;</div>
+
   <div class="conversation">
     <ul class="icrm_chat_messages_list">
     </ul>
@@ -10,4 +11,5 @@
       <input class="close" name="icrm_message_submit" value="Send" type="submit">
     </form>
   </div>
+
 </div>
