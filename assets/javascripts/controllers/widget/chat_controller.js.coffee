@@ -4,16 +4,11 @@ class @ICRMClient.Chat.ChatController extends @ICRMClient.Base
   constructor: (visitor_id) ->
     @visitor_id = visitor_id
 
-    @from_type = 'Visitor'
-    @from_id = visitor_id
-
     @messages_collection = new ICRMClient.Chat.MessagesCollection()
-    @messages_view = new ICRMClient.Chat.MessagesView
-      collection: @messages_collection
 
-    new ICRMClient.Chat.FormView
+    new ICRMClient.Chat.ContainerView
       collection: @messages_collection
-      parent: @
+      visitor_id: @visitor_id
 
     window.ICRMClient.faye.subscribe "/chat/#{visitor_id}", @_messageHandler
 
@@ -31,22 +26,6 @@ class @ICRMClient.Chat.ChatController extends @ICRMClient.Base
           from:
             name: 'John Birman'
           content: 'Show must go on'
-
-  postMessage: (content) =>
-    message = new window.ICRMClient.Chat.MessageModel
-      visitor_id: @visitor_id
-      from_type: @from_type
-      from_id: @from_id
-      created_at: 'sending..'
-      content: content
-
-    @messages_collection.add message
-
-    @ajax
-      url: @messages_url
-      data: message.attributes
-      success: (response) =>
-        message.set response
 
   _messageHandler: (msg) =>
     if msg.method == 'create'

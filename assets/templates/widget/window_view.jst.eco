@@ -8,7 +8,6 @@
       <div class="textarea">
         <textarea cols="30" rows="10" name="content"></textarea>
       </div>
-      <input type="hidden" name="from_type" value="Visitor" />
       <input class="close" value="Send" type="submit" />
     </form>
   </div>
