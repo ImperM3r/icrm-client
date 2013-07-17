@@ -9,20 +9,21 @@ class @ICRMClient.RootController extends @ICRMClient.Base
 
     window.ICRMClient.Utils.loadStyle  @assets.css
 
+    @el = @_createRootNode()
+
     # TODO include faye_client into this script
     window.ICRMClient.Utils.loadScript @assets.faye_js, @_tryInitFaye
-
-    @el = @render
 
     @_runInformer()
 
   _createRootNode: =>
     # TODO rename icrm_chat to icrm_client
-    root =  @$ @chat_init_template()
+    root = @$ @template()
 
     @$('body').eq(0).append root
     window.ICRMClient.Base::$rootNode = root
     window.ICRMClient.Base::$notificationsNode = root.find('.notifications')
+    root
 
   _tryInitFaye: =>
     @log 'try init faye'
@@ -37,6 +38,7 @@ class @ICRMClient.RootController extends @ICRMClient.Base
     @widget_controller = new ICRMClient.Widget.WindowController
       visitor_id: @visitor_id
       parent_el: @el
+      visible: window.ICRM_Settings.chat == true
 
     @notification_controller = new window.ICRMClient.NotificationController @visitor_id
 
@@ -44,6 +46,9 @@ class @ICRMClient.RootController extends @ICRMClient.Base
     @log "Try to _runInformer"
     return if @informer
     @log "Run _runInformer"
+
+    @visitor_id = 777
+    return # for testing purposes
 
     @informer = new window.ICRMClient.InformerController (response) =>
       #@visitor_id = parseInt JSON.parse(response.data).visitor_id

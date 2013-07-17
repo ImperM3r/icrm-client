@@ -3,12 +3,8 @@ class @ICRMClient.Chat.ChatController extends @ICRMClient.Base
 
   constructor: (visitor_id) ->
     @el =
-      $starter:      @$rootNode.find '.icrm_button_starter'
-      $chat_holder:  @$rootNode.find '.chat_holder'
       $input_text:   @$rootNode.find 'textarea[name="icrm_message_text"]'
       $submit:       @$rootNode.find 'input[name="icrm_message_submit"]'
-
-    @_showStarter()
 
     @visitor_id = visitor_id
     # @drawChatStarter()
@@ -42,18 +38,6 @@ class @ICRMClient.Chat.ChatController extends @ICRMClient.Base
           from:
             name: 'John Birman'
           content: 'Show must go on'
-
-  _showStarter: =>
-    if window.ICRM_Settings.chat == true
-      @el.$starter.show()
-      @el.$starter.on 'click', @_showChat
-      @el.$chat_holder.find('.icrm_chat_close').click @_closeChat
-
-  _showChat: =>
-    @el.$chat_holder.show()
-
-  _closeChat: =>
-    @el.$chat_holder.hide()
 
   _postMessage: (content) =>
     message = new window.ICRMClient.Chat.MessageModel

@@ -9,7 +9,7 @@ class ICRMClient.Chat.MessageView extends @ICRMClient.Backbone.View
     @listenTo @model, 'change', (model) =>
       @render()
 
-  template: JST['messages/view']
+  template: JST['chat/message_view']
 
   render: ->
     @$el.html @template @model.presentation()

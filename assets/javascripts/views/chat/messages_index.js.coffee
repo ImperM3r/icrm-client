@@ -15,4 +15,4 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
     @$el.empty()
 
     @collection.each (model) =>
-      @add model
+      @append model
