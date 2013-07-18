@@ -1,0 +1,25 @@
+%html
+  %head
+    %title Тестирование виджета Convead
+    %link(href="/assets/jasmine.css" rel="stylesheet")
+    %script(scr="/assets/jasmine.js")
+
+    :coffee
+      ->
+        jasmineEnv = jasmine.getEnv()
+        jasmineEnv.updateInterval = 1000
+
+        htmlReporter = new jasmine.HtmlReporter()
+        jasmineEnv.addReporter(htmlReporter)
+
+        jasmineEnv.specFilter = (spec) ->
+          htmlReporter.specFilter(spec)
+
+        currentWindowOnload = window.onload
+
+        window.onload = ->
+          if currentWindowOnload
+            currentWindowOnload()
+          jasmineEnv.execute()
+  %body
+

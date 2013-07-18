@@ -3,10 +3,13 @@
   "version": "0.1",
   "dependencies": {
     "brandymint-easyXDM": "latest",
-    "underscore": "latest",
-    "backbone": "latest",
-    "jquery": "1.10.2",
-    "json2": "latest"
+    "underscore":         "latest",
+    "backbone":           "latest",
+    "jquery":             "1.10.2",
+    "json2":              "latest",
+    "nock":               "latest",
+    "jasmine":            "latest",
+    "jasmine-jquery":     "latest"
   },
   "ignore": [
     "**/.*",

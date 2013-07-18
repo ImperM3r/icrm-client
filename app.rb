@@ -12,4 +12,8 @@ class Application < Sinatra::Base
     content_type :json
     { visitor: { id: 123 } }.to_json
   end
+
+  get '/spec' do
+    haml :spec
+  end
 end
