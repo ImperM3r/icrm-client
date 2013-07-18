@@ -1,6 +1,4 @@
-#= require models/notification
-
-class @ICRMClient.Controllers.NotificationController extends @ICRMClient.Base
+class @ICRMClient.NotificationController extends @ICRMClient.Base
   constructor: (visitor_id) ->
     unless window.ICRMClient.$?
       console.error "Can't initalize NotificationController"
@@ -17,5 +15,5 @@ class @ICRMClient.Controllers.NotificationController extends @ICRMClient.Base
   _notificationHandler: (message) =>
     console.log "Receive notifiction", JSON.stringify(message)
 
-    noty = new window.ICRMClient.Models.Notification message.notification
+    noty = new window.ICRMClient.NotificationModel message.notification
     noty.show()

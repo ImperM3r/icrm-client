@@ -1,4 +1,4 @@
-class ICRMClient.Models.Message extends @ICRMClient.Backbone.Model
+class ICRMClient.Chat.MessageModel extends @ICRMClient.Backbone.Model
   presentation: ->
     p = @toJSON()
 

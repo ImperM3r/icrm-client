@@ -1,3 +1,4 @@
+#= require json2/json2
 #= require jquery/jquery.min
 
 ## Prepare jQuery

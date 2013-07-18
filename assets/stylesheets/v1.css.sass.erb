@@ -17,13 +17,20 @@ $avatarSize: 32px
   line-height: 16px
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
 
-  .chat_holder
-    display: none
+  input, textarea, select
+    font: 100% 'HelveticaNeueLight', Arial, Helvetica, Verdana, sans-serif
+    vertical-align: middle
+    color: #000
+    margin: 0
+
+  .icrm_window_holder
+    font-size: 14px
+    line-height: 26px
     top: 50%
     left: 50%
-    width: 572px
-    height: 338px
-    margin: -169px 0 0 -286px
+    width: 604px
+    height: 373px
+    margin: -169px 0 0 -302px
     position: fixed
     z-index: 9999
 
@@ -37,29 +44,200 @@ $avatarSize: 32px
     border: solid 2px #f18000
     padding: 14px 14px 17px
 
+    h1.heading
+      font-size: 18px
+      font-weight: normal
+      color: #21191f
+      margin: 0 0 9px
+      line-height: 24px
+
+      span
+        display: none
+        padding: 4px 0 7px 43px
+        background: url(<%= Settings.url %>images/ico-ask-orange.png) no-repeat 2px 0
+
+      span.notifications-text
+        background: url(<%= Settings.url %>images/ico-notifications-orange.png) no-repeat 3px 5px
+
+      span.suggestion-text
+        background: url(<%= Settings.url %>images/ico-lamp.png) no-repeat 3px 0
+
+      span.problem-text
+        background: url(<%= Settings.url %>images/ico-airplane.png) no-repeat 3px 0
+        padding-left: 48px
+
+    &.conversation .conversation-text
+      display: block
+    &.notifications .notifications-text
+      display: block
+    &.suggestion .suggestion-text
+      display: block
+    &.problem .problem-text
+      display: block
+
+    .tabset
+      padding: 0
+      margin: 0 0 15px
+      list-style: none
+      width: 100%
+      text-align: center
+      font: 15px/18px 'helvetica_neuemedium', Arial, Helvetica, Verdana, sans-serif
+
+      &:after
+        display: block
+        clear: both
+        content: ""
+
+      li
+        float: left
+        width: 25%
+
+      a
+        display: block
+        padding: 4px 5px
+        border: 1px solid #bbb
+        color: #3f3f3f
+        background: #f5f5f5 url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y1ZjVmNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlY2VjZWMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+)
+        background: -moz-linear-gradient(top,  #f5f5f5 0%, #ececec 100%)
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#ececec))
+        background: -webkit-linear-gradient(top,  #f5f5f5 0%,#ececec 100%)
+        background: -o-linear-gradient(top,  #f5f5f5 0%,#ececec 100%)
+        background: -ms-linear-gradient(top,  #f5f5f5 0%,#ececec 100%)
+        background: linear-gradient(to bottom,  #f5f5f5 0%,#ececec 100%)
+        margin-left: -1px
+        box-shadow: 1px 1px 1px #fff inset
+        -webkit-box-shadow: 1px 1px 1px #fff inset
+        -moz-box-shadow: 1px 1px 1px #fff inset
+        text-shadow: 0 1px rgba(255,255,255,.75)
+        outline: none
+
+      li:first-child a
+        margin: 0
+
+      a:hover
+        text-decoration: none
+
+      a.active
+        background: #fff
+        border-color: #f18000
+        color: #f27b00
+        position: relative
+
+        &:after
+          top: -2px
+          left: -2px
+          right: -2px
+          bottom: -2px
+          position: absolute
+          content: ""
+          border: 1px solid #f18000
+          border-radius: 3px
+          -moz-border-radius: 3px
+          -webkit-border-radius: 3px
+
+        &:before
+          top: 100%
+          left: 50%
+          margin: 0 0 0 -10px
+          position: absolute
+          z-index: 2
+          content: ""
+          width: 21px
+          height: 12px
+          background: url(<%= Settings.url %>images/sprite.png) no-repeat -219px -214px
+
+    .listing
+      padding: 0
+      margin: 0 0 9px
+      list-style: none
+      font: 13px/16px Arial, Helvetica, sans-serif
+      border: 1px solid #cacaca
+      /* min-height: 260px; */
+      position: relative
+
+      li
+        border-top: 1px solid #cacaca
+
+        &:first-child
+          border-top: 0
+
+      .open
+        display: block
+        overflow: hidden
+        padding: 13px 10px 13px 12px
+        color: #393939
+        cursor: pointer
+
+        &:hover
+          background: #f7f7f7
+          text-decoration: none
+
+      .author
+        float: left
+        width: 67px
+        margin-right: 5px
+
+      .open:hover .author
+        text-decoration: underline
+
+      .text-holder
+        float: left
+        width: 430px
+        margin-right: 5px
+
+      .open:hover .text-holder
+        text-decoration: underline
+
+      .date
+        display: block
+        overflow: hidden
+        font-style: normal
+
+      .open:hover .date
+        text-decoration: none
+
+      .chat .author
+        color: #003cff
+
+  .convead_tab_content
+    /* border:1px solid #a1a1a1; */
+    /* border-width:1px 1px 0; */
+
   .icrm_chat_messages_list
     padding: 12px
     margin: 0
     list-style: none
-    height: 240px
+    height: 146px
     overflow: auto
     font: 13px/16px Arial, Helvetica, sans-serif
     color: #5d5d5d
     border: 1px solid #cacaca
 
-  form.respond_form
+  form, fieldset
+    margin: 0
+    padding: 0
+    border-style: none
+
+  .respond_form
     width: 100%
     border-bottom: 1px solid #cacaca
+
     &:after
       display: block
       clear: both
       content: ""
+
+    .textarea
+      float: left
+      position: relative
+      border-bottom: none
+
     textarea
       font-size: 13px
       color: #cacaca
-      width: 517px !important
-      height: 61px !important
-      max-height: 61px
+      width: 529px
+      height: 75px
+      max-height: 75px
       padding: 6px 4px 8px 7px
       float: left
       overflow: auto
@@ -68,7 +246,7 @@ $avatarSize: 32px
       border-right: 0
       border-bottom: none
 
-      .text-active
+      &.text-active
         color: #333
 
     input[type="submit"]
@@ -76,7 +254,6 @@ $avatarSize: 32px
       width: 42px
       height: 75px
       border: 0
-      border-left: solid 1px #cacaca
       background: url(<%= Settings.url %>images/sprite.png) no-repeat -259px -175px
       padding: 0
       text-indent: -9999px
@@ -86,9 +263,117 @@ $avatarSize: 32px
       line-height: 0
       border-right: 1px solid #cacaca
       border-left: 1px solid #cacaca
+      opacity: 1.0
+
+  .respond-form2
+    width: 100%
+
+    &:after
+      display: block
+      clear: both
+      content: ""
+
+    .textarea
+      float: left
+      position: relative
+
+    textarea
+      font-size: 13px
+      color: #b0b0b0
+      width: 572px !important
+      height: 186px !important
+      max-height: 186px
+      padding: 6px 4px 5px 7px
+      float: left
+      margin-bottom: 11px
+      border: 1px solid #cacaca
+      border: 1px solid 1px solid #a1a1a1
+      /* border-bottom: 1px solid #cacaca */
+
+      &.text-active
+        color: #333
+
+  .close-link
+    position: absolute
+    top: -84px
+    right: 29px
+    width: 11px
+    height: 11px
+    overflow: hidden
+    text-indent: -9999px
+    z-index: 3
+    display: none
+    background: url(<%= Settings.url %>images/sprite.png) no-repeat -219px -233px
+
+  .popup-active .close-link
+    display: block
+
+  .respondbutton
+    display: block !important
+    border: 1px solid #5c5c5c
+    margin: 2px 11px 2px 0
+    padding: 2px 12px 0px 11px
+    background: url('<%= Settings.url %>images/respondbutton-bg.png') repeat-x top left
+    color: #fff
+    float: left
+
+    &:hover
+      background: url('<%= Settings.url %>images/respondbutton-bg-hover.png') repeat-x top left
+      text-decoration: none
+
+  .addlink
+    display: block
+    font-size: 12px
+    color: #0093D8
+    margin-left: 113px
+
+  .addfile img
+    margin-top: 30px
+    display: block
+
+  .listing .popup
+    position: absolute
+    top: 0
+    left: 0
+    background: #fff
+    padding: 14px 14px 10px 12px
+    color: #373737
+    display: none
+    height: 186px
+    overflow: auto
+    font: 14px/20px 'HelveticaNeueLight', Arial, Helvetica, Verdana, sans-serif
+
+  .popup
+    .title
+      overflow: hidden
+      margin-bottom: 14px
+
+      .date
+        float: right
+        color: #888
+        width: 55px
+        text-align: right
+        font-size: 13px
+        margin-top: 4px
+
+      h2
+        float: left
+        max-width: 465px
+        color: #373737
+        margin: 0
+        font: 22px/26px 'HelveticaNeueLight', Arial, Helvetica, Verdana, sans-serif
+
+    a
+      color: #318add
+    p
+      margin: 0 0 11px
+
+  .popup-holder
+    position: relative
+    overflow: hidden
+    height: 0
 
   .icrm_button_starter
-    display: none
     position: fixed
     bottom: 0
     left: 50%
@@ -130,7 +415,15 @@ $avatarSize: 32px
     font-size: 14px
     margin-bottom: 4px
 
-  .icrm_chat_close
+  .convead_window_close
+    position: absolute
+    width: 12px
+    height: 12px
+    top: 20px
+    right: 19px
+    background: url(<%= Settings.url %>images/sprite.png) no-repeat -220px -194px
+
+  .convead_notification_close
     position: absolute
     top: 0
     right: 4px
@@ -144,6 +437,9 @@ $avatarSize: 32px
     float: right
   .pull-left
     float: left
+
+  .cl
+    clear: both
 
   .clearfix
     &:before,

@@ -1,6 +1,6 @@
 # TODO Move views methods to the View
 
-class @ICRMClient.Models.Notification extends @ICRMClient.Base
+class @ICRMClient.NotificationModel extends @ICRMClient.Base
   read_url: window.ICRMClient.Assets.api_url + 'notifications/mark_read'
   _read: false
 
@@ -13,7 +13,7 @@ class @ICRMClient.Models.Notification extends @ICRMClient.Base
 
   _prepareHtml: ->
     el = @$ "<div id='icrm_chat'>"+
-      "<a class='icrm_chat_close' href='#'>&times;</a>"+
+      "<a class='convead_notification_close' href='#'>&times;</a>"+
       "<img src='http://lorempixel.com/32/32/cats/' class='icrm_chat_avatar pull-left' width='32' height='32' />"+
       "<div class='pull-right'>"+
       "<div class='icrm_chat_subject'><strong>#{@subject}</strong></div>"+

@@ -1,0 +1,3 @@
+@ICRMClient =
+  Widget: {}
+  Chat: {}

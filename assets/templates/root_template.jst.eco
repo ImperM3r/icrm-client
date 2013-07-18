@@ -1,18 +1,3 @@
 <div id="icrm_chat">
-  <a href="#" class="icrm_button_starter" style="display: none;"><span class="inner">Ask question</span></a>
   <div class="notifications bottom-right"></div>
-
-  <div class="lightbox chat_holder" style="display: none;">
-    <div class="icrm_chat_close pull-right">&times;</div>
-    <div class="conversation">
-      <ul class="icrm_chat_messages_list">
-      </ul>
-      <form action="#" class="respond_form">
-        <div class="textarea">
-          <textarea cols="30" rows="10" name="icrm_message_text"></textarea>
-        </div>
-        <input class="close" name="icrm_message_submit" value="Send" type="submit">
-      </form>
-    </div>
-  </div>
 </div>

@@ -1,4 +1,4 @@
-class ICRMClient.Views.MessageView extends @ICRMClient.Backbone.View
+class ICRMClient.Chat.MessageView extends @ICRMClient.Backbone.View
   tagName: 'li'
   id: ->
     'convead-message-' + @model.get('id')
@@ -9,7 +9,7 @@ class ICRMClient.Views.MessageView extends @ICRMClient.Backbone.View
     @listenTo @model, 'change', (model) =>
       @render()
 
-  template: JST['messages/view']
+  template: JST['chat/message_view']
 
   render: ->
     @$el.html @template @model.presentation()
