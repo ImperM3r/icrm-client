@@ -1,5 +1,3 @@
-#= require models/notification
-
 class @ICRMClient.NotificationController extends @ICRMClient.Base
   constructor: (visitor_id) ->
     unless window.ICRMClient.$?
