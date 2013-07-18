@@ -1,15 +1,85 @@
-<div class="lightbox icrm_window_holder">
-  <div class="icrm_window_close pull-right">&times;</div>
+<div class="icrm_window_holder">
 
-  <div class="icrm_chat_holder">
-    <ul class="icrm_chat_messages_list">
-    </ul>
-    <form action="#" class="respond_form">
-      <div class="textarea">
-        <textarea cols="30" rows="10" name="content"></textarea>
+  <div class="lightbox conversation">
+
+    <a href="#" class="convead_window_close"></a>
+
+    <div class="convead_navigation">
+
+      <h1 class="heading">
+        <span class="conversation-text">Hello, we’d love to hear your feedback...</span>
+        <span class="notifications-text">Notifications</span>
+        <span class="suggestion-text">Suggestion</span>
+        <span class="problem-text">Problem</span>
+      </h1>
+
+      <ul class="tabset">
+        <li><a class="tab active" href="#convead_chat_holder">Conversation</a></li>
+        <li><a class="tab" href="#convead_notifications_holder">Notifications</a></li>
+        <li><a class="tab" href="#suggestion">Suggestion</a></li>
+        <li><a class="tab" href="#problem">Problem</a></li>
+      </ul>
+
+    </div>
+
+    <div class="convead_tab_content">
+
+      <div id="convead_chat_holder">
+        <ul class="icrm_chat_messages_list">
+        </ul>
+        <form action="#" class="respond_form">
+          <div class="textarea">
+            <textarea cols="30" rows="10" name="content"></textarea>
+          </div>
+          <input class="close" value="Send" type="submit" />
+        </form>
       </div>
-      <input class="close" value="Send" type="submit" />
-    </form>
+
+      <div id="convead_notifications_holder">
+        <ul class="listing">
+          <li class="popup-section">
+            <a class="open" href="#">
+              <strong class="author">Alex</strong>
+              <span class="text-holder">Hello. Can I help you?</span>
+              <em class="date">15 Jul</em>
+            </a>
+            <div class="popup">
+              <header class="title">
+                <h2>Hello. Can I help you?</h2>
+                <em class="date">16.01.13</em>
+              </header>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+              <a href="#">Read More</a>
+            </div>
+            <a href="#" class="close-link">close</a>
+          </li>
+        </ul>
+      </div>
+
+      <div id="suggestion">
+        <form action="#" class="respond-form2">
+          <div class="textarea">
+            <textarea cols="30" rows="10">Please, enter your message here...</textarea>
+          </div>
+        </form>
+        <a href="" class="respondbutton">Отправить</a>
+        <a class="addlink" href="">Добавить файл</a>
+        <div class="cl"></div>
+      </div>
+
+      <div id="problem">
+        <form action="#" class="respond-form2">
+          <div class="textarea">
+            <textarea cols="30" rows="10">Please, enter your message here...</textarea>
+            <a href="" class="respondbutton">Отправить</a>
+            <a class="addlink" href="">Добавить файл</a>
+            <div class="cl"></div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
   </div>
 
 </div>

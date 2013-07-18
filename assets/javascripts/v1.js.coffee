@@ -5,10 +5,9 @@
 #= require ./lib/backbone
 #= require ./lib/utils
 #= require_tree ../templates
-#= require_tree ./models
-#= require_tree ./collections
 #= require_tree ./views
 #= require_tree ./controllers
+#= require_tree ./notifications
 #= require_tree ./chat
 #= require_tree ./widget
 

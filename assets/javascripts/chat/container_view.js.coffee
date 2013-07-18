@@ -1,5 +1,5 @@
 class ICRMClient.Chat.ContainerView extends @ICRMClient.Backbone.View
-  el: '#icrm_chat .icrm_chat_holder'
+  el: '#icrm_chat #convead_chat_holder'
 
   initialize: (options) ->
     @collection = new ICRMClient.Chat.MessagesCollection()

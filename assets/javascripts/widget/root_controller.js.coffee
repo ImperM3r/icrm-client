@@ -4,7 +4,7 @@ class @ICRMClient.Widget.RootController extends @ICRMClient.Base
   # visible
   # parent_el
   constructor: (options) ->
-    @window         = new ICRMClient.Widget.WindowView()
+    @window         = new ICRMClient.Widget.WindowView visitor_id: options.visitor_id
     @starter_button = new ICRMClient.Widget.StarterButtonView
       window: @window
 
@@ -12,9 +12,7 @@ class @ICRMClient.Widget.RootController extends @ICRMClient.Base
     @parent_el = options.parent_el
     @_render()
 
-    new ICRMClient.Chat.ContainerView visitor_id: options.visitor_id
-
   _render: ->
     if @visible
-      @$(@parent_el).append @window.render().el
+      @window.append_to @$(@parent_el)
       @$(@parent_el).append @starter_button.render().el
