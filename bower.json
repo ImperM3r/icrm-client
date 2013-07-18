@@ -5,7 +5,7 @@
     "brandymint-easyXDM": "latest",
     "underscore": "latest",
     "backbone": "latest",
-    "jquery": "latest"
+    "jquery": "1.10.2"
   },
   "ignore": [
     "**/.*",
