@@ -10,6 +10,7 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
     window.ICRMClient.Utils.loadStyle  @assets.css
 
     @el = @_createRootNode()
+    @$el = @$ @el
 
     # TODO include faye_client into this script
     window.ICRMClient.Utils.loadScript @assets.faye_js, @_tryInitFaye
@@ -21,7 +22,13 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
     root = @$ @template()
 
     @$('body').eq(0).append root
+
+    # TODO Избавиться от глобалоной $rootNode
+    # пусть каждый виджет сам себе делает нужные элементы
     window.ICRMClient.Base::$rootNode = root
+
+    # TODO Перенести создание вьюх для Notification в NotificationView
+    # и избавиться от глобальной $notifoicationNode
     window.ICRMClient.Base::$notificationsNode = root.find('.notifications')
     root
 
@@ -37,10 +44,9 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
     ext = new window.ICRMClient.FayeLogger @visitor_id
     window.ICRMClient.faye.addExtension ext
 
-    @widget_controller = new ICRMClient.Widget.RootController
-      visitor_id: @visitor_id
-      parent_el: @el
-      visible: window.ICRM_Settings.chat == true
+    if window.ICRM_Settings.chat
+      @widget_controller = new ICRMClient.Widget.RootController visitor_id: @visitor_id
+      @$el.append @widget_controller.render().$el
 
     @notification_controller = new window.ICRMClient.NotificationController @visitor_id
 
