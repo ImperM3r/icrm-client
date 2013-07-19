@@ -7,7 +7,7 @@ class @ICRMClient.NotificationModel extends @ICRMClient.Base
   constructor: (attrs) ->
     @subject = attrs.subject
     @content = attrs.content
-    @avatar = attrs.manager.avatar.thumb_32.url
+    @avatar = attrs.manager.avatar_url
     @id = attrs.id
 
     @$el = @_prepareHtml()
