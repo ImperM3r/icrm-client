@@ -1,5 +1,8 @@
-class ICRMClient.Chat.ContainerView extends @ICRMClient.Backbone.View
-  el: '#icrm_chat #convead_chat_holder'
+class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
+  template: JST['chat/chat_tab_view']
+
+  tagName: 'div'
+  id: 'convead_chat_holder'
 
   initialize: (options) ->
     @collection = new ICRMClient.Chat.MessagesCollection()
@@ -7,11 +10,11 @@ class ICRMClient.Chat.ContainerView extends @ICRMClient.Backbone.View
     @from_id    = options.visitor_id
     @from_type  = 'Visitor'
 
-    new ICRMClient.Chat.FormView
+    @form_view = new ICRMClient.Chat.FormView
       collection: @collection
       visitor_id: @visitor_id
 
-    new ICRMClient.Chat.MessagesView
+    @messages_view = new ICRMClient.Chat.MessagesView
       collection: @collection
 
     window.ICRMClient.faye.subscribe "/chat/#{@visitor_id}", @_messageHandler, @
@@ -30,6 +33,10 @@ class ICRMClient.Chat.ContainerView extends @ICRMClient.Backbone.View
           from:
             name: 'John Birman'
           content: 'Show must go on'
+
+  render: ->
+    @$el.html @template(@)
+    @
 
   _messageHandler: (msg) ->
     if msg.method == 'create'

@@ -1,0 +1,18 @@
+<h1 class="heading">
+  <span class="conversation-text">Hello, we’d love to hear your feedback...</span>
+  <span class="notifications-text">Notifications</span>
+  <span class="suggestion-text">Suggestion</span>
+  <span class="problem-text">Problem</span>
+</h1>
+
+<ul class="tabset">
+  <% for button in @buttons: %>
+    <%- button.render().el.outerHTML %>
+  <% end %>
+</ul>
+
+<div class="convead_tab_content">
+  <% for tab in @tabs: %>
+    <%- tab.render().el.outerHTML %>
+  <% end %>
+</div>

@@ -1,5 +1,6 @@
 class ICRMClient.Chat.FormView extends @ICRMClient.Backbone.View
-  el: '#icrm_chat form.respond_form'
+  template: JST['chat/form_view']
+
   messages_url: window.ICRMClient.Assets.api_url + 'chat/messages'
 
   initialize: (options) ->
@@ -12,10 +13,13 @@ class ICRMClient.Chat.FormView extends @ICRMClient.Backbone.View
   events:
     'submit' : '_submitMessage'
 
+  render: ->
+    @$el.html @template()
+    @
+
   _submitMessage: =>
     @_postMessage @$textarea.val()
     @$textarea.val ''
-
     false
 
   _postMessage: (content) =>
