@@ -4,8 +4,6 @@ class ICRMClient.Problem.ProblemTabView extends @ICRMClient.Backbone.View
   id: 'convead_problem_holder'
   tagName: 'div'
 
-  tab_name: 'Problem'
-
   render: ->
     @$el.html @template()
     @

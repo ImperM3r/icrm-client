@@ -5,10 +5,10 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
 
     @navigation = new ICRMClient.Widget.NavigationView
       tabs: [
-        new ICRMClient.Chat.ChatTabView visitor_id: options.visitor_id
-        new ICRMClient.Notifications.NotificationTabView()
-        new ICRMClient.Suggestion.SuggestionTabView()
-        new ICRMClient.Problem.ProblemTabView()
+        { name: 'Conversation',  obj: new ICRMClient.Chat.ChatTabView visitor_id: options.visitor_id }
+        { name: 'Notifications', obj: new ICRMClient.Notifications.NotificationTabView() }
+        { name: 'Suggestion',    obj: new ICRMClient.Suggestion.SuggestionTabView() }
+        { name: 'Problem',       obj: new ICRMClient.Problem.ProblemTabView() }
       ]
 
   events:

@@ -4,8 +4,6 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
   tagName: 'div'
   id: 'convead_chat_holder'
 
-  tab_name: 'Conversations'
-
   initialize: (options) ->
     @collection = new ICRMClient.Chat.MessagesCollection()
     @visitor_id = options.visitor_id
