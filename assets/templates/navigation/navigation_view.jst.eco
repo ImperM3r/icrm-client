@@ -1,0 +1,17 @@
+<div class="convead_navigation">
+
+  <h1 class="heading">
+    <span class="conversation-text">Hello, we’d love to hear your feedback...</span>
+    <span class="notifications-text">Notifications</span>
+    <span class="suggestion-text">Suggestion</span>
+    <span class="problem-text">Problem</span>
+  </h1>
+
+  <ul class="tabset">
+    <li><a class="tab active" href="#convead_chat_holder">Conversation</a></li>
+    <li><a class="tab" href="#convead_notifications_holder">Notifications</a></li>
+    <li><a class="tab" href="#suggestion">Suggestion</a></li>
+    <li><a class="tab" href="#problem">Problem</a></li>
+  </ul>
+
+</div>
