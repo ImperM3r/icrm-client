@@ -1,0 +1,8 @@
+<form action="#" class="respond-form2">
+  <div class="textarea">
+    <textarea cols="30" rows="10">Please, enter your message here...</textarea>
+    <a href="" class="respondbutton">Отправить</a>
+    <a class="addlink" href="">Добавить файл</a>
+    <div class="cl"></div>
+  </div>
+</form>

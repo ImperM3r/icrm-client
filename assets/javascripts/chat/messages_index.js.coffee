@@ -1,6 +1,8 @@
 class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
   model_view: ICRMClient.Chat.MessageView
-  el: 'ul.icrm_chat_messages_list'
+
+  tagName: 'ul'
+  className: 'icrm_chat_messages_list'
 
   initialize: (options) ->
     @render()
@@ -16,3 +18,4 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
 
     @collection.each (model) =>
       @append model
+    @
