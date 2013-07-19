@@ -1,8 +1,8 @@
 ## Debug logger for Faye
 
 class @ICRMClient.FayeLogger
-  constructor: (visitor_id) ->
-    @visitor_id = visitor_id
+  constructor: (visitor) ->
+    @visitor = visitor
 
   incoming: (message, callback) ->
     #console.log('incoming', message)
@@ -10,5 +10,5 @@ class @ICRMClient.FayeLogger
 
   outgoing: (message, callback) ->
     #console.log('outgoing', message)
-    message.ext = {visitor_id: @visitor_id}
+    message.ext = {visitor_id: @visitor.id}
     callback(message)
