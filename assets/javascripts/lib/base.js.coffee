@@ -24,6 +24,9 @@ class @ICRMClient.Base
         #throw 'error'
 
 
+    # XDomainRequest object is used instead of clean ajax
+    # for CORS request in ie8, ie9 browsers
+    # https://www.pivotaltracker.com/s/projects/841313/stories/53544883
     if XDomainRequest? && xdr = XDomainRequest()
       data = JSON.stringify(data)
       console.log "Sedning xdr: #{data}"
