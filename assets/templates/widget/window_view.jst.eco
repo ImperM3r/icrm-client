@@ -1,6 +1,8 @@
 <div class="icrm_window_holder">
   <div class="lightbox conversation">
     <a href="#" class="convead_window_close"></a>
-    <div class="convead_navigation"></div>
+    <div class="convead_navigation">
+      <%- @navigation.render().el.outerHTML %>
+    </div>
   </div>
 </div>

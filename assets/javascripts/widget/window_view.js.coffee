@@ -15,8 +15,7 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
     'click .convead_window_close' : '_hide'
 
   render: ->
-    @$el.html( @template() ).hide() # starting hidden
-    @$('.convead_navigation').append @navigation.render().el
+    @$el.html( @template(@) ).hide() # starting hidden
     @
 
   toggleVisibility: =>
