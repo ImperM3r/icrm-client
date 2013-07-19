@@ -2,5 +2,5 @@
   <div class="textarea">
     <textarea cols="30" rows="10" name="content"></textarea>
   </div>
-  <input class="close" value="Send" type="submit" />
+  <input id="icrm_chat_submit_button" value="Send" type="submit" />
 </form>

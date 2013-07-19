@@ -5,7 +5,7 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
 
     @navigation = new ICRMClient.Widget.NavigationView
       tabs: [
-        { name: 'Conversation',  obj: new ICRMClient.Chat.ChatTabView visitor_id: options.visitor_id }
+        { name: 'Conversation',  obj: new ICRMClient.Chat.ChatTabView( visitor_id: options.visitor_id ) }
         { name: 'Notifications', obj: new ICRMClient.Notifications.NotificationTabView() }
         { name: 'Suggestion',    obj: new ICRMClient.Suggestion.SuggestionTabView() }
         { name: 'Problem',       obj: new ICRMClient.Problem.ProblemTabView() }
@@ -15,7 +15,8 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
     'click .convead_window_close' : '_hide'
 
   render: ->
-    @$el.html( @template(@) ).hide() # starting hidden
+    @$el.html( @template(@) ) #.hide() # starting hidden
+    @$el.find('#convead_client_navigation').append @navigation.render().$el
     @
 
   toggleVisibility: =>
