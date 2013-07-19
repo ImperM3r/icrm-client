@@ -8,7 +8,9 @@ class ICRMClient.Widget.NavigationView extends @ICRMClient.Backbone.View
     @currentTab = null
     $tabLinks.each (i, link) =>
       $link = @$(link)
-      $tab = options.$parent.find($link.attr 'href')
+      href = $link.attr 'href'
+      href = href.substr(href.lastIndexOf('#'))
+      $tab = options.$parent.find(href)
       @$tabs = @$tabs.add $tab
       if $link.hasClass 'active'
         @prevActiveLink = $link
@@ -27,5 +29,7 @@ class ICRMClient.Widget.NavigationView extends @ICRMClient.Backbone.View
     $link.addClass 'active'
     @prevActiveLink = $link
     @currentTab.hide()
-    @currentTab = @$tabs.filter($link.attr 'href').eq(0).show()
+    href = $link.attr 'href'
+    href = href.substr(href.lastIndexOf('#'))
+    @currentTab = @$tabs.filter(href).eq(0).show()
     e.preventDefault()
