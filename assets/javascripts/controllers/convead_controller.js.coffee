@@ -27,13 +27,15 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
 
   _tryInitFaye: =>
     @log 'try init faye'
-    return unless Faye? and @visitor_id
+    return unless @visitor_id
 
     @log 'init faye'
     # We can init faye if here is initializer @visitor and
-    window.ICRMClient.faye = new Faye.Client @assets.faye_url
-    window.ICRMClient.faye.setHeader 'ICRM-Visitor', @visitor_id
-    # window.ICRMClient.faye.addExtension window.ICRMClient.FayeLogger
+    window.ICRMClient.faye = new Faye.Client @assets.faye_url, timeout: 30, retry: 3
+
+    #window.ICRMClient.faye.setHeader 'ICRM-Visitor', @visitor_id
+    ext = new window.ICRMClient.FayeLogger @visitor_id
+    window.ICRMClient.faye.addExtension ext
 
     @widget_controller = new ICRMClient.Widget.RootController
       visitor_id: @visitor_id
