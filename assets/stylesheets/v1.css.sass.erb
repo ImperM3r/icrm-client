@@ -36,6 +36,9 @@
         width: 272px
         border: solid 2px #900
 
+      textarea
+        width: 230px
+
   .lightbox
     width: 572px
     height: 338px
@@ -226,7 +229,7 @@
     padding: 0
     border-style: none
 
-  .respond_form
+  .chat_form
     width: 100%
     border-bottom: 1px solid #cacaca
 
@@ -235,17 +238,18 @@
       clear: both
       content: ""
 
-    .textarea
-      float: left
-      position: relative
-      border-bottom: none
+    <%#.textarea%>
+      <%#float: left%>
+      <%#position: relative%>
+      <%#border-bottom: none%>
 
     textarea
+      resize: none
       font-size: 13px
       color: #cacaca
-      width: 517px
-      height: 61px
-      max-height: 61px
+      width: 530px
+      height: 75px
+      //max-height: 61px
       padding: 6px 4px 8px 7px
       float: left
       overflow: auto

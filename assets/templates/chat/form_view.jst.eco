@@ -1,6 +1,4 @@
-<form action="#" class="respond_form">
-  <div class="textarea">
-    <textarea cols="30" rows="10" name="content"></textarea>
-  </div>
-  <input id="icrm_chat_submit_button" value="Send" type="submit" />
+<form action="#" class="chat_form">
+  <textarea cols="30" rows="10" name="content" class='chat_textarea'></textarea>
+  <input value="Send" type="submit" />
 </form>
