@@ -14,6 +14,7 @@ gem 'settingslogic'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'yui-compressor'
 gem 'unicorn'
+gem 'semver2'
 
 group :development do
   gem "better_errors"
