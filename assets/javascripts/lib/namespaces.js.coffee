@@ -1,4 +1,5 @@
 @ICRMClient =
+  TestHelpers: {}
   Widget: {}
   Chat: {}
   Notifications: {}

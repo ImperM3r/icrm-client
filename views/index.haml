@@ -10,9 +10,8 @@
         ICRM-Client
         %small Тест виджета
 
-      %button.btn{:onclick=>"ICRMSendTestNotify()"} Отправить нотификацию
-      %button.btn{:onclick=>"ICRMSendServerMessage()"} Сообщение с сервера
-
+      %button.btn{:onclick=>"ICRMClient.TestHelpers.SendTestNotificatoin()"} Отправить нотификацию
+      %button.btn{:onclick=>"ICRMClient.TestHelpers.SendChatMessage()"} Сообщение с сервера
 
     :javascript
       window.ICRM_Settings = {

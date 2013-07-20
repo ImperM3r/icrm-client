@@ -33,7 +33,7 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
     root
 
   _tryInitFaye: =>
-    return unless @visitor_id
+    return unless @visitor
 
     @log 'init faye'
 
@@ -42,10 +42,10 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
       visitor: @informer_response.visitor
 
     if window.ICRM_Settings.chat
-      @widget_controller = new ICRMClient.Widget.RootController visitor_id: @visitor_id
+      @widget_controller = new ICRMClient.Widget.RootController visitor: @visitor
       @$el.append @widget_controller.render().$el
 
-    @notification_controller = new window.ICRMClient.NotificationController @visitor_id
+    @notification_controller = new window.ICRMClient.NotificationController @visitor
 
   _runInformer: =>
     return if @informer
@@ -56,8 +56,11 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
       @log "Informer response: #{response.toString()}"
 
       if !response || !response.visitor
-        @log "Problem with visitor_id: #{response.data}"
+        @log "Bad response #{response.data}"
       else
-        @visitor_id = response.visitor.id
+        @visitor = response.visitor
+        @visitor.type = 'Visitor'
+        window.ICRMClient.visitor = @visitor
+
 
         @_tryInitFaye()

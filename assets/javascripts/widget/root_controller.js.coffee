@@ -4,7 +4,7 @@ class @ICRMClient.Widget.RootController extends @ICRMClient.Backbone.View
   # Input parameters:
   # visitor_id
   initialize: (options) ->
-    @window         = new ICRMClient.Widget.WindowView visitor_id: options.visitor_id
+    @window         = new ICRMClient.Widget.WindowView visitor: options.visitor
 
     @starter_button = new ICRMClient.Widget.StarterButtonView
       window: @window

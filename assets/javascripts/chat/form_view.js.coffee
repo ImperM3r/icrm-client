@@ -1,40 +1,39 @@
 class ICRMClient.Chat.FormView extends @ICRMClient.Backbone.View
   template: JST['chat/form_view']
 
-  messages_url: window.ICRMClient.Assets.api_url + 'chat/messages'
+  conversation_url: window.ICRMClient.Assets.api_url + 'chat/conversation/'
 
   initialize: (options) ->
-    @$textarea = @$('textarea[name="content"]')
-
-    @visitor_id = options.visitor_id
-    @from_id    = options.visitor_id
-    @from_type  = 'Visitor'
+    @conversation_id  = options.conversation_id
+    @sender           = options.sender
+    @post_url         = @conversation_url + @conversation_id
 
   events:
     'submit' : '_submitMessage'
+
+  $textarea: ->
+    @$el.find('#convead_chat_textarea')
 
   render: ->
     @$el.html @template()
     @
 
-  _submitMessage: =>
-    @_postMessage @$textarea.val()
-    @$textarea.val ''
+  _submitMessage: (a,b,c)=>
+    @_postMessage @$textarea().val()
+    @$textarea().val ''
     false
 
   _postMessage: (content) =>
 
-    message = new ICRMClient.Chat.MessageModel
-      visitor_id: @visitor_id
-      from_type:  @from_type
-      from_id:    @from_id
+    message = new ICRMClient.Chat.Message
+      sender:     @sender
       created_at: 'sending..'
       content:    content
 
     @collection.add message
 
     window.ICRMClient.Base::ajax
-      url: @messages_url
+      url: @post_url
       data: message.attributes
       success: (response) =>
         message.set response

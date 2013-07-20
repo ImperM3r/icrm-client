@@ -4,34 +4,37 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
   tab_name: 'Conversation'
 
   initialize: (options) ->
-    @collection = new ICRMClient.Chat.MessagesCollection()
-    @visitor_id = options.visitor_id
-    @from_id    = options.visitor_id
-    @from_type  = 'Visitor'
+    @window_view     = options.window_view
+    @sender          = options.visitor
+    @conversation_id = @sender.id
+
+    @collection      = new ICRMClient.Chat.MessagesCollection
 
     @form_view = new ICRMClient.Chat.FormView
-      collection: @collection
-      visitor_id: @visitor_id
+      conversation_id: @conversation_id
+      collection:      @collection
+      sender:          @sender
 
     @messages_view = new ICRMClient.Chat.MessagesView
       collection: @collection
 
-    window.ICRMClient.faye.subscribe "/chat/#{@visitor_id}", @_messageHandler, @
+    window.ICRMClient.faye.subscribe "/conversations/#{@conversation_id}", @_messageHandler, @
 
     _id = 0
 
-    window.ICRMSendServerMessage = =>
+    window.ICRMClient.TestHelpers.SendChatMessage = =>
       @_messageHandler
         method: 'create'
         message:
-          visitor_id: @visitor_id
-          id: _id++
+          id:         _id++
+          conversation_id: @conversation_id
+          sender:
+            type: 'Manager'
+            id:   0
+            name: 'John Silver'
+          recipient: @sender
           created_at: new Date()
-          from_type: 'Manager'
-          from_id: 123
-          from:
-            name: 'John Birman'
-          content: 'Show must go on'
+          content:    'Show must go on'
 
   render: ->
     @$el.append @messages_view.render().$el
@@ -41,7 +44,9 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
   _messageHandler: (msg) ->
     if msg.method == 'create'
       # Collection is smart to detect the existed message
-      if msg.message.from_id == @from_id && msg.message.from_type == @from_type
-        console.log "message from me"
+      if msg.message.sender.id == @sender.id && msg.message.sender.type == @sender.type
+        console.log "Got retranslated message"
       else
-        @collection.add msg.message
+        @window_view.show()
+        message = new ICRMClient.Chat.Message msg.message
+        @collection.add message

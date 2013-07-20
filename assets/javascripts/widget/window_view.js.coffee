@@ -5,14 +5,14 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
 
     @navigation = new ICRMClient.Widget.NavigationView
       tab_views: [
-        new ICRMClient.Chat.ChatTabView( visitor_id: options.visitor_id),
+        new ICRMClient.Chat.ChatTabView( visitor: options.visitor, window_view: @),
         new ICRMClient.Notifications.NotificationTabView(),
         new ICRMClient.Suggestion.SuggestionTabView(),
         new ICRMClient.Problem.ProblemTabView()
       ]
 
   events:
-    'click .convead_window_close' : '_hide'
+    'click .convead_window_close' : 'hide'
 
   render: ->
     @$el.html( @template(@) ).hide() # starting hidden
@@ -22,5 +22,11 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
   toggleVisibility: =>
     @$el.toggle()
 
-  _hide: =>
+  isVisibly: ->
+    @$el.is(":visible")
+
+  show: =>
+    @$el.show()
+
+  hide: =>
     @$el.hide()

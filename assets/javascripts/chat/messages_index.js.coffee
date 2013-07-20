@@ -11,7 +11,10 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
       @append model
 
   append: (model) =>
-    @$el.append new @model_view(model: model).render().el
+    $msg_el = new @model_view(model: model).render().$el
+    $msg_el.fadeIn 200
+
+    @$el.append $msg_el
 
   render: ->
     @$el.empty()
