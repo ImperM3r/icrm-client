@@ -1,6 +1,6 @@
 <div class="widget-window">
   <div class="lightbox conversation">
-    <a href="#" class="convead_window_close"></a>
-    <div id="convead_client_window_content"></div>
+    <a href="#" class="window_close"></a>
+    <div class="widget-window-content"></div>
   </div>
 </div>

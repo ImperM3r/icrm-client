@@ -12,7 +12,7 @@ class ICRMClient.Chat.FormView extends @ICRMClient.Backbone.View
     'submit' : '_submitMessage'
 
   $textarea: ->
-    @$el.find('#convead_chat_textarea')
+    @$el.find('textarea[name=content]')
 
   render: ->
     @$el.html @template()

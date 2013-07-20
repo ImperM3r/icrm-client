@@ -26,6 +26,16 @@
     position: fixed
     z-index: 9999
 
+    &.chat-standalone
+      z-index: 9998
+      top: 0
+      left: 0
+      margin: 0 0
+      width: 304px
+      .lightbox
+        width: 272px
+        border: solid 2px #900
+
   .lightbox
     width: 572px
     height: 338px
@@ -380,7 +390,7 @@
     font-size: 14px
     margin-bottom: 4px
 
-  .convead_window_close
+  .window_close
     position: absolute
     width: 12px
     height: 12px

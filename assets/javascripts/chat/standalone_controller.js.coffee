@@ -10,31 +10,48 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
 
   render: ->
     @$el.html( @template(@) )
-    @$el.find('#convead_client_window_content').append @chat.render().$el
+    content_el = @$el.find('.widget-window-content')
+    content_el.append @chat.render().$el
 
     ICRMClient.$('#convead_client_container').append @$el
     @
 
+  # The stub for incoming messages
   show: ->
-    # the stub for incoming messages
+    @$el.show()
+
+  close: ->
+    @hide()
+
+  hide: ->
+    @$el.hide()
+
+  isVisible: ->
+    @$el.is(":visible")
+
+  toggleVisibility: ->
+    @$el.toggle()
 
   events:
-    'click .convead_window_close' : 'close'
+    'click .window_close' : 'close'
 
-window.ICRMClient.Chat.Start =(conversation_id) ->
-  if window.ICRM
-    sender = window.ICRM.manager
+window.ICRMClient.Chat.Start = (conversation_id) ->
+  if window.ICRMClient.standalone_chat
+    window.ICRMClient.standalone_chat.toggleVisibility()
   else
-    # Fake Manager for testing
-    sender = 
-      id: 1
-      type: 'User'
-      name: 'Danil Pismenny'
+    if window.ICRM
+      sender = window.ICRM.manager
+    else
+      # Fake Manager for testing
+      sender = 
+        id: 1
+        type: 'User'
+        name: 'Danil Pismenny'
 
-  @chat_controller = new window.ICRMClient.Chat.StandaloneController
-    conversation_id: ICRMClient.visitor.id
-    sender: sender
+    window.ICRMClient.standalone_chat = new window.ICRMClient.Chat.StandaloneController
+      conversation_id: ICRMClient.visitor.id
+      sender: sender
 
-  @chat_controller.render()
+    window.ICRMClient.standalone_chat.render()
 
   false

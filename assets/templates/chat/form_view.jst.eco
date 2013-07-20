@@ -1,6 +1,6 @@
 <form action="#" class="respond_form">
   <div class="textarea">
-    <textarea cols="30" rows="10" name="content" id="convead_chat_textarea"></textarea>
+    <textarea cols="30" rows="10" name="content"></textarea>
   </div>
   <input id="icrm_chat_submit_button" value="Send" type="submit" />
 </form>
