@@ -1,4 +1,5 @@
 class Application < Sinatra::Base
+  require 'semver'
   helpers do
     include Sprockets::Helpers
   end

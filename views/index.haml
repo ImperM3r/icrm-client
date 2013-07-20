@@ -7,7 +7,7 @@
   %body
     .container
       %h2
-        ICRM-Client
+        %a{:href=>'/'} ICRM-Client
         %small Тест виджета
 
       %button.btn{:onclick=>"ICRMClient.TestHelpers.SendTestNotificatoin()"} Отправить нотификацию
@@ -60,3 +60,8 @@
           window.addEventListener('load',l,false);
         }
       })();
+
+    .container
+      .footer
+        %hr
+        %small.muted= SemVer.find

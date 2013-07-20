@@ -12,4 +12,6 @@ require 'sprockets-helpers'
 require 'coffee_script'
 require 'eco'
 
+require 'semver'
+
 require './config/settings'
