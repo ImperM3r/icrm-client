@@ -33,16 +33,13 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
     root
 
   _tryInitFaye: =>
-    @log 'try init faye'
     return unless @visitor_id
 
     @log 'init faye'
-    # We can init faye if here is initializer @visitor and
-    window.ICRMClient.faye = new Faye.Client @assets.faye_url, timeout: 30, retry: 3
 
-    #window.ICRMClient.faye.setHeader 'ICRM-Visitor', @visitor_id
-    ext = new window.ICRMClient.FayeLogger @visitor_id
-    window.ICRMClient.faye.addExtension ext
+    window.ICRMClient.faye = new ICRMClient.FayeClient
+      app_key: window.ICRMClient.app_key
+      visitor: @informer_response.visitor
 
     if window.ICRM_Settings.chat
       @widget_controller = new ICRMClient.Widget.RootController visitor_id: @visitor_id
@@ -51,17 +48,16 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
     @notification_controller = new window.ICRMClient.NotificationController @visitor_id
 
   _runInformer: =>
-    @log "Try to _runInformer"
     return if @informer
     @log "Run _runInformer"
 
     @informer = new window.ICRMClient.InformerController (response) =>
-      #@visitor_id = parseInt JSON.parse(response.data).visitor_id
-      @visitor_id = response.visitor_id
+      @informer_response = response
+      @log "Informer response: #{response.toString()}"
 
-      if isNaN(@visitor_id) # unless visitor_id is a number
+      if !response || !response.visitor
         @log "Problem with visitor_id: #{response.data}"
       else
-        @log "Get visitor_id: #{@visitor_id}"
+        @visitor_id = response.visitor.id
 
         @_tryInitFaye()

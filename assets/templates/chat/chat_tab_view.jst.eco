@@ -1,2 +1,0 @@
-<%- @messages_view.render().el.outerHTML %>
-<%- @form_view.render().el.outerHTML %>

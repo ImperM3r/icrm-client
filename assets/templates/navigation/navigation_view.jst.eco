@@ -5,14 +5,5 @@
   <span class="problem-text">Problem</span>
 </h1>
 
-<ul class="tabset">
-  <% for button in @buttons: %>
-    <%- button.render().el.outerHTML %>
-  <% end %>
-</ul>
-
-<div class="convead_tab_content">
-  <% for tab in @tabs: %>
-    <%- tab.render().el.outerHTML %>
-  <% end %>
-</div>
+<ul id="convead_client_navigation_tabset"></ul>
+<div id="convead_client_navigation_tabs_content"></div>

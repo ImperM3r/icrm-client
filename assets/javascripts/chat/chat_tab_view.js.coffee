@@ -1,6 +1,4 @@
 class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
-  template: JST['chat/chat_tab_view']
-
   tagName: 'div'
   id: 'convead_chat_holder'
 
@@ -35,7 +33,8 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
           content: 'Show must go on'
 
   render: ->
-    @$el.html @template(@)
+    @$el.append @messages_view.render().$el
+    @$el.append @form_view.render().$el
     @
 
   _messageHandler: (msg) ->

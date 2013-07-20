@@ -4,6 +4,7 @@
 #= require ./lib/jquery
 #= require ./lib/backbone
 #= require ./lib/utils
+#= require ./lib/faye_client
 #= require ./lib/faye_logger
 #= require_tree ../templates
 #= require_tree ./views
