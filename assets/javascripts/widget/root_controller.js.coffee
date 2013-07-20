@@ -1,8 +1,6 @@
 class @ICRMClient.Widget.RootController extends @ICRMClient.Backbone.View
   className: 'convead_client-widget-root'
 
-  # Input parameters:
-  # visitor_id
   initialize: (options) ->
     @window         = new ICRMClient.Widget.WindowView visitor: options.visitor
 

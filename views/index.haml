@@ -11,7 +11,10 @@
         %small Тест виджета
 
       %button.btn{:onclick=>"ICRMClient.TestHelpers.SendTestNotificatoin()"} Отправить нотификацию
+      %br
       %button.btn{:onclick=>"ICRMClient.TestHelpers.SendChatMessage()"} Сообщение с сервера
+      %br
+      %button.btn{:onclick=>"ICRMClient.Chat.Start()"} Чат от менеджера
 
     :javascript
       window.ICRM_Settings = {
@@ -36,8 +39,8 @@
         // Don't change this
         app_key: "f71809f7311fc105bc1657c63e2c78e3ff6005c36b8d317a",
 
-        //whether to show chat or not
-        chat: true
+        //whether to show chat widget or not
+        widget: true
       };
 
       (function(){

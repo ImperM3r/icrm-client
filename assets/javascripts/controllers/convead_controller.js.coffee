@@ -18,14 +18,9 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
     @_runInformer()
 
   _createRootNode: =>
-    # TODO rename icrm_chat to icrm_client
     root = @$ @template()
 
     @$('body').eq(0).append root
-
-    # TODO Избавиться от глобалоной $rootNode
-    # пусть каждый виджет сам себе делает нужные элементы
-    window.ICRMClient.Base::$rootNode = root
 
     # TODO Перенести создание вьюх для Notification в NotificationView
     # и избавиться от глобальной $notifoicationNode
@@ -41,7 +36,7 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
       app_key: window.ICRMClient.app_key
       visitor: @informer_response.visitor
 
-    if window.ICRM_Settings.chat
+    if window.ICRM_Settings.widget
       @widget_controller = new ICRMClient.Widget.RootController visitor: @visitor
       @$el.append @widget_controller.render().$el
 

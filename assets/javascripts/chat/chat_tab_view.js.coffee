@@ -4,9 +4,9 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
   tab_name: 'Conversation'
 
   initialize: (options) ->
-    @window_view     = options.window_view
-    @sender          = options.visitor
-    @conversation_id = @sender.id
+    @parent_controller     = options.parent_controller
+    @sender          = options.sender
+    @conversation_id = options.conversation_id
 
     @collection      = new ICRMClient.Chat.MessagesCollection
 
@@ -47,6 +47,6 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
       if msg.message.sender.id == @sender.id && msg.message.sender.type == @sender.type
         console.log "Got retranslated message"
       else
-        @window_view.show()
+        @parent_controller.show()
         message = new ICRMClient.Chat.Message msg.message
         @collection.add message
