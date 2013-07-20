@@ -1,1 +1,1 @@
-<a class="tab" href="#<%= @tab_id%>"><%= @tab_name %></a>
+<a class="tab" href="#"><%= @tab_view.tab_name %></a>

@@ -3,6 +3,7 @@ class ICRMClient.Suggestion.SuggestionTabView extends @ICRMClient.Backbone.View
 
   id: 'convead_suggestion_holder'
   tagName: 'div'
+  tab_name: 'Suggestion'
 
   render: ->
     @$el.html @template()
