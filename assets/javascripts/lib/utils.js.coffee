@@ -15,3 +15,15 @@
       callback.call() if @readyState in ['complete', 'loaded']
     script.onload = callback
     window.ICRMClient.head.appendChild script
+
+  # Get URI parameters value
+  gup: (name) ->
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]")
+    regexS = "[\\?&]" + name + "=([^&#]*)"
+    regex = new RegExp regexS
+    results = regex.exec window.location.href
+
+    if results
+      results[1]
+    else
+      null

@@ -36,7 +36,7 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
       app_key: window.ICRMClient.app_key
       visitor: @informer_response.visitor
 
-    if window.ICRM_Settings.widget
+    if window.ICRM_Settings.widget || ICRMClient.Utils.gup('convead_widget')
       @widget_controller = new ICRMClient.Widget.RootController visitor: @visitor
       @$el.append @widget_controller.render().$el
 
