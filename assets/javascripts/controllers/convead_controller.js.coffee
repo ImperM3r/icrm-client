@@ -1,5 +1,5 @@
 class @ICRMClient.ConveadController extends @ICRMClient.Base
-  template: JST['root_template']
+  template: JST['convead_client_container']
 
   constructor: (options) ->
     window.ICRMClient.app_key = window.ICRM_Settings.app_key
@@ -13,9 +13,7 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
     @$el = @$ @el
 
     # TODO include faye_client into this script
-    window.ICRMClient.Utils.loadScript @assets.faye_js, @_tryInitFaye
-
-    @_runInformer()
+    window.ICRMClient.Utils.loadScript @assets.faye_js, @start_visitor
 
   _createRootNode: =>
     root = @$ @template()
@@ -27,35 +25,16 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
     window.ICRMClient.Base::$notificationsNode = root.find('.notifications')
     root
 
-  _tryInitFaye: =>
-    return unless @visitor
-
-    @log 'init faye'
+  start_visitor: =>
+    return unless visitor = window.ICRMClient.visitor
+    @debug 'Start visitor'
 
     window.ICRMClient.faye = new ICRMClient.FayeClient
       app_key: window.ICRMClient.app_key
-      visitor: @informer_response.visitor
+      visitor: visitor
 
     if window.ICRM_Settings.widget || ICRMClient.Utils.gup('convead_widget')
-      @widget_controller = new ICRMClient.Widget.RootController visitor: @visitor
+      @widget_controller = new ICRMClient.Widget.RootController visitor: visitor
       @$el.append @widget_controller.render().$el
 
-    @notification_controller = new window.ICRMClient.NotificationController @visitor
-
-  _runInformer: =>
-    return if @informer
-    @log "Run _runInformer"
-
-    @informer = new window.ICRMClient.InformerController (response) =>
-      @informer_response = response
-      @log "Informer response: #{response.toString()}"
-
-      if !response || !response.visitor
-        @log "Bad response #{response.data}"
-      else
-        @visitor = response.visitor
-        @visitor.type = 'Visitor'
-        window.ICRMClient.visitor = @visitor
-
-
-        @_tryInitFaye()
+    @notification_controller = new window.ICRMClient.NotificationController visitor

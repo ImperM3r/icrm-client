@@ -7,6 +7,13 @@ class @ICRMClient.Base
   # $notificationsNode
   assets:
     window.ICRMClient.Assets
+
+  error: (message) ->
+    console.error message
+
+  debug: (message) ->
+    console.debug message
+
   log: (message) ->
     console.log message
 
@@ -23,6 +30,7 @@ class @ICRMClient.Base
         console.log "error while making cors ajax: #{e}"
         #throw 'error'
 
+    console.debug "Sending ajax: " + JSON.stringify(data)
 
     # XDomainRequest object is used instead of clean ajax
     # for CORS request in ie8, ie9 browsers
@@ -40,5 +48,4 @@ class @ICRMClient.Base
       xdr.open 'POST', options.url
       xdr.send data
     else
-      console.log "Sending ajax: " + JSON.stringify(data)
       @$.ajax data

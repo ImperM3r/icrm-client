@@ -1,21 +1,11 @@
-@import cleanslate
-@import alert-bangtidy
-@import icrm-notify
 
-$avatarSize: 32px
+#convead_client_container
+  @import notifications
+  @import button_starter
 
-#icrm_chat
+  @import cleanslate
   @extend .clearslate
-  @extend .alert-bangTidy
-  @extend %icrm_chat
-  width: 320px
-  @media (max-width: 979px)
-    width: 100%
-    margin: 0 auto
-  padding: 10px 16px 10px ($avatarSize + 20px)
-  font-size: 13px
-  line-height: 16px
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+  @extend %convead_notifications
 
   input, textarea, select
     font: 100% 'HelveticaNeueLight', Arial, Helvetica, Verdana, sans-serif
@@ -23,7 +13,9 @@ $avatarSize: 32px
     color: #000
     margin: 0
 
-  .icrm_window_holder
+  // Basic widget window box
+
+  .widget-window
     font-size: 14px
     line-height: 26px
     top: 50%
@@ -38,11 +30,13 @@ $avatarSize: 32px
     width: 572px
     height: 338px
     background-color: #fff
+    border: solid 2px #f18000
+    padding: 14px 14px 17px
+
+    // TODO use sass shadow
     -webkit-box-shadow: 0 7px 16px rgba(2,2,2,.49)
     -moz-box-shadow: 0 7px 16px rgba(2,2,2,.49)
     box-shadow: 0 7px 16px rgba(2,2,2,.49)
-    border: solid 2px #f18000
-    padding: 14px 14px 17px
 
     h1.heading
       font-size: 18px
@@ -97,6 +91,8 @@ $avatarSize: 32px
         padding: 4px 5px
         border: 1px solid #bbb
         color: #3f3f3f
+
+        // TODO use sass gradient
         background: #f5f5f5 url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y1ZjVmNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlY2VjZWMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+)
         background: -moz-linear-gradient(top,  #f5f5f5 0%, #ececec 100%)
         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#ececec))
@@ -131,6 +127,8 @@ $avatarSize: 32px
           position: absolute
           content: ""
           border: 1px solid #f18000
+
+          // TODO Use sass radius
           border-radius: 3px
           -moz-border-radius: 3px
           -webkit-border-radius: 3px
@@ -373,39 +371,6 @@ $avatarSize: 32px
     overflow: hidden
     height: 0
 
-  .icrm_button_starter
-    position: fixed
-    bottom: 0
-    left: 50%
-    margin-left: 400px
-    text-shadow: 0 1px rgba(2,2,2,.13)
-    background: #ef970c url(<%= Settings.url %>images/bg-fixed-button.png) repeat-x top left
-    -moz-border-radius: 3px 3px 0 0
-    border-radius: 3px 3px 0 0
-    -webkit-border-top-left-radius: 3px
-    -webkit-border-top-right-radius: 3px
-    -webkit-box-shadow: 0 0 5px rgba(2,2,2,.68)
-    -moz-box-shadow: 0 0 5px rgba(2,2,2,.68)
-    box-shadow: 0 0 5px rgba(2,2,2,.68)
-    cursor: pointer
-    text-align: left
-    z-index: 1000
-    text-decoration: none
-
-    .inner
-      background: url(<%= Settings.url %>images/ico-ask.png) no-repeat right
-      padding: 6px 40px 4px 14px
-      width: 124px
-      display: block
-      color: white
-      font: 14px/26px 'Arial', sans-serif
-
-    &:hover
-      text-decoration: none
-      background: #ef970c url(<%= Settings.url %>images/bg-fixed-button-hover.png) repeat-x top left
-    &:active
-      background-color: #ef970c
-
   .icrm_chat_avatar
     margin:
       left: - ($avatarSize + 10px)
@@ -422,16 +387,6 @@ $avatarSize: 32px
     top: 20px
     right: 19px
     background: url(<%= Settings.url %>images/sprite.png) no-repeat -220px -194px
-
-  .convead_notification_close
-    position: absolute
-    top: 0
-    right: 4px
-    font-size: 20px
-    font-weight: bold
-    line-height: 25px
-    color: #000
-    text-decoration: none
 
   .pull-right
     float: right

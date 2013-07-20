@@ -13,7 +13,9 @@ class @ICRMClient.NotificationModel extends @ICRMClient.Base
     @$el = @_prepareHtml()
 
   _prepareHtml: ->
-    el = @$ "<div id='icrm_chat'>"+
+    # класс
+    # TODO Move to template
+    el = @$ "<div class='notification-box'>"+
       "<a class='convead_notification_close' href='#'>&times;</a>"+
       "<img src='#{@avatar}' class='icrm_chat_avatar pull-left' width='32' height='32' />"+
       "<div class='pull-right'>"+

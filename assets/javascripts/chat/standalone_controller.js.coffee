@@ -1,7 +1,6 @@
 class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
+  template: JST['chat/standalone']
   className: 'convead_client-widget-root'
-
-  template: JST['widget/window_view']
 
   initialize: (options) ->
     @chat = new ICRMClient.Chat.ChatTabView
@@ -13,7 +12,7 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
     @$el.html( @template(@) )
     @$el.find('#convead_client_window_content').append @chat.render().$el
 
-    ICRMClient.$('#icrm_chat').append @$el
+    ICRMClient.$('#convead_client_container').append @$el
     @
 
   show: ->
