@@ -1,6 +1,6 @@
 <a class='convead_notification_close' href='#'>&times;</a>
 <img src="<%= @avatar %>" class='icrm_chat_avatar pull-left' width='32' height='32' />
-<div class='pull-right'>
+<div class='pull-left'>
   <div class='icrm_chat_subject'><strong><%= @subject %></strong></div>
   <div class='icrm_chat_content'><%= @content %></div>
 </div>

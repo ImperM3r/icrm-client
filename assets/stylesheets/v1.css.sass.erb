@@ -1,21 +1,26 @@
+@import mixins
+@import reset
+@import notifications
+@import button_starter
+
+.convead-client-reset
+  +resetStyles
 
 #convead_client_container
-  @import notifications
-  @import button_starter
-
-  @import cleanslate
-  @extend .clearslate
-  @extend %convead_notifications
+  //@extend %convead_notifications
+  +buttonStarter
+  +conveadNotifications
 
   input, textarea, select
     font: 100% 'HelveticaNeueLight', Arial, Helvetica, Verdana, sans-serif
     vertical-align: middle
     color: #000
     margin: 0
+    +box-sizing(border-box)
 
   // Basic widget window box
 
-  .widget-window
+  .convead-client-widget-window
     font-size: 14px
     line-height: 26px
     top: 50%
@@ -32,14 +37,14 @@
       left: 0
       margin: 0 0
       width: 304px
-      .lightbox
+      .convead-client-lightbox
         width: 272px
         border: solid 2px #900
 
       textarea
         width: 230px
 
-  .lightbox
+  .convead-client-lightbox
     width: 572px
     height: 338px
     background-color: #fff
@@ -401,6 +406,7 @@
 
   .window_close
     position: absolute
+    z-index: 9999
     width: 12px
     height: 12px
     top: 20px

@@ -1,32 +1,33 @@
-.icrm_button_starter
-  position: fixed
-  bottom: 0
-  left: 50%
-  margin-left: 400px
-  text-shadow: 0 1px rgba(2,2,2,.13)
-  background: #ef970c url(<%= Settings.url %>images/bg-fixed-button.png) repeat-x top left
-  -moz-border-radius: 3px 3px 0 0
-  border-radius: 3px 3px 0 0
-  -webkit-border-top-left-radius: 3px
-  -webkit-border-top-right-radius: 3px
-  -webkit-box-shadow: 0 0 5px rgba(2,2,2,.68)
-  -moz-box-shadow: 0 0 5px rgba(2,2,2,.68)
-  box-shadow: 0 0 5px rgba(2,2,2,.68)
-  cursor: pointer
-  text-align: left
-  z-index: 1000
-  text-decoration: none
-
-  .inner
-    background: url(<%= Settings.url %>images/ico-ask.png) no-repeat right
-    padding: 6px 40px 4px 14px
-    width: 124px
-    display: block
-    color: white
-    font: 14px/26px 'Arial', sans-serif
-
-  &:hover
+@mixin buttonStarter()
+  .icrm_button_starter
+    position: fixed
+    bottom: 0
+    right: 20px
+    margin-left: 400px
+    text-shadow: 0 1px rgba(2,2,2,.13)
+    background: #ef970c url(<%= Settings.url %>images/bg-fixed-button.png) repeat-x top left
+    -moz-border-radius: 3px 3px 0 0
+    border-radius: 3px 3px 0 0
+    -webkit-border-top-left-radius: 3px
+    -webkit-border-top-right-radius: 3px
+    -webkit-box-shadow: 0 0 5px rgba(2,2,2,.68)
+    -moz-box-shadow: 0 0 5px rgba(2,2,2,.68)
+    box-shadow: 0 0 5px rgba(2,2,2,.68)
+    cursor: pointer
+    text-align: left
+    z-index: 1000
     text-decoration: none
-    background: #ef970c url(<%= Settings.url %>images/bg-fixed-button-hover.png) repeat-x top left
-  &:active
-    background-color: #ef970c
+
+    .inner
+      background: url(<%= Settings.url %>images/ico-ask.png) no-repeat right
+      padding: 6px 40px 4px 14px
+      width: 124px
+      display: block
+      color: white
+      font: 14px/26px 'Arial', sans-serif
+
+    &:hover
+      text-decoration: none
+      background: #ef970c url(<%= Settings.url %>images/bg-fixed-button-hover.png) repeat-x top left
+    &:active
+      background-color: #ef970c
