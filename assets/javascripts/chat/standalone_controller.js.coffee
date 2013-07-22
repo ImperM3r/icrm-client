@@ -36,13 +36,15 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
   events:
     'click .window_close' : 'close'
 
+
+# Debugging helpers
 window.ICRMClient.Chat.Start = (conversation_id) ->
 
   if window.ICRMClient.standalone_chat
     window.ICRMClient.standalone_chat.toggleVisibility()
   else
     # Fake Manager for testing
-    sender = 
+    sender = new window.ICRMClient.Chat.Chatter
       id: 1
       type: 'User'
       name: 'Danil Pismenny'

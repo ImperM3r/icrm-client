@@ -46,7 +46,7 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
   _messageHandler: (msg) ->
     if msg.method == 'create'
       # Collection is smart to detect the existed message
-      if msg.message.sender.id == @sender.id && msg.message.sender.type == @sender.type
+      if msg.message.sender.id == @sender.get('id') && msg.message.sender.type == @sender.get('type')
         console.debug "Got retranslated message"
       else
         @parent_controller.show()

@@ -6,8 +6,8 @@ class ICRMClient.Chat.FormView extends @ICRMClient.Backbone.View
   initialize: (options) ->
     @conversation_id  = options.conversation_id
     @sender           = options.sender
-    @ajax_post        = options.ajax || window.ICRMClient.Base::ajax
     @post_url         = @conversation_url + @conversation_id
+    @ajax             = options.ajax || window.ICRMClient.Base::ajax
 
   events:
     'submit' : '_submitMessage'
@@ -26,13 +26,13 @@ class ICRMClient.Chat.FormView extends @ICRMClient.Backbone.View
 
   _postMessage: (content) =>
     message = new ICRMClient.Chat.Message
-      sender:     @sender
+      sender:     @sender.attributes
       created_at: 'sending..'
       content:    content
 
     @collection.add message
 
-    @ajax_post
+    @ajax
       url: @post_url
       data: message.attributes
       success: (response) =>

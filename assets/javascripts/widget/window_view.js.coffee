@@ -5,7 +5,7 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
     @navigation = new ICRMClient.Widget.NavigationView
       tab_views: [
         new ICRMClient.Chat.ChatTabView(
-          sender:            options.visitor,
+          sender:            new window.ICRMClient.Chat.Chatter(options.visitor),
           conversation_id:   options.visitor.id,
           faye:              window.ICRMClient.faye
           parent_controller: @,
