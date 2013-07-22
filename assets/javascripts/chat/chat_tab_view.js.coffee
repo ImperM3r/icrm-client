@@ -9,8 +9,6 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
     @conversation_id = options.conversation_id
     @faye            = options.faye
 
-    @message_api_url = window.ICRMClient.Assets.api_url + 'chat/conversation/' + @conversation_id + '/message/'
-
     @collection      = new ICRMClient.Chat.MessagesCollection
 
     @form_view = new ICRMClient.Chat.FormView
@@ -20,6 +18,7 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
       ajax:            options.ajax
 
     @messages_view = new ICRMClient.Chat.MessagesView
+      conversation_id: options.conversation_id
       collection: @collection
 
     @faye.subscribe "/conversations/#{@conversation_id}", @_messageHandler, @
@@ -53,14 +52,6 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
       @parent_controller.show()
       message = new ICRMClient.Chat.Message m
       @collection.add message
-      @_mark_read_message message
-
-  _mark_read_message: (message) =>
-    window.ICRMClient.Base::ajax
-      url: @message_api_url + message.id + '/mark_read'
-      data: message.attributes
-      success: (response) ->
-        console.log "message id:#{message.id} | read status: #{JSON.parse(response).status}"
 
   _modify_message: (m) =>
     if message = @collection.get(m.id)
