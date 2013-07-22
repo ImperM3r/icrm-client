@@ -48,7 +48,7 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
   _create_message: (m) =>
     # Collection is smart to detect the existed message
     if m.sender.id == @sender.get('id') && m.sender.type == @sender.get('type')
-      console.debug "Got retranslated message"
+      console.log "Got retranslated message"
     else
       @parent_controller.show()
       message = new ICRMClient.Chat.Message m
@@ -60,11 +60,11 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
       url: @message_api_url + message.id + '/mark_read'
       data: message.attributes
       success: (response) ->
-        console.debug "message id:#{message.id} | read status: #{JSON.parse(response).status}"
+        console.log "message id:#{message.id} | read status: #{JSON.parse(response).status}"
 
   _modify_message: (m) =>
     if message = @collection.get(m.id)
-      console.debug message
+      console.log message
       message.set m
     else
       console.error "message does not exist in collection, id: #{m.id}"
@@ -73,5 +73,4 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
     switch msg.method
       when 'create' then @_create_message msg.message
       when 'modify' then @_modify_message msg.message
-      else console.error "Unknown message method: #{msg.method}"
-
+      else console.log "Unknown message method: #{msg.method}"
