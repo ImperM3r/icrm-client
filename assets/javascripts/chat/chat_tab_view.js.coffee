@@ -9,6 +9,8 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
     @conversation_id = options.conversation_id
     @faye            = options.faye
 
+    @confirm_url = window.ICRMClient.Assets.api_url + 'chat/conversation/' + @conversation_id + '/confirm/'
+
     @collection      = new ICRMClient.Chat.MessagesCollection
 
     @form_view = new ICRMClient.Chat.FormView
@@ -44,11 +46,21 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
     @
 
   _messageHandler: (msg) ->
-    if msg.method == 'create'
-      # Collection is smart to detect the existed message
-      if msg.message.sender.id == @sender.get('id') && msg.message.sender.type == @sender.get('type')
-        console.debug "Got retranslated message"
-      else
-        @parent_controller.show()
-        message = new ICRMClient.Chat.Message msg.message
-        @collection.add message
+    switch msg.method
+      when 'create'
+        # Collection is smart to detect the existed message
+        if msg.message.sender.id == @sender.id && msg.message.sender.type == @sender.type
+          console.debug "Got retranslated message"
+        else
+          @parent_controller.show()
+          message = new ICRMClient.Chat.Message msg.message
+          @collection.add message
+
+          window.ICRMClient.Base::ajax
+            url: @confirm_url + message.id
+            data: message.attributes
+            success: (response) ->
+              message.set response
+
+      when 'update'
+        console.log msg
