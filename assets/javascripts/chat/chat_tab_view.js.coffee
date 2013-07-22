@@ -9,7 +9,7 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
     @conversation_id = options.conversation_id
     @faye            = options.faye
 
-    @confirm_url = window.ICRMClient.Assets.api_url + 'chat/conversation/' + @conversation_id + '/confirm/'
+    @mark_read_url = window.ICRMClient.Assets.api_url + 'chat/conversation/' + @conversation_id + '/mark_read/'
 
     @collection      = new ICRMClient.Chat.MessagesCollection
 
@@ -57,7 +57,7 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
           @collection.add message
 
           window.ICRMClient.Base::ajax
-            url: @confirm_url + message.id
+            url: @mark_read_url + message.id
             data: message.attributes
             success: (response) ->
               r = JSON.parse(response)
