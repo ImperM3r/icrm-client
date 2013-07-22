@@ -9,6 +9,8 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
     @conversation_id = options.conversation_id
     @faye            = options.faye
 
+    @message_api_url = window.ICRMClient.Assets.api_url + 'chat/conversation/' + @conversation_id + '/message/'
+
     @collection      = new ICRMClient.Chat.MessagesCollection
 
     @form_view = new ICRMClient.Chat.FormView
@@ -43,12 +45,33 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
     @$el.append @form_view.render().$el
     @
 
+  _create_message: (m) =>
+    # Collection is smart to detect the existed message
+    if m.sender.id == @sender.get('id') && m.sender.type == @sender.get('type')
+      console.debug "Got retranslated message"
+    else
+      @parent_controller.show()
+      message = new ICRMClient.Chat.Message m
+      @collection.add message
+      @_mark_read_message message
+
+  _mark_read_message: (message) =>
+    window.ICRMClient.Base::ajax
+      url: @message_api_url + message.id + '/mark_read'
+      data: message.attributes
+      success: (response) ->
+        console.debug "message id:#{message.id} | read status: #{JSON.parse(response).status}"
+
+  _modify_message: (m) =>
+    if message = @collection.get(m.id)
+      console.debug message
+      message.set m
+    else
+      console.error "message does not exist in collection, id: #{m.id}"
+
   _messageHandler: (msg) ->
-    if msg.method == 'create'
-      # Collection is smart to detect the existed message
-      if msg.message.sender.id == @sender.get('id') && msg.message.sender.type == @sender.get('type')
-        console.debug "Got retranslated message"
-      else
-        @parent_controller.show()
-        message = new ICRMClient.Chat.Message msg.message
-        @collection.add message
+    switch msg.method
+      when 'create' then @_create_message msg.message
+      when 'modify' then @_modify_message msg.message
+      else console.error "Unknown message method: #{msg.method}"
+
