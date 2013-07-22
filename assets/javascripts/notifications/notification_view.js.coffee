@@ -40,7 +40,6 @@ class @ICRMClient.NotificationView extends @ICRMClient.Backbone.View
         console.log JSON.stringify(d)
 
   close: =>
-    @log "Close notification #{@id}"
     @markAsRead()
     @$el.fadeOut 400, =>
       @$el.remove()
