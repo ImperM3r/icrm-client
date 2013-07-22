@@ -12,7 +12,7 @@ class @ICRMClient.Base
     console.error message
 
   debug: (message) ->
-    console.debug message
+    console.log message
 
   log: (message) ->
     console.log message
@@ -30,7 +30,7 @@ class @ICRMClient.Base
         console.log "error while making cors ajax: #{e}"
         #throw 'error'
 
-    console.debug "Sending ajax: " + JSON.stringify(data)
+    console.log "Sending ajax: " + JSON.stringify(data)
 
     # XDomainRequest object is used instead of clean ajax
     # for CORS request in ie8, ie9 browsers

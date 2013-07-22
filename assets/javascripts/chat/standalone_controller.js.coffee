@@ -10,6 +10,8 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
       conversation_id: options.conversation_id
       parent_controller: @
 
+    @chat.form_view.postMessage("initiated chat...") if options.sender.get('type') == 'User'
+
   render: ->
     @$el.html( @template(@) )
     content_el = @$el.find('.j-convead-client-widget-window-content')

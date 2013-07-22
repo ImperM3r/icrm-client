@@ -20,11 +20,11 @@ class ICRMClient.Chat.FormView extends @ICRMClient.Backbone.View
     @
 
   _submitMessage: =>
-    @_postMessage @$textarea().val()
+    @postMessage @$textarea().val()
     @$textarea().val ''
     false
 
-  _postMessage: (content) =>
+  postMessage: (content) =>
     message = new ICRMClient.Chat.Message
       sender:     @sender.attributes
       created_at: 'sending..'
