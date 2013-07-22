@@ -26,6 +26,6 @@
     results = regex.exec window.location.href
 
     if results
-      results[1] root DOM node
+      results[1]
     else
       null
