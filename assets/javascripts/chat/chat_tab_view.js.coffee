@@ -45,27 +45,33 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
     @$el.append @form_view.render().$el
     @
 
+  _create_message: (msg_message) ->
+    # Collection is smart to detect the existed message
+    if msg_message.sender.id == @sender.get('id') && msg_message.sender.type == @sender.get('type')
+      console.debug "Got retranslated message"
+    else
+      @parent_controller.show()
+      message = new ICRMClient.Chat.Message msg_message
+      @collection.add message
+      @_mark_read_message message
+
+  _mark_read_message: (message) =>
+    window.ICRMClient.Base::ajax
+      url: @mark_read_url + message.id
+      data: message.attributes
+      success: (response) ->
+        console.debug "message id:#{message.id} | read status: #{JSON.parse(response).status}"
+
+  _modify_message: (msg_message) ->
+    if message = @collection.get(msg_message.id)
+      console.debug message
+      message.set message
+    else
+      console.error "message does not exist in collection, id: #{msg_message.id}"
+
   _messageHandler: (msg) ->
     switch msg.method
-      when 'create'
-        # Collection is smart to detect the existed message
-        if msg.message.sender.id == @sender.get('id') && msg.message.sender.type == @sender.get('type')
-          console.debug "Got retranslated message"
-        else
-          @parent_controller.show()
-          message = new ICRMClient.Chat.Message msg.message
-          @collection.add message
+      when 'create' then @_create_message msg.message
+      when 'modify' then @_modify_message msg.message
+      else console.error "Unknown message method: #{msg.method}"
 
-          window.ICRMClient.Base::ajax
-            url: @mark_read_url + message.id
-            data: message.attributes
-            success: (response) ->
-              r = JSON.parse(response)
-              console.debug "message id:#{message.id} | read status: #{r.status}"
-
-      when 'update'
-        if message = @collection.get(msg.message.id)
-          console.debug msg
-          message.set msg.message
-        else
-          console.error "message does not exist in collection, id: #{msg.message.id}"
