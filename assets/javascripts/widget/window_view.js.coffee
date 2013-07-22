@@ -20,7 +20,7 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
 
   render: ->
     @$el.html( @template(@) ).hide() # starting hidden
-    @$el.find('.widget-window-content').append @navigation.render().$el
+    @$el.find('.j-convead-client-widget-window-content').append @navigation.render().$el
     @
 
   toggleVisibility: =>

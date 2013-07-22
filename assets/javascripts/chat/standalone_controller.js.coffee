@@ -12,7 +12,7 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
 
   render: ->
     @$el.html( @template(@) )
-    content_el = @$el.find('.widget-window-content')
+    content_el = @$el.find('.j-convead-client-widget-window-content')
     content_el.append @chat.render().$el
 
     @

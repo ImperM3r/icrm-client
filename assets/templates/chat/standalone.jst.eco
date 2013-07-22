@@ -1,7 +1,7 @@
-<div class="widget-window chat-standalone">
-  <div class="lightbox conversation">
+<div class="convead-client-widget-window chat-standalone">
+  <div class="convead-client-lightbox conversation">
     <a href="#" class="window_close"></a>
-    <div class="widget-window-content">
+    <div class="j-convead-client-widget-window-content">
 
       <h1 class="heading">
       <span class="conversation-text">Chat with a visitor</span>

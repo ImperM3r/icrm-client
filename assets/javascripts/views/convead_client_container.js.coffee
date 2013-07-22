@@ -1,5 +1,6 @@
 class @ICRMClient.ConveadClientContainer extends @ICRMClient.Backbone.View
   id: 'convead_client_container'
+  className: 'convead-client-reset'
   initialize: ->
     window.ICRMClient.Utils.loadStyle window.ICRMClient.Assets.css
 

@@ -1,60 +1,60 @@
 @import alert-bangtidy
-// @import alert
 
 $avatarSize: 32px
 
-.notifications 
-  position: fixed
-  z-index: 9999
+@mixin conveadNotifications
+  .notifications 
+    position: fixed
+    z-index: 9999
 
-/* Positioning */ 
-.notifications.top-right 
-  right: 10px
-  top: 10px
+  /* Positioning */ 
+  .notifications.top-right 
+    right: 10px
+    top: 10px
 
-.notifications.top-left 
-  left: 10px
-  top: 10px
+  .notifications.top-left 
+    left: 10px
+    top: 10px
 
-.notifications.bottom-left 
-  left: 10px
-  bottom: 10px
+  .notifications.bottom-left 
+    left: 10px
+    bottom: 10px
 
-.notifications.bottom-right 
-  right: 10px
-  bottom: 10px
+  .notifications.bottom-right 
+    right: 10px
+    bottom: 10px
 
-/* Notification Element */
-.notifications > div 
-  position: relative
-  z-index: 9999
-  margin: 5px 0px
+  /* Notification Element */
+  .notifications > div 
+    position: relative
+    z-index: 9999
+    margin: 5px 0px
 
-.notifications
-  &.top-right, &.top-left, &.bottom-right, &.bottom-left
+  .notifications
+    &.top-right, &.top-left, &.bottom-right, &.bottom-left
+      @media (max-width: 979px)
+        top: 10px
+        left: 10px
+        right: 10px
+        bottom: auto
+
+  .notification-box
+    @extend .alert-bangTidy
+    width: 320px
     @media (max-width: 979px)
-      top: 10px
-      left: 10px
-      right: 10px
-      bottom: auto
+      width: 100%
+      margin: 0 auto
+    padding: 10px 16px 10px ($avatarSize + 20px)
+    font-size: 13px
+    line-height: 16px
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
 
-.notification-box
-  @extend .alert-bangTidy
-  width: 320px
-  @media (max-width: 979px)
-    width: 100%
-    margin: 0 auto
-  padding: 10px 16px 10px ($avatarSize + 20px)
-  font-size: 13px
-  line-height: 16px
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
-
-  .convead_notification_close
-    position: absolute
-    top: 0
-    right: 4px
-    font-size: 20px
-    font-weight: bold
-    line-height: 25px
-    color: #000
-    text-decoration: none
+    .convead_notification_close
+      position: absolute
+      top: 0
+      right: 4px
+      font-size: 20px
+      font-weight: bold
+      line-height: 25px
+      color: #aaa
+      text-decoration: none
