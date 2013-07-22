@@ -1,7 +1,7 @@
 class @ICRMClient.ConveadClientContainer extends @ICRMClient.Backbone.View
   id: 'convead_client_container'
   initialize: ->
-    window.ICRMClient.Utils.loadStyle '/assets/v1.css'
+    window.ICRMClient.Utils.loadStyle window.ICRMClient.Assets.css
 
   append: (el) ->
     @$el.append el
