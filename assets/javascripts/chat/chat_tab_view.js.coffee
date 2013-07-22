@@ -60,7 +60,12 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
             url: @confirm_url + message.id
             data: message.attributes
             success: (response) ->
-              message.set response
+              r = JSON.parse(response)
+              console.debug "message id:#{message.id} | read status: #{r.status}"
 
       when 'update'
-        console.log msg
+        if message = @collection.get(msg.message.id)
+          console.debug msg
+          message.set msg.message
+        else
+          console.error "message does not exist in collection, id: #{msg.message.id}"
