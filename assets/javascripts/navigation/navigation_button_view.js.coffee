@@ -13,7 +13,16 @@ class ICRMClient.Widget.NavigationButton extends @ICRMClient.Backbone.View
     @$el.html @template(@)
     @
 
-  _click: ->
-    @nav_controller.selectTabView @tab_view
+  inactivate: ->
+    @$('a.tab').removeClass 'active'
+    @tab_view.$el.hide()
+    @
 
+  activate: ->
+    @$('a.tab').addClass 'active'
+    @tab_view.$el.show()
+    @
+
+  _click: ->
+    @nav_controller.selectTabView @
     false

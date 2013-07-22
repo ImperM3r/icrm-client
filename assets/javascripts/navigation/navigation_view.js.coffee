@@ -8,11 +8,10 @@ class ICRMClient.Widget.NavigationView extends @ICRMClient.Backbone.View
     for tab_view in @tab_views
       @buttons.push new ICRMClient.Widget.NavigationButton nav_controller: @, tab_view: tab_view
 
-  selectTabView: (tab_view)->
-    if tab_view != @current_tab_view
-      @current_tab_view.$el.hide() if @current_tab_view
-      tab_view.$el.show()
-      @current_tab_view = tab_view
+  selectTabView: (button)->
+    if button != @current_button
+      @current_button.inactivate() if @current_button
+      @current_button = button.activate()
 
   render: ->
     @$el.html @template()
@@ -25,5 +24,5 @@ class ICRMClient.Widget.NavigationView extends @ICRMClient.Backbone.View
     for tab in @tab_views
       $tabs_el.append tab.render().$el.hide()
 
-    @selectTabView @tab_views[0]
+    @selectTabView @buttons[0]
     @
