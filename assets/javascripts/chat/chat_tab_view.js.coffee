@@ -9,7 +9,7 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
     @conversation_id = options.conversation_id
     @faye            = options.faye
 
-    @mark_read_url = window.ICRMClient.Assets.api_url + 'chat/conversation/' + @conversation_id + '/mark_read/'
+    @message_api_url = window.ICRMClient.Assets.api_url + 'chat/conversation/' + @conversation_id + '/message/'
 
     @collection      = new ICRMClient.Chat.MessagesCollection
 
@@ -45,29 +45,29 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
     @$el.append @form_view.render().$el
     @
 
-  _create_message: (msg_message) ->
+  _create_message: (m) =>
     # Collection is smart to detect the existed message
-    if msg_message.sender.id == @sender.get('id') && msg_message.sender.type == @sender.get('type')
+    if m.sender.id == @sender.get('id') && m.sender.type == @sender.get('type')
       console.debug "Got retranslated message"
     else
       @parent_controller.show()
-      message = new ICRMClient.Chat.Message msg_message
+      message = new ICRMClient.Chat.Message m
       @collection.add message
       @_mark_read_message message
 
   _mark_read_message: (message) =>
     window.ICRMClient.Base::ajax
-      url: @mark_read_url + message.id
+      url: @message_api_url + message.id + '/mark_read'
       data: message.attributes
       success: (response) ->
         console.debug "message id:#{message.id} | read status: #{JSON.parse(response).status}"
 
-  _modify_message: (msg_message) ->
-    if message = @collection.get(msg_message.id)
+  _modify_message: (m) =>
+    if message = @collection.get(m.id)
       console.debug message
-      message.set message
+      message.set m
     else
-      console.error "message does not exist in collection, id: #{msg_message.id}"
+      console.error "message does not exist in collection, id: #{m.id}"
 
   _messageHandler: (msg) ->
     switch msg.method
