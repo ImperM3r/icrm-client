@@ -26,6 +26,7 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
     @
 
   _mark_read: (model) =>
+    return unless model.get('id')
     window.ICRMClient.Base::ajax
       url: @message_api_url + model.get('id') + '/mark_read'
       data: model.attributes
