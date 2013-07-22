@@ -1,12 +1,13 @@
 class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
   tagName: 'div'
-  id: 'convead_chat_holder'
+  className: 'convead_chat_holder'
   tab_name: 'Conversation'
 
   initialize: (options) ->
     @parent_controller     = options.parent_controller
     @sender          = options.sender
     @conversation_id = options.conversation_id
+    @faye            = options.faye
 
     @collection      = new ICRMClient.Chat.MessagesCollection
 
@@ -14,11 +15,12 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
       conversation_id: @conversation_id
       collection:      @collection
       sender:          @sender
+      ajax:            options.ajax
 
     @messages_view = new ICRMClient.Chat.MessagesView
       collection: @collection
 
-    window.ICRMClient.faye.subscribe "/conversations/#{@conversation_id}", @_messageHandler, @
+    @faye.subscribe "/conversations/#{@conversation_id}", @_messageHandler, @
 
     _id = 0
 

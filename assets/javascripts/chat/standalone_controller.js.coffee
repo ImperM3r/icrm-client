@@ -1,10 +1,12 @@
 class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
   template: JST['chat/standalone']
-  className: 'convead_client-widget-root'
+  className: 'convead_client-standalone_chat'
 
   initialize: (options) ->
     @chat = new ICRMClient.Chat.ChatTabView
       sender: options.sender
+      faye:   options.faye
+      ajax:   options.ajax
       conversation_id: options.conversation_id
       parent_controller: @
 
@@ -13,7 +15,6 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
     content_el = @$el.find('.widget-window-content')
     content_el.append @chat.render().$el
 
-    ICRMClient.$('#convead_client_container').append @$el
     @
 
   # The stub for incoming messages
@@ -36,6 +37,7 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
     'click .window_close' : 'close'
 
 window.ICRMClient.Chat.Start = (conversation_id) ->
+
   if window.ICRMClient.standalone_chat
     window.ICRMClient.standalone_chat.toggleVisibility()
   else
@@ -51,7 +53,8 @@ window.ICRMClient.Chat.Start = (conversation_id) ->
     window.ICRMClient.standalone_chat = new window.ICRMClient.Chat.StandaloneController
       conversation_id: ICRMClient.visitor.id
       sender: sender
+      faye: window.ICRMClient.faye
 
-    window.ICRMClient.standalone_chat.render()
+    ICRMClient.$('#convead_client_container').append window.ICRMClient.standalone_chat.render().$el
 
   false

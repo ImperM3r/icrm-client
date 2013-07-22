@@ -2,4 +2,4 @@
 #= require backbone/backbone
 #
 @ICRMClient.Backbone = Backbone.noConflict()
-@ICRMClient.Backbone.$ = @ICRMClient.$
+@ICRMClient.Backbone.$ = @ICRMClient.$ if @ICRMClient.$

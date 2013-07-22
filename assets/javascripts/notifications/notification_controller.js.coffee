@@ -1,10 +1,10 @@
-class @ICRMClient.NotificationController extends @ICRMClient.Base
-  constructor: (visitor) ->
-    unless window.ICRMClient.$?
-      console.error "Can't initalize NotificationController"
-      return
+class @ICRMClient.NotificationController extends @ICRMClient.Backbone.View
+  className: 'notifications bottom-right'
 
-    window.ICRMClient.faye.subscribe "/notifications/#{visitor.id}", @_notificationHandler
+  initialize: (options) ->
+    @faye = options.faye || window.ICRMClient.faye
+
+    @faye.subscribe "/notifications/#{options.visitor.id}", @_notificationHandler
 
     window.ICRMClient.TestHelpers.SendTestNotificatoin= =>
       @_notificationHandler notification:
@@ -14,8 +14,12 @@ class @ICRMClient.NotificationController extends @ICRMClient.Base
         subject: 'Subject',
         content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
 
+
   _notificationHandler: (message) =>
     console.log "Receive notifiction", JSON.stringify(message)
 
-    noty = new window.ICRMClient.NotificationModel message.notification
-    noty.show()
+    noty = new window.ICRMClient.NotificationView
+      controller: @
+      notification: message.notification
+
+    @$el.append noty.render().$el

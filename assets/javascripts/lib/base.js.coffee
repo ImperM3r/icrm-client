@@ -17,7 +17,7 @@ class @ICRMClient.Base
   log: (message) ->
     console.log message
 
-  ajax: (options) ->
+  ajax: (options) =>
 
     data = _.extend options,
       headers:
@@ -48,4 +48,4 @@ class @ICRMClient.Base
       xdr.open 'POST', options.url
       xdr.send data
     else
-      @$.ajax data
+      window.ICRMClient.$.ajax data
