@@ -41,14 +41,11 @@ window.ICRMClient.Chat.Start = (conversation_id) ->
   if window.ICRMClient.standalone_chat
     window.ICRMClient.standalone_chat.toggleVisibility()
   else
-    if window.ICRM
-      sender = window.ICRM.manager
-    else
-      # Fake Manager for testing
-      sender = 
-        id: 1
-        type: 'User'
-        name: 'Danil Pismenny'
+    # Fake Manager for testing
+    sender = 
+      id: 1
+      type: 'User'
+      name: 'Danil Pismenny'
 
     window.ICRMClient.standalone_chat = new window.ICRMClient.Chat.StandaloneController
       conversation_id: ICRMClient.visitor.id
