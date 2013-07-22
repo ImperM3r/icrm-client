@@ -20,5 +20,5 @@ class ICRMClient.Chat.MessageView extends @ICRMClient.Backbone.View
     'convead-message-' + @model.get('id')
 
   _class: =>
-    'convead-sender-' + @model.get('from_type') +
+    'convead-sender-' + @model.get('sender').type +
       (if @model.get('read') == true then ' read' else '')
