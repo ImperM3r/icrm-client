@@ -31,13 +31,15 @@ class @ICRMClient.NotificationView extends @ICRMClient.Backbone.View
 
     @_read = true
     # TODO send ajax to mark notification as read
-    @log "Mark notification #{@noty.id} as read"
+    console.debug "Mark notification #{@noty.id} as read"
 
     @ajax
       url: @read_url
       data: { id: @noty.id }
       success: (d) ->
-        console.log JSON.stringify(d)
+        console.debug JSON.stringify(d)
+      error: (d) ->
+        console.error "Error sending mark_read request #{d}"
 
   close: =>
     @markAsRead()
