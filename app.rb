@@ -9,6 +9,7 @@ class Application < Sinatra::Base
   end
 
   post '/v1/logger' do
-    [200, {"Content-type" => "application/json"}, '{ "visitor_id": "123" }']
+    content_type :json
+    { visitor: { id: 123 } }.to_json
   end
 end
