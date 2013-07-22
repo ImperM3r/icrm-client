@@ -12,7 +12,7 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
 
   start_visitor: =>
     return unless visitor = window.ICRMClient.visitor
-    @debug 'Start visitor'
+    @debug "Start visitor #{visitor.id}"
 
     if window.ICRMClient.faye
       @error 'Faye is already defined'
