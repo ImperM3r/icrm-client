@@ -5,9 +5,11 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
   className: 'icrm_chat_messages_list'
 
   initialize: (options) ->
+    @message_api_url = window.ICRMClient.Assets.api_url + 'chat/conversation/' + options.conversation_id + '/message/'
     @render()
 
     @listenTo @collection, 'add', (model) =>
+      @_mark_read model
       @append model
 
   append: (model) =>
@@ -22,3 +24,11 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
     @collection.each (model) =>
       @append model
     @
+
+  _mark_read: (model) =>
+    window.ICRMClient.Base::ajax
+      url: @message_api_url + model.get('id') + '/mark_read'
+      data: model.attributes
+      success: (response) ->
+        console.log "message id:#{model.get('id')} | read status: #{JSON.parse(response).status}"
+
