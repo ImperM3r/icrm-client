@@ -10,6 +10,8 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
       conversation_id: options.conversation_id
       parent_controller: @
 
+    actual_time $el: @$el
+
     # Don't send automessage. Wait until manager to decide to do it by himself
     # @chat.form_view.postMessage("initiated chat...") if options.sender.get('type') == 'User'
 

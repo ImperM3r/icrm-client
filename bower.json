@@ -6,7 +6,9 @@
     "underscore": "latest",
     "backbone": "latest",
     "jquery": "1.10.2",
-    "json2": "latest"
+    "json2": "latest",
+    "moment": "latest",
+    "actual_time": "git://github.com/BrandyMint/actual_time.git"
   },
   "ignore": [
     "**/.*",
