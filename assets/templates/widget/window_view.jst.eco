@@ -4,3 +4,5 @@
     <div class="j-convead-client-widget-window-content"></div>
   </div>
 </div>
+<div class="convead-client-backdrop">
+</div>
