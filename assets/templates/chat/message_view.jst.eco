@@ -2,9 +2,8 @@
   <%= @sender.name %>
 </span>
 <%= @content %>
-<span class="convead-message-datetime pull-right">
-  <%= @created_at %>
+<span class="convead-message-datetime pull-right" role="time" data-time="<%= @created_at %>">
+  <%= window.moment(@created_at).fromNow() %>
 </span>
 <div class="clearfix">
 </div>
-
