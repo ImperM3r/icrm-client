@@ -3,7 +3,7 @@
     <a href="#" class="window_close"></a>
     <div class="j-convead-client-widget-window-content">
 
-      <h1 class="heading">
+      <h1 class="convead-client-heading">
       <span class="conversation-text">Chat with a visitor</span>
       </h1>
     </div>

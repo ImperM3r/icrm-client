@@ -1,4 +1,4 @@
-<h1 class="heading">
+<h1 class="convead-client-heading">
   <%# TODO Change heading when tab changed %>
   <span class="conversation-text">Hello, we’d love to hear your feedback...</span>
   <span class="notifications-text">Notifications</span>

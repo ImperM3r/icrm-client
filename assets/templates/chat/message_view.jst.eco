@@ -1,7 +1,10 @@
-<span class="icrm-message-datetime">
-  <%= @created_at %>
-</span>
-<span class="icrm-message-owner">
+<span class="convead-message-owner">
   <%= @sender.name %>
 </span>
 <%= @content %>
+<span class="convead-message-datetime pull-right">
+  <%= @created_at %>
+</span>
+<div class="clearfix">
+</div>
+
