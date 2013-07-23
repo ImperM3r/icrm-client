@@ -3,6 +3,22 @@
 @import notifications
 @import button_starter
 
+$textColor: #5d5d5d
+$borderColor: #cacaca
+$orange: #f18000
+
+@mixin conveadBtn()
+  background: #f5f5f5 url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y1ZjVmNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlY2VjZWMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+)
+  +gradient-vertical(#f5f5f5, #ececec)
+  margin-left: -1px
+  +box-shadow(inset 1px 1px 1px #fff)
+  text-shadow: 0 1px rgba(255,255,255,.75)
+  outline: none
+  text-decoration: none
+  &:hover
+    +gradient-vertical(#f5f5f5, darken(#ececec,10%))
+
+
 .convead-client-reset
   +resetStyles
 
@@ -17,6 +33,7 @@
     color: #000
     margin: 0
     +box-sizing(border-box)
+    +border-radius(0)
 
   // Basic widget window box
 
@@ -58,7 +75,7 @@
     width: 572px
     height: 338px
     background-color: #fff
-    border: solid 2px #f18000
+    border: solid 2px $orange
     padding: 14px 14px 17px
 
     // TODO use sass shadow
@@ -66,7 +83,7 @@
     -moz-box-shadow: 0 7px 16px rgba(2,2,2,.49)
     box-shadow: 0 7px 16px rgba(2,2,2,.49)
 
-    h1.heading
+    h1.convead-client-heading
       font-size: 18px
       font-weight: normal
       color: #21191f
@@ -113,76 +130,53 @@
       li
         float: left
         width: 25%
+        &:first-child a
+          margin: 0
+        & > a
+          display: block
+          padding: 4px 5px
+          border: 1px solid #bbb
+          color: #3f3f3f
+          +conveadBtn
+          -webkit-tap-highlight-color: $orange
+          &.active
+            background: #fff
+            border-color: $orange
+            color: #f27b00
+            position: relative
+            &:after
+              top: -2px
+              left: -2px
+              right: -2px
+              bottom: -2px
+              position: absolute
+              content: ""
+              border: 1px solid $orange
+              // TODO Use sass radius
+              +border-radius(3px)
 
-      a
-        display: block
-        padding: 4px 5px
-        border: 1px solid #bbb
-        color: #3f3f3f
-
-        // TODO use sass gradient
-        background: #f5f5f5 url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y1ZjVmNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlY2VjZWMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+)
-        background: -moz-linear-gradient(top,  #f5f5f5 0%, #ececec 100%)
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#ececec))
-        background: -webkit-linear-gradient(top,  #f5f5f5 0%,#ececec 100%)
-        background: -o-linear-gradient(top,  #f5f5f5 0%,#ececec 100%)
-        background: -ms-linear-gradient(top,  #f5f5f5 0%,#ececec 100%)
-        background: linear-gradient(to bottom,  #f5f5f5 0%,#ececec 100%)
-        margin-left: -1px
-        box-shadow: 1px 1px 1px #fff inset
-        -webkit-box-shadow: 1px 1px 1px #fff inset
-        -moz-box-shadow: 1px 1px 1px #fff inset
-        text-shadow: 0 1px rgba(255,255,255,.75)
-        outline: none
-
-      li:first-child a
-        margin: 0
-
-      a:hover
-        text-decoration: none
-
-      a.active
-        background: #fff
-        border-color: #f18000
-        color: #f27b00
-        position: relative
-
-        &:after
-          top: -2px
-          left: -2px
-          right: -2px
-          bottom: -2px
-          position: absolute
-          content: ""
-          border: 1px solid #f18000
-
-          // TODO Use sass radius
-          border-radius: 3px
-          -moz-border-radius: 3px
-          -webkit-border-radius: 3px
-
-        &:before
-          top: 100%
-          left: 50%
-          margin: 0 0 0 -10px
-          position: absolute
-          z-index: 2
-          content: ""
-          width: 21px
-          height: 12px
-          background: url(<%= Settings.url %>images/sprite.png) no-repeat -219px -214px
+            &:before
+              top: 100%
+              left: 50%
+              margin: 0 0 0 -10px
+              position: absolute
+              z-index: 2
+              content: ""
+              width: 21px
+              height: 12px
+              background: url(<%= Settings.url %>images/sprite.png) no-repeat -219px -214px
 
     .listing
       padding: 0
       margin: 0 0 9px
       list-style: none
       font: 13px/16px Arial, Helvetica, sans-serif
-      border: 1px solid #cacaca
+      border: 1px solid $borderColor
       /* min-height: 260px; */
       position: relative
 
       li
-        border-top: 1px solid #cacaca
+        border-top: 1px solid $borderColor
 
         &:first-child
           border-top: 0
@@ -230,17 +224,46 @@
     /* border-width:1px 1px 0; */
 
   .icrm_chat_messages_list
-    padding: 12px
+    //padding: 12px
     margin: 0
     list-style: none
-    height: 146px
+    height: 174px
     overflow: auto
     font: 13px/16px Arial, Helvetica, sans-serif
     color: #5d5d5d
-    border: 1px solid #cacaca
+    border: 1px solid $borderColor
 
-    .read
-      color: red
+    .convead-message
+      padding: 8px 8px 6px
+      color: $textColor
+      background: none
+      border-bottom: 1px solid lighten($borderColor,10%)
+      &.convead-sender-visitor
+        background: #eee
+        color: lighten($textColor,10%)
+        .convead-message-owner
+          visibility: hidden
+        .convead-message-datetime
+          color: lighten($textColor, 20%)
+      &.convead-sender-owner.convead-message-unread
+        border-bottom: 1px solid lighten($orange,35%)
+        background: lighten($orange,45%)
+        color: darken($orange,7%)
+        .convead-message-datetime
+          color: lighten($orange,10%)
+      &.convead-message-read, .convead-message-unread
+        &:first-child
+          border-top: none
+    .convead-message-datetime
+      color: lighten($textColor,10%)
+    .convead-message-owner
+      color: #003cff
+      font-weight: bold
+      width: 80px
+    .convead-message-datetime
+      font-size: 0.85em
+      width: 60px
+      overflow: hidden
 
   form, fieldset
     margin: 0
@@ -249,7 +272,7 @@
 
   .chat_form
     width: 100%
-    border-bottom: 1px solid #cacaca
+    border-bottom: 1px solid $borderColor
 
     &:after
       display: block
@@ -264,7 +287,7 @@
     textarea
       resize: none
       font-size: 13px
-      color: #cacaca
+      color: $textColor
       /* при значениях w/h 530/75 текстареа выглядит нормально на нашем сайте, 
         но под 9м эксплорером разъезжается
         при значениях 517/61 текстареа выглядела абсолютно нормально на оригинальном сайте
@@ -276,7 +299,7 @@
       padding: 6px 4px 8px 7px
       float: left
       overflow: auto
-      border-left: 1px solid #cacaca
+      border-left: 1px solid $borderColor
       border-top: 0
       border-right: 0
       border-bottom: none
@@ -296,9 +319,10 @@
       cursor: pointer
       font-size: 0
       line-height: 0
-      border-right: 1px solid #cacaca
-      border-left: 1px solid #cacaca
+      border-right: 1px solid $borderColor
+      border-left: 1px solid $borderColor
       opacity: 1.0
+      -webkit-tap-highlight-color: $orange
 
   .respond-form2
     width: 100%
@@ -314,16 +338,16 @@
 
     textarea
       font-size: 13px
-      color: #b0b0b0
+      color: $textColor
       width: 572px !important
       height: 186px !important
       max-height: 186px
       padding: 6px 4px 5px 7px
       float: left
       margin-bottom: 11px
-      border: 1px solid #cacaca
+      border: 1px solid $borderColor
       border: 1px solid 1px solid #a1a1a1
-      /* border-bottom: 1px solid #cacaca */
+      /* border-bottom: 1px solid $borderColor */
 
       &.text-active
         color: #333

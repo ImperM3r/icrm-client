@@ -1,6 +1,6 @@
 <form action="#" class="respond-form2">
   <div class="textarea">
-    <textarea cols="30" rows="10">(problem) Please, enter your message here...</textarea>
+    <textarea cols="30" rows="10" placeholder='(problem) Start typing your message here...'></textarea>
     <a href="" class="respondbutton">Отправить</a>
     <a class="addlink" href="">Добавить файл</a>
     <div class="cl"></div>
