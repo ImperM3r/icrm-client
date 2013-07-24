@@ -58,7 +58,7 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
       console.log message
       message.set m
     else
-      console.error "message does not exist in collection, id: #{m.id}"
+      console.log "message does not exist in collection, id: #{m.id}"
 
   _messageHandler: (msg) ->
     switch msg.method
