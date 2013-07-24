@@ -11,5 +11,3 @@
       if event.which == 13 and !event.shiftKey and !event.ctrlKey && @val().replace(/^\s+|\s+$/g, "").length > 0
         @.closest('form').submit()
         event.preventDefault()
-
-# TODO Setup app_key in headers

@@ -17,7 +17,7 @@ class ICRMClient.Chat.FormView extends @ICRMClient.Backbone.View
 
   render: ->
     @$el.html @template()
-    @$textarea().submitByEnter()
+    ## TODO @$textarea().submitByEnter()
     @
 
   _submitMessage: =>
