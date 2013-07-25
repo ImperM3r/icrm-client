@@ -20,7 +20,7 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
     content_el = @$ '.j-convead-client-widget-window-content'
     content_el.append @chat.render().$el
     if @$el.draggable?
-      @$('.chat-standalone').draggable()
+      @$('.chat-standalone').draggable(containment: 'window')
 
     @
 
