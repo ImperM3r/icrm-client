@@ -21,6 +21,7 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
 
   render: ->
     @$el.empty()
+    @$el.preventParentScroll()
 
     @collection.each (model) =>
       @append model
