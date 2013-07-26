@@ -21,7 +21,7 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
     if prev = @collection.prev model
       prev.view.$el.after $msg_el
     else
-      @$el.append $msg_el
+      @$el.prepend $msg_el
 
     @$el.animate { scrollTop: @$el.prop('scrollHeight') }, "slow"
 
