@@ -9,11 +9,12 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
     @conversation_id = options.conversation_id
     @faye            = options.faye
     @channel         = "/conversations/#{@conversation_id}"
-    @call_accepted   = false
+    @call_sent       = false
 
     @collection      = new ICRMClient.Chat.MessagesCollection
 
-    @listenTo @collection, 'add', @_make_call
+    if @sender.get('type') == 'Visitor'
+      @listenTo @collection, 'add', @_make_call
 
     @form_view = new ICRMClient.Chat.FormView
       conversation_id: @conversation_id
@@ -48,15 +49,12 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
     @$el.append @form_view.render().$el
     @
 
-  _make_call: =>
-    if @sender.get('type') == 'Visitor' and !@call_accepted
+  _make_call: (model) =>
+    if !@call_sent and model.get('sender').type == 'Visitor'
+      @call_sent = true
       @faye.client.publish @faye.org_path + @channel,
         method: 'call',
         conversation_id: @conversation_id
-
-  _call_accepted: (msg) =>
-    if msg.call_initiator == @sender.get('id')
-      @call_accepted = true
 
   _create_message: (m) =>
     # Collection is smart to detect the existed message
@@ -78,5 +76,4 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
     switch msg.method
       when 'create' then @_create_message msg.message
       when 'modify' then @_modify_message msg.message
-      when 'call_accepted' then @_call_accepted msg
       else console.log "Unknown message method: #{msg.method}"
