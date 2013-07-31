@@ -26,7 +26,8 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
       conversation_id: options.conversation_id
       collection: @collection
 
-    @faye.subscribe @channel, @_messageHandler, @
+    (@faye.subscribe @channel, @_messageHandler, @).callback =>
+      @messages_view.get_unread()
 
     _id = 0
 
