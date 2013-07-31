@@ -7,7 +7,6 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
   initialize: (options) ->
     @conversation_url = window.ICRMClient.Assets.api_url + 'chat/conversation/' + options.conversation_id
     @message_api_url =  @conversation_url + '/message/'
-    @_get_unread()
 
     @listenTo @collection, 'add', (model) =>
       @_mark_read model
@@ -33,6 +32,12 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
       @append model
     @
 
+  get_unread: ->
+    window.ICRMClient.Base::ajax
+      url: @conversation_url + '/get_unread'
+      success: (response) ->
+        console.log "to send: [#{JSON.parse(response).count}] unread messages"
+
   _mark_read: (model) =>
     return unless model.get('id') and model.get('read') != true
     window.ICRMClient.Base::ajax
@@ -41,8 +46,4 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
       success: (response) ->
         console.log "message id:#{model.get('id')} | read status: #{JSON.parse(response).status}"
 
-  _get_unread: ->
-    window.ICRMClient.Base::ajax
-      url: @conversation_url + '/get_unread'
-      success: (response) ->
-        console.log "to send: [#{JSON.parse(response).count}] unread messages"
+
