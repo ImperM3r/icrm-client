@@ -8,8 +8,13 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
     @sender          = options.sender
     @conversation_id = options.conversation_id
     @faye            = options.faye
+    @channel         = "/conversations/#{@conversation_id}"
+    @call_sent       = false
 
     @collection      = new ICRMClient.Chat.MessagesCollection
+
+    if @sender.get('type') == 'Visitor'
+      @listenTo @collection, 'add', @_make_call
 
     @form_view = new ICRMClient.Chat.FormView
       conversation_id: @conversation_id
@@ -21,7 +26,7 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
       conversation_id: options.conversation_id
       collection: @collection
 
-    @faye.subscribe "/conversations/#{@conversation_id}", @_messageHandler, @
+    @faye.subscribe @channel, @_messageHandler, @
 
     _id = 0
 
@@ -43,6 +48,13 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
     @$el.append @messages_view.render().$el
     @$el.append @form_view.render().$el
     @
+
+  _make_call: (model) =>
+    if !@call_sent and model.get('sender').type == 'Visitor'
+      @call_sent = true
+      @faye.client.publish @faye.org_path + @channel,
+        method: 'call',
+        conversation_id: @conversation_id
 
   _create_message: (m) =>
     # Collection is smart to detect the existed message
