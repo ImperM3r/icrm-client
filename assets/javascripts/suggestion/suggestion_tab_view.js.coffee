@@ -5,6 +5,8 @@ class ICRMClient.Suggestion.SuggestionTabView extends @ICRMClient.Backbone.View
   tagName: 'div'
   tab_name: 'Suggestion'
 
+  disabled: true
+
   render: ->
     @$el.html @template()
     @
