@@ -11,6 +11,7 @@ class ICRMClient.Widget.NavigationButton extends @ICRMClient.Backbone.View
 
   render: ->
     @$el.html @template(@)
+    @$el.addClass 'inactive' if @tab_view.disabled
     @
 
   inactivate: ->
@@ -24,5 +25,5 @@ class ICRMClient.Widget.NavigationButton extends @ICRMClient.Backbone.View
     @
 
   _click: ->
-    @nav_controller.selectTabView @
+    @nav_controller.selectTabView @ unless @tab_view.disabled
     false

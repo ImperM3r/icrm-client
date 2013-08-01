@@ -1,5 +1,5 @@
 <div class="convead-client-widget-window">
-  <div class="convead-client-lightbox conversation">
+  <div class="convead-client-lightbox">
     <a href="#" class="window_close"></a>
     <div class="j-convead-client-widget-window-content"></div>
   </div>

@@ -6,6 +6,8 @@ class ICRMClient.Problem.ProblemTabView extends @ICRMClient.Backbone.View
 
   tab_name: 'Problem'
 
+  disabled: true
+
   render: ->
     @$el.html @template()
     @
