@@ -24,6 +24,3 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
     if window.ICRM_Settings.widget || ICRMClient.Utils.gup('convead_widget')
       @widget_controller = new ICRMClient.Widget.RootController visitor: visitor
       @container.append @widget_controller.render().$el
-
-    @notification_controller = new window.ICRMClient.NotificationController visitor: visitor
-    @container.append @notification_controller.render().$el

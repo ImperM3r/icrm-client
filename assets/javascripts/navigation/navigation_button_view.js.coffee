@@ -4,10 +4,11 @@ class ICRMClient.Widget.NavigationButton extends @ICRMClient.Backbone.View
 
   initialize: (options) ->
     @tab_view = options.tab_view
+    @tab_view.button = @
     @nav_controller = options.nav_controller
 
   events:
-    'click .tab' : '_click'
+    'click .tab' : 'click'
 
   render: ->
     @$el.html @template(@)
@@ -24,6 +25,6 @@ class ICRMClient.Widget.NavigationButton extends @ICRMClient.Backbone.View
     @tab_view.$el.show()
     @
 
-  _click: ->
+  click: ->
     @nav_controller.selectTabView @ unless @tab_view.disabled
     false

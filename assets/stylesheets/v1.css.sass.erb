@@ -176,7 +176,7 @@ $orange: #f18000
       list-style: none
       font: 13px/16px Arial, Helvetica, sans-serif
       border: 1px solid $borderColor
-      /* min-height: 260px; */
+      min-height: 250px
       position: relative
 
       li
@@ -222,6 +222,65 @@ $orange: #f18000
 
       .chat .author
         color: #003cff
+
+      .popup
+        position: absolute
+        top: 0
+        left: 0
+        background: #fff
+        padding: 14px 14px 10px 12px
+        color: #373737
+        display: none
+        height: 186px
+        width: 544px
+        overflow: auto
+        font: 14px/20px 'HelveticaNeueLight', Arial, Helvetica, Verdana, sans-serif
+
+        .title
+          overflow: hidden
+          margin-bottom: 14px
+
+          .date
+            float: right
+            color: #888
+            width: 55px
+            text-align: right
+            font-size: 13px
+            margin-top: 4px
+
+          h2
+            float: left
+            max-width: 465px
+            color: #373737
+            margin: 0
+            font: 22px/26px 'HelveticaNeueLight', Arial, Helvetica, Verdana, sans-serif
+
+        a
+          color: #318add
+
+        p
+          margin: 0 0 11px
+
+      .popup-holder
+        position: relative
+        overflow: hidden
+        height: 0
+
+      .close-link
+        position: absolute
+        top: -82px
+        right: 29px
+        width: 11px
+        height: 11px
+        overflow: hidden
+        text-indent: -9999px
+        z-index: 3
+        display: none
+        background: url(<%= Settings.url %>images/sprite.png) no-repeat -219px -233px
+
+      .popup-active .close-link
+        display: block
+
 
   #convead_client_navigation_tabs_content
     /* border:1px solid #a1a1a1; */
@@ -294,7 +353,7 @@ $orange: #f18000
       resize: none
       font-size: 13px
       color: $textColor
-      /* при значениях w/h 530/75 текстареа выглядит нормально на нашем сайте, 
+      /* при значениях w/h 530/75 текстареа выглядит нормально на нашем сайте,
         но под 9м эксплорером разъезжается
         при значениях 517/61 текстареа выглядела абсолютно нормально на оригинальном сайте
         откуда брался дизайн, и выглядит нормально под эксплорером, но на нашем сайте
@@ -358,21 +417,6 @@ $orange: #f18000
       &.text-active
         color: #333
 
-  .close-link
-    position: absolute
-    top: -84px
-    right: 29px
-    width: 11px
-    height: 11px
-    overflow: hidden
-    text-indent: -9999px
-    z-index: 3
-    display: none
-    background: url(<%= Settings.url %>images/sprite.png) no-repeat -219px -233px
-
-  .popup-active .close-link
-    display: block
-
   .respondbutton
     display: block !important
     border: 1px solid #5c5c5c
@@ -395,43 +439,6 @@ $orange: #f18000
   .addfile img
     margin-top: 30px
     display: block
-
-  .listing .popup
-    position: absolute
-    top: 0
-    left: 0
-    background: #fff
-    padding: 14px 14px 10px 12px
-    color: #373737
-    display: none
-    height: 186px
-    overflow: auto
-    font: 14px/20px 'HelveticaNeueLight', Arial, Helvetica, Verdana, sans-serif
-
-  .popup
-    .title
-      overflow: hidden
-      margin-bottom: 14px
-
-      .date
-        float: right
-        color: #888
-        width: 55px
-        text-align: right
-        font-size: 13px
-        margin-top: 4px
-
-      h2
-        float: left
-        max-width: 465px
-        color: #373737
-        margin: 0
-        font: 22px/26px 'HelveticaNeueLight', Arial, Helvetica, Verdana, sans-serif
-
-    a
-      color: #318add
-    p
-      margin: 0 0 11px
 
   .popup-holder
     position: relative

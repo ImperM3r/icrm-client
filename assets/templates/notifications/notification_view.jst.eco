@@ -1,0 +1,14 @@
+<a class="open" href="#">
+  <strong class="author">Alex</strong>
+  <span class="text-holder"><%= @subject %></span>
+  <em class="date">15 Jul</em>
+</a>
+<div class="popup">
+  <header class="title">
+    <h2><%= @subject %></h2>
+    <em class="date">16.01.13</em>
+  </header>
+  <p><%= @content %></p>
+  <a href="#">Read More</a>
+</div>
+<a href="#" class="close-link">close</a>

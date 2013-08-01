@@ -10,7 +10,11 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
           faye:              window.ICRMClient.faye
           parent_controller: @,
         ),
-        new ICRMClient.Notifications.NotificationTabView(),
+        new ICRMClient.Notifications.NotificationTabView(
+          visitor:           options.visitor,
+          faye:              window.ICRMClient.faye,
+          parent_controller: @
+        ),
         new ICRMClient.Suggestion.SuggestionTabView(),
         new ICRMClient.Problem.ProblemTabView()
       ]
