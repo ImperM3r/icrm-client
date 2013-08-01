@@ -1,47 +1,43 @@
-# TODO Move views methods to the View
+class @ICRMClient.Notifications.NotificationView extends @ICRMClient.Backbone.View
+  template: JST['notifications/notification_view']
 
-class @ICRMClient.NotificationView extends @ICRMClient.Backbone.View
-  template: JST['notifications/notification']
-
-  className: 'notification-box'
+  tagName: 'li'
+  className: 'popup-section'
 
   read_url: window.ICRMClient.Assets.api_url + 'notifications/mark_read'
 
   _read: false
 
-  initialize: (options) ->
-
-    @controller = options.controller
-    @noty = 
-      subject: options.notification.subject
-      content: options.notification.content
-      id:      options.notification.id
-      avatar:  options.notification.manager.avatar_url
-
   events:
-    'click a.convead_notification_close' : 'close'
+    'click a.open'       : '_showPopup'
+    'click a.close-link' : '_closePopup'
 
   render: ->
-    @$el.html @template @noty
+    @$el.html @template @model.toJSON()
     @$el.fadeIn(400)
     @
 
-  markAsRead: =>
+  _markAsRead: =>
     return if @_read
+    id = @model.get('id')
 
     @_read = true
     # TODO send ajax to mark notification as read
-    console.log "Mark notification #{@noty.id} as read"
+    console.log "Mark notification #{id} as read"
 
-    @ajax
+    window.ICRMClient.Base::ajax
       url: @read_url
-      data: { id: @noty.id }
+      data: { id: id }
       success: (d) ->
         console.log JSON.stringify(d)
       error: (d) ->
         console.error "Error sending mark_read request #{d}"
 
-  close: =>
-    @markAsRead()
-    @$el.fadeOut 400, =>
-      @$el.remove()
+  _closePopup: =>
+    @_markAsRead()
+    @$el.removeClass 'popup-active'
+    @$('div.popup').hide()
+
+  _showPopup: ->
+    @$el.addClass 'popup-active'
+    @$('div.popup').show()
