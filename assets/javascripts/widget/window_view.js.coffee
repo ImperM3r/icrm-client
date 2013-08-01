@@ -14,6 +14,7 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
         new ICRMClient.Suggestion.SuggestionTabView(),
         new ICRMClient.Problem.ProblemTabView()
       ]
+      parent: @
 
     actual_time $el: @$el
 
@@ -39,3 +40,6 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
 
   hide: =>
     @$el.hide()
+
+  switchHeaderClass: (from, to) =>
+    @$('.convead-client-lightbox').removeClass(from).addClass(to)

@@ -3,6 +3,7 @@ class ICRMClient.Widget.NavigationView extends @ICRMClient.Backbone.View
 
   initialize: (options) ->
     @tab_views = options.tab_views
+    @widget_view = options.parent
     @buttons = []
 
     for tab_view in @tab_views
@@ -10,7 +11,12 @@ class ICRMClient.Widget.NavigationView extends @ICRMClient.Backbone.View
 
   selectTabView: (button)->
     if button != @current_button
-      @current_button.inactivate() if @current_button
+      current_header_class = ''
+      if @current_button
+        @current_button.inactivate()
+        current_header_class = @current_button.tab_view.tab_name.toLowerCase()
+
+      @widget_view.switchHeaderClass current_header_class, button.tab_view.tab_name.toLowerCase()
       @current_button = button.activate()
 
   render: ->

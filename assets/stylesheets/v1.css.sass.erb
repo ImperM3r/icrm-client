@@ -107,6 +107,8 @@ $orange: #f18000
 
     &.conversation .conversation-text
       display: block
+    &.notifications > div
+      margin: 0
     &.notifications .notifications-text
       display: block
     &.suggestion .suggestion-text
@@ -130,6 +132,8 @@ $orange: #f18000
       li
         float: left
         width: 25%
+        &.inactive
+          opacity: 0.5
         &:first-child a
           margin: 0
         & > a
