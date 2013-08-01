@@ -23,7 +23,7 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
     actual_time $el: @$el
 
   events:
-    'click .window_close' : 'close'
+    'click a.window_close' : 'close'
 
   render: ->
     @$el.html( @template(@) ).hide() # starting hidden
