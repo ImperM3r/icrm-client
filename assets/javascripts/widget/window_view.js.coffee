@@ -11,6 +11,7 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
           parent_controller: @,
         ),
         new ICRMClient.Notifications.NotificationTabView(
+          collection:        options.collections.notifications,
           visitor:           options.visitor,
           faye:              window.ICRMClient.faye,
           parent_controller: @

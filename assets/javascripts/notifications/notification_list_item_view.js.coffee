@@ -8,8 +8,7 @@ class ICRMClient.Notifications.NotificationListItemView extends @ICRMClient.Back
   initialize: (options) ->
     @tab_view = options.tab_view
     @notification_view = new ICRMClient.Notifications.NotificationView model: @model, tab_view: @tab_view
-    @tab_view.activateTab().showView()
-    #@_showNotification()
+    @tab_view.activateTab().showView @notification_view
 
     @listenTo @model, 'change', @render
 

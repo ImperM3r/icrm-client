@@ -4,7 +4,6 @@ class ICRMClient.Notifications.NotificationListView extends @ICRMClient.Backbone
 
   initialize: (options) ->
     @tab_view = options.tab_view
-    @tab_view.register_view @
 
     @listenTo @collection, 'add', @append
 
@@ -13,8 +12,8 @@ class ICRMClient.Notifications.NotificationListView extends @ICRMClient.Backbone
     @$el.append list_item_view.render().el
     @$el.animate { scrollTop: @$el.prop('scrollHeight') }, 'slow'
 
-  activate: (view) =>
-    if view == @
-      @$el.show()
-    else
-      @$el.hide()
+  show: =>
+    @$el.show()
+
+  hide: =>
+    @$el.hide()
