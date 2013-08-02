@@ -1,4 +1,4 @@
-class @ICRMClient.Widget.NotificationController extends @ICRMClient.Base
+class @ICRMClient.Widget.NotificationsController extends @ICRMClient.Base
 
   constructor: (options) ->
     @collection = new ICRMClient.Notifications.NotificationsCollection()

@@ -6,28 +6,26 @@ class ICRMClient.Notifications.NotificationView extends @ICRMClient.Backbone.Vie
 
   initialize: (options) ->
     @tab_view = options.tab_view
-    @tab_view.append_view @
 
   render: ->
-    @$el.html(@template @model.toJSON()).fadeIn(200)
+    @$el.html @template @model.toJSON()
     @
 
   show: =>
-    @$el.show()
+    @tab_view.append_view @
+    @render().$el.fadeIn(200)
 
   hide: =>
-    @$el.hide()
+    @remove()
 
   _close: =>
     @_markAsRead()
-    @tab_view.closeView()
+    @tab_view.closeCurrentView()
 
   read_url: window.ICRMClient.Assets.api_url + 'notifications/mark_read'
 
-  _read: false
-
   _markAsRead: =>
-    return if @_read
+    return if @model.get('read')
     id = @model.get('id')
 
     @_read = true
