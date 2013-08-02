@@ -19,6 +19,12 @@ Send test notify from the browser console:
 Post test message to chat:
 
    > ICRMSendServerMessage()
+   
+
+Links
+-----
+
+* http://friendlybit.com/js/lazy-loading-asyncronous-javascript/
 
 
 Testing on activesite
