@@ -1,0 +1,5 @@
+<a class="open" href="#">
+  <strong class="author">Alex</strong>
+  <span class="text-holder"><%= @subject %></span>
+  <em class="date">15 Jul</em>
+</a>
