@@ -24,6 +24,10 @@ class ICRMClient.Notifications.NotificationTabView extends @ICRMClient.Backbone.
         subject: 'Subject'
         content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
 
+  activateTab: =>
+    @parent_controller.show()
+    @.button.click()
+
   register_view: (view) =>
     @registered_views.push view
     @$el.append view.render().$el.hide() # starting hidden
