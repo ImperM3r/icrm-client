@@ -11,16 +11,10 @@ class ICRMClient.Notifications.NotificationView extends @ICRMClient.Backbone.Vie
     @$el.html @template @model.toJSON()
     @
 
-  show: =>
-    @tab_view.append_view @
-    @render().$el.fadeIn(200)
-
-  hide: =>
-    @remove()
-
   _close: =>
     @_markAsRead()
     @tab_view.closeCurrentView()
+    @remove()
 
   read_url: window.ICRMClient.Assets.api_url + 'notifications/mark_read'
 
