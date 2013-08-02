@@ -37,8 +37,9 @@ class ICRMClient.Notifications.NotificationView extends @ICRMClient.Backbone.Vie
     window.ICRMClient.Base::ajax
       url: @read_url
       data: { id: id }
-      success: (d) ->
+      success: (d) =>
         console.log JSON.stringify(d)
+        @model.set('read', true);
       error: (d) ->
         console.error "Error sending mark_read request #{d}"
 

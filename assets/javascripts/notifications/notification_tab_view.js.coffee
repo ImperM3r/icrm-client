@@ -17,8 +17,11 @@ class ICRMClient.Notifications.NotificationTabView extends @ICRMClient.Backbone.
     #show list view
     @showView()
 
+    _id = 0
+
     window.ICRMClient.TestHelpers.SendTestNotificatoin= =>
       @_notificationHandler notification:
+        id: _id++
         manager:
           avatar_url: 'http://lorempixel.com/32/32/cats/'
         subject: 'Subject'
@@ -26,7 +29,8 @@ class ICRMClient.Notifications.NotificationTabView extends @ICRMClient.Backbone.
 
   activateTab: =>
     @parent_controller.show()
-    @.button.click()
+    @button.click()
+    @
 
   register_view: (view) =>
     @registered_views.push view
