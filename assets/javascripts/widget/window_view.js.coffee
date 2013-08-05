@@ -3,22 +3,19 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
 
   initialize: (options) ->
     @navigation = new ICRMClient.Widget.NavigationView
-      tab_views: [
-        new ICRMClient.Chat.ChatTabView(
+      tab_views:
+        chat_tab: new ICRMClient.Chat.ChatTabView(
           sender:            new window.ICRMClient.Chat.Chatter(options.visitor),
           conversation_id:   options.visitor.id,
           faye:              window.ICRMClient.faye
           parent_controller: @,
-        ),
-        new ICRMClient.Notifications.NotificationTabView(
+        )
+        notification_tab: new ICRMClient.Notifications.NotificationTabView(
           collection:        options.notifications,
-          visitor:           options.visitor,
-          faye:              window.ICRMClient.faye,
           parent_controller: @
-        ),
-        new ICRMClient.Suggestion.SuggestionTabView(),
-        new ICRMClient.Problem.ProblemTabView()
-      ]
+        )
+        suggestion_tab: new ICRMClient.Suggestion.SuggestionTabView()
+        problem_tab: new ICRMClient.Problem.ProblemTabView()
       parent: @
 
     actual_time $el: @$el
@@ -48,3 +45,7 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
 
   switchHeaderClass: (from, to) =>
     @$('.convead-client-lightbox').removeClass(from).addClass(to)
+
+  showNotification: (model) =>
+    @show()
+    @navigation.showNotification model

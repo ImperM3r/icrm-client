@@ -24,9 +24,11 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
 
     notifications_controller = new ICRMClient.Widget.NotificationsController visitor: visitor, faye: faye
 
-    if window.ICRM_Settings.widget || ICRMClient.Utils.gup('convead_widget')
-      @widget_controller = new ICRMClient.Widget.RootController
-        visitor: visitor
-        notifications: notifications_controller.collection
-      #TODO run after dom ready
-      @container.append @widget_controller.render().$el
+    widget_controller = new ICRMClient.Widget.RootController
+      visitor: visitor
+      notifications: notifications_controller.collection
+
+    #TODO run after dom ready
+    @container.append widget_controller.render().$el
+
+    new ICRMClient.Notifications.NotificationObserver collection: notifications_controller.collection, widget: widget_controller
