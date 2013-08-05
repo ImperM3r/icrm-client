@@ -3,6 +3,6 @@
     <h2><%= @subject %></h2>
     <em class="date">16.01.13</em>
   </header>
-  <p><%= @content %></p>
+  <p><%- @linkify @escape(@content) %></p>
   <a href="#" class="j-go-back">Go Back</a>
 </div>

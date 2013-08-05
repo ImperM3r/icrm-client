@@ -8,8 +8,13 @@ class ICRMClient.Notifications.NotificationView extends @ICRMClient.Backbone.Vie
     @tab_view = options.tab_view
 
   render: ->
-    @$el.html @template @model.toJSON()
+    @$el.html @template @_presentation()
     @
+
+  _presentation: =>
+    presentation = @model.toJSON()
+    _.extend presentation, window.ICRMClient.Helpers
+    presentation
 
   _close: =>
     @_markAsRead()
