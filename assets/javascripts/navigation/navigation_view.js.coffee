@@ -6,7 +6,7 @@ class ICRMClient.Widget.NavigationView extends @ICRMClient.Backbone.View
     @widget_view = options.parent
     @buttons = []
 
-    for tab_view in @tab_views
+    for own key, tab_view of @tab_views
       @buttons.push new ICRMClient.Widget.NavigationButton nav_controller: @, tab_view: tab_view
 
   selectTabView: (button)->
@@ -27,8 +27,12 @@ class ICRMClient.Widget.NavigationView extends @ICRMClient.Backbone.View
       $buttons_el.append button.render().$el
 
     $tabs_el = @$el.find '#convead_client_navigation_tabs_content'
-    for tab in @tab_views
+    for own key, tab of @tab_views
       $tabs_el.append tab.render().$el.hide()
 
     @selectTabView @buttons[0]
     @
+
+  showNotification: (model) =>
+    @tab_views.notification_tab.button.click()
+    @tab_views.notification_tab.showNotification model

@@ -1,2 +1,2 @@
-<ul class="listing">
-</ul>
+<div class="notification-container"></div>
+<div class="notification-list"></div>

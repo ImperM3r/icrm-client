@@ -176,8 +176,9 @@ $avatarSize: 32px
       list-style: none
       font: 13px/16px Arial, Helvetica, sans-serif
       border: 1px solid $borderColor
-      min-height: 250px
+      height: 250px
       position: relative
+      overflow-y: auto
 
       li
         border-top: 1px solid $borderColor
@@ -223,64 +224,66 @@ $avatarSize: 32px
       .chat .author
         color: #003cff
 
-      .popup
-        position: absolute
-        top: 0
-        left: 0
-        background: #fff
-        padding: 14px 14px 10px 12px
-        color: #373737
-        display: none
-        height: 226px
-        width: 544px
-        overflow: auto
-        font: 14px/20px 'HelveticaNeueLight', Arial, Helvetica, Verdana, sans-serif
+      .notification-unread .open
+        background: #d9d9d9
 
-        .title
-          overflow: hidden
-          margin-bottom: 14px
+    .popup
+      padding: 0
+      margin: 0 0 9px
+      list-style: none
+      border: 1px solid $borderColor
+      max-height: 250px
+      position: relative
 
-          .date
-            float: right
-            color: #888
-            width: 55px
-            text-align: right
-            font-size: 13px
-            margin-top: 4px
+      background: #fff
+      padding: 14px 14px 10px 12px
+      color: #373737
+      height: 226px
+      width: 544px
+      overflow: auto
+      font: 14px/20px 'HelveticaNeueLight', Arial, Helvetica, Verdana, sans-serif
 
-          h2
-            float: left
-            max-width: 465px
-            color: #373737
-            margin: 0
-            font: 22px/26px 'HelveticaNeueLight', Arial, Helvetica, Verdana, sans-serif
+      .title
+        overflow: hidden
+        margin-bottom: 14px
 
-        a
-          color: #318add
+        .date
+          float: right
+          color: #888
+          width: 55px
+          text-align: right
+          font-size: 13px
+          margin-top: 4px
+          margin-right: 30px
 
-        p
-          margin: 0 0 11px
+        h2
+          float: left
+          max-width: 465px
+          color: #373737
+          margin: 0
+          font: 22px/26px 'HelveticaNeueLight', Arial, Helvetica, Verdana, sans-serif
+
+      a
+        color: #318add
+
+      p
+        margin: 0 0 11px
 
       .popup-holder
         position: relative
         overflow: hidden
         height: 0
 
-      .close-link
-        position: absolute
-        top: -82px
-        right: 29px
-        width: 11px
-        height: 11px
-        overflow: hidden
-        text-indent: -9999px
-        z-index: 3
-        display: none
-        background: url(<%= Settings.url %>images/sprite.png) no-repeat -219px -233px
-
-      .popup-active .close-link
-        display: block
-
+    .close-link
+      top: 23px
+      right: 19px
+      width: 12px
+      height: 12px
+      overflow: hidden
+      text-indent: -9999px
+      z-index: 9999
+      position: absolute
+      background: url(<%= Settings.url %>images/sprite.png) no-repeat -220px -194px
 
   #convead_client_navigation_tabs_content
     /* border:1px solid #a1a1a1; */

@@ -14,13 +14,21 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
     return unless visitor = window.ICRMClient.visitor
     @debug "Start visitor #{visitor.id}"
 
+
     if window.ICRMClient.faye
       @error 'Faye is already defined'
 
-    window.ICRMClient.faye = new ICRMClient.FayeClient
+    window.ICRMClient.faye = faye = new ICRMClient.FayeClient
       app_key: window.ICRMClient.app_key
       visitor: visitor
 
-    if window.ICRM_Settings.widget || ICRMClient.Utils.gup('convead_widget')
-      @widget_controller = new ICRMClient.Widget.RootController visitor: visitor
-      @container.append @widget_controller.render().$el
+    notifications_controller = new ICRMClient.Widget.NotificationsController visitor: visitor, faye: faye
+
+    widget_controller = new ICRMClient.Widget.RootController
+      visitor: visitor
+      notifications: notifications_controller.collection
+
+    #TODO run after dom ready
+    @container.append widget_controller.render().$el
+
+    new ICRMClient.Notifications.NotificationObserver collection: notifications_controller.collection, widget: widget_controller
