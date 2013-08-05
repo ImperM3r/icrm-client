@@ -32,3 +32,6 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
     @container.append widget_controller.render().$el
 
     new ICRMClient.Notifications.NotificationObserver collection: notifications_controller.collection, widget: widget_controller
+    new ICRMClient.Widget.ReminderController
+      notification_collection: notifications_controller.collection
+      widget: widget_controller

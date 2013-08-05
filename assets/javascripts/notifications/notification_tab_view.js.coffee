@@ -20,3 +20,4 @@ class ICRMClient.Notifications.NotificationTabView extends @ICRMClient.Backbone.
     notification = new ICRMClient.Notifications.NotificationView model: model, tab_view: @
     @$('.notification-list').hide()
     @$('.notification-container').html notification.render().el
+    true
