@@ -4,6 +4,5 @@
     <em class="date">16.01.13</em>
   </header>
   <p><%= @content %></p>
-  <a href="#">Read More</a>
+  <a href="#" class="j-go-back">Go Back</a>
 </div>
-<a href="#" class="close-link">close</a>
