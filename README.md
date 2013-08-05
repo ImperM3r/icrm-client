@@ -8,6 +8,11 @@ Backbone
 
 * https://docs.google.com/drawings/d/1J0PfEyMDuie3Qw6VtA4R4a7od5lwXHMO6kLj8V-72T4/edit
 
+Design
+------
+
+* https://docs.google.com/drawings/d/1rqX9skp1lI35GMzq5DmHfTayfpZr0ldNAL64zU-B9mY/edit
+
 
 Debugging
 ---------
