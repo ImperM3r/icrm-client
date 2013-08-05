@@ -1,6 +1,6 @@
 <a class="tab<%= ' active' if @active %>" href="#">
   <%= @tab_view.tab_name %>
-  <% if unread = @_unread_count(): %>
+  <% if unread = @_unreadCount(): %>
     <span class="badge badge-important"><%= unread %></span>
   <% end %>
 </a>

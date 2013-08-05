@@ -47,5 +47,6 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
     @$('.convead-client-lightbox').removeClass(from).addClass(to)
 
   showNotification: (model) =>
+    return false if @isVisibly()
     @show()
     @navigation.showNotification model

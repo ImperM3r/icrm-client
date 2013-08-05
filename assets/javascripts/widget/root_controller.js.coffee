@@ -12,7 +12,6 @@ class @ICRMClient.Widget.RootController extends @ICRMClient.Backbone.View
   render: ->
     @$el.append @window.render().$el
     @$el.append @starter_button.render().$el
-
     @
 
   showNotification: (model) ->

@@ -35,8 +35,6 @@ class ICRMClient.Widget.NavigationButton extends @ICRMClient.Backbone.View
     @nav_controller.selectTabView @ unless @tab_view.disabled
     false
 
-  _unread_count: =>
-    if @collection != undefined
-      @collection.length - @collection.where( read: true ).length
-    else
-      0
+  _unreadCount: =>
+    if @collection and func = @collection.unreadCount
+      func.call()
