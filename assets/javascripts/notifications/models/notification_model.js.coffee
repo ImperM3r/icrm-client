@@ -11,7 +11,6 @@ class ICRMClient.Notifications.NotificationModel extends @ICRMClient.Backbone.Mo
       url: @read_url
       data: { id: @id }
       success: (d) =>
-        debugger
         @set('read', true)
       error: (d) ->
         console.error "Error sending mark_read request #{d}"
