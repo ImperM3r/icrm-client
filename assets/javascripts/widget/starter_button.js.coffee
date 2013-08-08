@@ -12,5 +12,5 @@ class ICRMClient.Widget.StarterButtonView extends @ICRMClient.Backbone.View
       @$el.html @template()
     @
 
-  _toggleWindowVisibility: =>
+  _toggleWindowVisibility: (e) =>
     @window.toggleVisibility()

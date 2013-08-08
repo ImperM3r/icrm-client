@@ -9,6 +9,9 @@ class @ICRMClient.Widget.RootController extends @ICRMClient.Backbone.View
     @starter_button = new ICRMClient.Widget.StarterButtonView
       window: @window
 
+  events:
+    'click a' : '_linkHandler'
+
   render: ->
     @$el.append @window.render().$el
     @$el.append @starter_button.render().$el
@@ -16,3 +19,6 @@ class @ICRMClient.Widget.RootController extends @ICRMClient.Backbone.View
 
   showNotification: (model) ->
     @window.showNotification model
+
+  _linkHandler: (e) =>
+    e.preventDefault()
