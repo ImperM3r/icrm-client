@@ -21,23 +21,33 @@
 
     :javascript
       window.ICRM_Settings = {
-        // TODO: The current logged in user's email address.
-        email: "john@example.com",
+        person: {
+          // TODO: The current logged in user's email address.
+          email: "john@example.com",
 
-        // TODO: The current logged in user's names
-        first_name: "John",
-        last_name: "Abama",
+          // TODO: The current logged in user's names
+          first_name: "John",
+          last_name: "Abama",
 
-        // TODO: The current logged in user's unique key (identificator)
-        user_hash: "unique_user_idenfiticator",
+          // TODO: The current logged in user's unique key (identificator)
+          user_hash: "unique_user_idenfiticator",
 
-        // TODO: The current logged in user's sign-up date as a Unix timestamp.
-        created_at: 1234567890,
+          // TODO: The current logged in user's sign-up date as a Unix timestamp.
+          created_at: 1234567890
+          },
 
-        // TODO OPTIONAL: The current logged in user's company name. Set up if exists.
-        company_name: "John's company",
-        // TODO OPTIONAL: The current logged in user's company unique key (identificator). Set up if exists.
-        company_hash: "unique_company_identificator",
+        company: {
+
+          // TODO OPTIONAL: The current logged in user's company name. Set up if exists.
+          company_name: "John's company",
+          // TODO OPTIONAL: The current logged in user's company unique key (identificator). Set up if exists.
+          company_hash: "unique_company_identificator"
+          },
+
+
+        visit: {
+          product_id: 12
+        },
 
         // Don't change this
         app_key: "f71809f7311fc105bc1657c63e2c78e3ff6005c36b8d317a",
