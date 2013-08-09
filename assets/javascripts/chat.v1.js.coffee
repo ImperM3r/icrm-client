@@ -6,5 +6,3 @@
 #= require_tree ./views
 #= require_tree ../templates
 #= require_tree ./chat
-
-console.log('convead widget version: ' + window.ICRM.semver = '<%= SemVer.find.to_s %>')
