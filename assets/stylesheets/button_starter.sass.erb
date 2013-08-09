@@ -5,7 +5,7 @@
     right: 20px
     margin-left: 400px
     text-shadow: 0 1px rgba(2,2,2,.13)
-    background: #ef970c url(<%= Settings.url %>images/bg-fixed-button.png) repeat-x top left
+    background: $starterButtonColor url(<%= Settings.url %>images/#{$imgDir}/bg-fixed-button.png) repeat-x top left
     -moz-border-radius: 3px 3px 0 0
     border-radius: 3px 3px 0 0
     -webkit-border-top-left-radius: 3px
@@ -28,6 +28,6 @@
 
     &:hover
       text-decoration: none
-      background: #ef970c url(<%= Settings.url %>images/bg-fixed-button-hover.png) repeat-x top left
+      background: $starterButtonColor url(<%= Settings.url %>images/#{$imgDir}/bg-fixed-button-hover.png) repeat-x top left
     &:active
-      background-color: #ef970c
+      background-color: $starterButtonColor
