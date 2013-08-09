@@ -5,7 +5,13 @@ class Application < Sinatra::Base
   end
 
   get '/' do
-    haml :index
+    @title = 'Convead Widget Index'
+    haml :index, layout: :layout
+  end
+
+  get '/about' do
+    @title = 'Convead Widget About'
+    haml :about, layout: :layout
   end
 
   post '/v1/logger' do
