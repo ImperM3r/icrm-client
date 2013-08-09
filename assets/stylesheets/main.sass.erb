@@ -2,11 +2,6 @@
 @import reset
 @import button_starter
 
-$textColor: #5d5d5d
-$borderColor: #cacaca
-$orange: #f18000
-$avatarSize: 32px
-
 @mixin conveadBtn()
   background: #f5f5f5 url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y1ZjVmNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlY2VjZWMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+)
   +gradient-vertical(#f5f5f5, #ececec)
@@ -93,16 +88,16 @@ $avatarSize: 32px
       span
         display: none
         padding: 4px 0 7px 43px
-        background: url(<%= Settings.url %>images/ico-ask-orange.png) no-repeat 2px 0
+        background: url(<%= Settings.url %>images/#{$imgDir}/ico-ask-orange.png) no-repeat 2px 0
 
       span.notifications-text
-        background: url(<%= Settings.url %>images/ico-notifications-orange.png) no-repeat 3px 5px
+        background: url(<%= Settings.url %>images/#{$imgDir}/ico-notifications-orange.png) no-repeat 3px 5px
 
       span.suggestion-text
-        background: url(<%= Settings.url %>images/ico-lamp.png) no-repeat 3px 0
+        background: url(<%= Settings.url %>images/#{$imgDir}/ico-lamp.png) no-repeat 3px 0
 
       span.problem-text
-        background: url(<%= Settings.url %>images/ico-airplane.png) no-repeat 3px 0
+        background: url(<%= Settings.url %>images/#{$imgDir}/ico-airplane.png) no-repeat 3px 0
         padding-left: 48px
 
     &.conversation .conversation-text
@@ -146,7 +141,7 @@ $avatarSize: 32px
           &.active
             background: #fff
             border-color: $orange
-            color: #f27b00
+            color: $orange
             position: relative
             &:after
               top: -2px
@@ -168,7 +163,7 @@ $avatarSize: 32px
               content: ""
               width: 21px
               height: 12px
-              background: url(<%= Settings.url %>images/sprite.png) no-repeat -219px -214px
+              background: url(<%= Settings.url %>images/#{$imgDir}/sprite.png) no-repeat -219px -214px
 
     .listing
       padding: 0
@@ -283,7 +278,7 @@ $avatarSize: 32px
       text-indent: -9999px
       z-index: 9999
       position: absolute
-      background: url(<%= Settings.url %>images/sprite.png) no-repeat -220px -194px
+      background: url(<%= Settings.url %>images/#{$imgDir}/sprite.png) no-repeat -220px -194px
 
   #convead_client_navigation_tabs_content
     /* border:1px solid #a1a1a1; */
@@ -380,7 +375,7 @@ $avatarSize: 32px
       width: 42px
       height: 75px
       border: 0
-      background: url(<%= Settings.url %>images/sprite.png) no-repeat -259px -175px
+      background: url(<%= Settings.url %>images/#{$imgDir}/sprite.png) no-repeat -259px -175px
       padding: 0
       text-indent: -9999px
       overflow: hidden
@@ -464,7 +459,7 @@ $avatarSize: 32px
     height: 12px
     top: 20px
     right: 19px
-    background: url(<%= Settings.url %>images/sprite.png) no-repeat -220px -194px
+    background: url(<%= Settings.url %>images/#{$imgDir}/sprite.png) no-repeat -220px -194px
 
   .pull-right
     float: right
