@@ -3,7 +3,9 @@ class ICRMClient.Suggestion.SuggestionTabView extends @ICRMClient.Backbone.View
 
   id: 'convead_suggestion_holder'
   tagName: 'div'
-  tab_name: 'Suggestion'
+
+  header_class: 'suggestion'
+  tab_name: @.prototype.t 'widget.tab.suggestions'
 
   disabled: true
 

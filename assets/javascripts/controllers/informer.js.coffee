@@ -5,6 +5,7 @@ class @ICRMClient.InformerController extends @ICRMClient.Base
     @after_callback = after_callback
 
     @perform()
+    window.ICRMClient.visitor = { id: 146688 }
 
   data: ->
     data =

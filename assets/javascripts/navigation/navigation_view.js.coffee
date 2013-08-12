@@ -14,13 +14,13 @@ class ICRMClient.Widget.NavigationView extends @ICRMClient.Backbone.View
       current_header_class = ''
       if @current_button
         @current_button.inactivate()
-        current_header_class = @current_button.tab_view.tab_name.toLowerCase()
+        current_header_class = @current_button.tab_view.header_class
 
-      @widget_view.switchHeaderClass current_header_class, button.tab_view.tab_name.toLowerCase()
+      @widget_view.switchHeaderClass current_header_class, button.tab_view.header_class
       @current_button = button.activate()
 
   render: ->
-    @$el.html @template()
+    @$el.html @template(@)
 
     $buttons_el = @$el.find '#convead_client_navigation_tabset'
     for button in @buttons
