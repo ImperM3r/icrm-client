@@ -3,9 +3,9 @@ Development
 
 Чтобы клиент работал независимо от сервера создаем `./config/application.local.yml`, где прописываем:
 
-  > url: 'http://localhost:9292/'              # Текущий адрес на котором запущен клиент
-  > faye_url: 'http://icrm.icfdev.ru:8809/fay' # Стейджевый faye-сервер, путь он работает
-  > api_url: 'http://localhost:9292/v1/'       # Загляшка для серверных запросов
+    url: 'http://localhost:9292/'              # Текущий адрес на котором запущен клиент
+    faye_url: 'http://icrm.icfdev.ru:8809/fay' # Стейджевый faye-сервер, путь он работает
+    api_url: 'http://localhost:9292/v1/'       # Загляшка для серверных запросов
 
 Запуск
 ------
