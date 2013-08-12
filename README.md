@@ -1,12 +1,16 @@
-Config
+Development
 ------
 
-User local logger in application.yml:
-  
-  > api_url: 'http://localhost:9292/v1/'
+Чтобы клиент работал независимо от сервера создаем `./config/application.local.yml`, где прописываем:
 
-Start
------
+  > url: 'http://localhost:9292/'              # Текущий адрес на котором запущен клиент
+  > faye_url: 'http://icrm.icfdev.ru:8809/fay' # Стейджевый faye-сервер, путь он работает
+  > api_url: 'http://localhost:9292/v1/'       # Загляшка для серверных запросов
+
+Запуск
+------
+
+Запускаем клиента (по-умолчанию на порту 9292):
 
     > rackup
 
