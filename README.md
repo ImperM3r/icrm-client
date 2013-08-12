@@ -1,3 +1,10 @@
+Config
+------
+
+User local logger in application.yml:
+  
+  > api_url: 'http://localhost:9292/v1/'
+
 Start
 -----
 
