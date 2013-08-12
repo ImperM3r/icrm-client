@@ -1,7 +1,8 @@
 class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
   tagName: 'div'
   className: 'convead_chat_holder'
-  tab_name: 'Conversation'
+  header_class: 'conversation'
+  tab_name: @.prototype.t 'widget.tab.conversation'
 
   initialize: (options) ->
     @parent_controller     = options.parent_controller

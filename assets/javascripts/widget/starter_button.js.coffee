@@ -9,7 +9,7 @@ class ICRMClient.Widget.StarterButtonView extends @ICRMClient.Backbone.View
 
   render: ->
     if window.ICRM_Settings.widget || ICRMClient.Utils.gup('convead_widget')
-      @$el.html @template()
+      @$el.html @template(@)
     @
 
   _toggleWindowVisibility: (e) =>

@@ -1,9 +1,9 @@
 <h1 class="convead-client-heading">
   <%# TODO Change heading when tab changed %>
-  <span class="conversation-text">Hello, we’d love to hear your feedback...</span>
-  <span class="notifications-text">Notifications</span>
-  <span class="suggestion-text">Suggestion</span>
-  <span class="problem-text">Problem</span>
+  <span class="conversation-text"><%= @t 'widget.header.conversation' %></span>
+  <span class="notifications-text"><%= @t 'widget.header.notifications' %></span>
+  <span class="suggestion-text"><%= @t 'widget.header.suggestions' %></span>
+  <span class="problem-text"><%= @t 'widget.header.problem' %></span>
 </h1>
 
 <ul id="convead_client_navigation_tabset"></ul>

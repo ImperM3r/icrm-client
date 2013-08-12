@@ -1,7 +1,8 @@
 class ICRMClient.Notifications.NotificationTabView extends @ICRMClient.Backbone.View
   template: JST['notifications/notification_tab_view']
 
-  tab_name: 'Notifications'
+  header_class: 'notifications'
+  tab_name: @.prototype.t 'widget.tab.notifications'
   id: 'convead_notifications_holder'
 
   initialize: (options) ->
