@@ -1,5 +1,12 @@
+Установка
+---------
+
+    bower install
+    bundle install
+
+
 Development
-------
+-----------
 
 Чтобы клиент работал независимо от сервера создаем `./config/application.local.yml`, где прописываем:
 
