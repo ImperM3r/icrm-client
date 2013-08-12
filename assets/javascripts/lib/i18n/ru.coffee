@@ -12,3 +12,5 @@
   'widget.header.conversation': 'Приветствуем, оставьте свой отзыв...'
   'widget.header.notifications': 'Уведомления'
   'widget.header.suggestions': 'Подсказки'
+
+  'notification.go_back': 'Вернуться'

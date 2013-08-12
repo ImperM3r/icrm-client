@@ -1,4 +1,4 @@
-_locale = ->
+detect_language = ->
   if window.navigator? && window.navigator.language?
     window.navigator.language.substr 0, 2
   else if window.clientInformation?
@@ -14,6 +14,6 @@ _locale = ->
   Suggestion: {}
   Problem: {}
   version: '<%= SemVer.find.to_s %>'
-  locale: _locale()
+  locale: detect_language()
 
 console.log 'Convead widget version: ' + @ICRMClient.version

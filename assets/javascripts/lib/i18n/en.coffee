@@ -14,3 +14,5 @@
   'widget.header.notifications': 'Notifications'
   'widget.header.suggestions': 'Suggestion'
   'widget.header.problem': 'Problem'
+
+  'notification.go_back': 'Go back'
