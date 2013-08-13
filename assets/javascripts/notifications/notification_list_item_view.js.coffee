@@ -14,9 +14,14 @@ class ICRMClient.Notifications.NotificationListItemView extends @ICRMClient.Back
     'click a.open' : '_showNotification'
 
   render: ->
-    @$el.html(@template @model.toJSON()).fadeIn(400)
+    @$el.html(@template @presentation()).fadeIn(400)
     @$el.attr 'class', @attributes().class
     @
+
+  presentation: ->
+    p = @model.toJSON()
+    _.extend p, window.ICRMClient.Helpers, @
+    p
 
   _showNotification: ->
     @tab_view.showNotification @model
