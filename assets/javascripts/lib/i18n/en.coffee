@@ -9,6 +9,7 @@
   'widget.tab.problem': 'Problem'
 
   'widget.chat.form.placeholder': 'Start typing your message here...'
+  'widget.chat.list.get_prev': 'get previous messages'
 
   'widget.header.conversation': 'Hello, we’d love to hear your feedback...'
   'widget.header.notifications': 'Notifications'

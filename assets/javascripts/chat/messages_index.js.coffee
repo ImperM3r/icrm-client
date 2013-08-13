@@ -3,6 +3,7 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
 
   tagName: 'ul'
   className: 'icrm_chat_messages_list'
+  template: JST['chat/message_index']
 
   initialize: (options) ->
     @conversation_url = window.ICRMClient.Assets.api_url + 'chat/conversation/' + options.conversation_id
@@ -12,6 +13,9 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
       @_mark_read model
       @append model
 
+  events:
+    'click li.get-prev-messages': '_getPrevMsgs'
+
   append: (model) =>
     model.view = new @model_view model: model
     $msg_el = model.view.render().$el
@@ -20,21 +24,22 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
     if prev = @collection.prev model
       prev.view.$el.after $msg_el
     else
-      @$el.prepend $msg_el
+      @$('li.get-prev-messages').after $msg_el
 
     @$el.scrollTop @$el.prop('scrollHeight')
 
   render: ->
-    @$el.empty()
+    @$el.html @template(@)
     @$el.preventParentScroll()
 
     @collection.each (model) =>
       @append model
     @
 
-  get_last: ->
+  get_last: (from) ->
     window.ICRMClient.Base::ajax
       url: @conversation_url + '/get_last'
+      data: { from: from }
       success: (response) =>
         console.log "recieved last #{response.length} messages"
         @collection.add( new @collection.model message ) for message in response
@@ -46,3 +51,6 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
       data: model.attributes
       success: (response) ->
         console.log "message id:#{model.get('id')} | read status: #{JSON.parse(response).status}"
+
+  _getPrevMsgs: ->
+    @get_last @collection.first().get('created_at')
