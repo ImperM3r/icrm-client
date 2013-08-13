@@ -1,7 +1,7 @@
 <div class="popup">
   <header class="title">
     <h2><%= @subject %></h2>
-    <em class="date">16.01.13</em>
+    <em class="date"><%= @msgDate @created_at %></em>
   </header>
   <p><%- @linkify @escape(@content) %></p>
   <a href="#" class="j-go-back"><%= @t 'notification.go_back' %></a>
