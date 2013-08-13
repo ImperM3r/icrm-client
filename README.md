@@ -1,14 +1,37 @@
-Config
+Установка
+---------
+
+Если нет bower, ставим https://github.com/bower/bower
+
+    npm install -g bower
+    bower install
+    bundle install
+
+
+Development
+-----------
+
+Чтобы клиент работал независимо от сервера создаем `./config/application.local.yml`, где прописываем:
+
+    url: 'http://localhost:9292/'               # Текущий адрес на котором запущен клиент
+    faye_url: 'http://icrm.icfdev.ru:8809/faye' # Стейджевый faye-сервер, путь он работает
+    api_url: 'http://localhost:9292/v1/'        # Загляшка для серверных запросов
+
+Запуск
 ------
 
-User local logger in application.yml:
-  
-  > api_url: 'http://localhost:9292/v1/'
-
-Start
------
+Запускаем клиента (по-умолчанию на порту 9292):
 
     > rackup
+    
+    
+А оно заработало?
+-----------------
+
+* Открываем браузер
+* Идем на страницу `http://localhost:9292/`
+* Через пару секнуд в правом нижнем углу видим красную  кнопку "Ask questions"
+* Открываем javascript-console и смотрим логи
 
 Backbone
 --------

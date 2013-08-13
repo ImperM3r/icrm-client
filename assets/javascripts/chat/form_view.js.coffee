@@ -16,7 +16,7 @@ class ICRMClient.Chat.FormView extends @ICRMClient.Backbone.View
     @$el.find('textarea[name=content]')
 
   render: ->
-    @$el.html @template()
+    @$el.html @template(@)
     @$textarea().submitByEnter()
     @
 

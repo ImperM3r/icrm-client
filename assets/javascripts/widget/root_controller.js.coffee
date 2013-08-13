@@ -21,4 +21,5 @@ class @ICRMClient.Widget.RootController extends @ICRMClient.Backbone.View
     @window.showNotification model
 
   _linkHandler: (e) =>
-    e.preventDefault()
+    unless e.target.getAttribute('data-link-external') == 'true'
+      e.preventDefault()

@@ -9,6 +9,7 @@
 #= require ./lib/faye_client
 #= require ./lib/faye_logger
 #= require ./lib/helpers
+#= require ./lib/i18n
 #= require_tree ../templates
 #= require_tree ./views
 #= require_tree ./controllers
