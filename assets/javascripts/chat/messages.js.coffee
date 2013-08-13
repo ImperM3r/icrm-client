@@ -1,6 +1,6 @@
 class ICRMClient.Chat.MessagesCollection extends @ICRMClient.Backbone.Collection
 
-  model: ICRMClient.Chat.MessageModel
+  model: ICRMClient.Chat.Message
 
   comparator: (model) ->
     #new Date(model.get('created_at')).getTime()

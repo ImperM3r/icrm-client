@@ -18,8 +18,6 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
         problem_tab: new ICRMClient.Problem.ProblemTabView()
       parent: @
 
-    actual_time $el: @$el
-
   events:
     'click a.window_close' : 'close'
 

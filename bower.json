@@ -8,7 +8,6 @@
     "jquery": "1.10.2",
     "json2": "latest",
     "moment": "latest",
-    "actual_time": "git://github.com/BrandyMint/actual_time.git",
     "jquery-utils": "git://github.com/BrandyMint/jquery-utils.git"
   },
   "ignore": [

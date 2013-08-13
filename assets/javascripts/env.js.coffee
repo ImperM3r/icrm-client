@@ -4,12 +4,12 @@
 #= require ./lib/jquery
 #= require ./lib/backbone
 #= require ./lib/moment
-#= require ./lib/actual_time
 #= require ./lib/utils
 #= require ./lib/faye_client
 #= require ./lib/faye_logger
 #= require ./lib/helpers
 #= require ./lib/i18n
+#= require ./lib/show_button
 #= require_tree ../templates
 #= require_tree ./views
 #= require_tree ./controllers
@@ -17,6 +17,7 @@
 #= require_tree ./notifications
 #= require_tree ./suggestion
 #= require_tree ./problem
+#= require_tree ./chat/models
 #= require_tree ./chat
 #= require_tree ./widget
 
