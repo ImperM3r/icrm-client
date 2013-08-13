@@ -4,7 +4,6 @@
 #= require ./lib/jquery
 #= require ./lib/backbone
 #= require ./lib/moment
-#= require ./lib/actual_time
 #= require ./lib/utils
 #= require ./lib/faye_client
 #= require ./lib/faye_logger
