@@ -36,10 +36,10 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
       @append model
     @
 
-  get_last: (from) ->
+  get_history: (since_id) ->
     window.ICRMClient.Base::ajax
-      url: @conversation_url + '/get_last'
-      data: { from: from }
+      url: @conversation_url + '/messages'
+      data: { since_id: since_id, count: window.ICRMClient.history_count }
       success: (response) =>
         console.log "recieved last #{response.length} messages"
         @collection.add( new @collection.model message ) for message in response
@@ -53,4 +53,4 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
         console.log "message id:#{model.get('id')} | read status: #{JSON.parse(response).status}"
 
   _getPrevMsgs: ->
-    @get_last @collection.first().get('created_at')
+    @get_history @collection.first().get('id')
