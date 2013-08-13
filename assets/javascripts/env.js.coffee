@@ -17,6 +17,7 @@
 #= require_tree ./notifications
 #= require_tree ./suggestion
 #= require_tree ./problem
+#= require_tree ./chat/models
 #= require_tree ./chat
 #= require_tree ./widget
 

@@ -1,0 +1,1 @@
+<li class="convead-message get-prev-messages"><%= @t 'widget.chat.list.get_prev' %></li>
