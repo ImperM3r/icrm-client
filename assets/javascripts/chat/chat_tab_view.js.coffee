@@ -31,7 +31,7 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
 
     (@faye.subscribe @channel, @_messageHandler, @).callback =>
       # callback for retrieve unread msgs only when channel is up and ready
-      @messages_view.get_last()
+      @messages_view.get_history()
 
     _id = 0
 
