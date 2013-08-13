@@ -303,7 +303,8 @@
         background: #eee
         color: lighten($textColor,10%)
         .convead-message-owner
-          visibility: hidden
+          color: $textColor
+          font-weight: normal
         .convead-message-datetime
           color: lighten($textColor, 20%)
       &.convead-sender-owner.convead-message-unread
@@ -322,10 +323,8 @@
     .convead-message-owner
       color: #003cff
       font-weight: bold
-      width: 80px
     .convead-message-datetime
       font-size: 0.85em
-      width: 60px
       overflow: hidden
 
   form, fieldset
