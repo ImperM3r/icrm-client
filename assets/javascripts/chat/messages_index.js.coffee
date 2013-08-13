@@ -22,7 +22,7 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
     else
       @$el.prepend $msg_el
 
-    @$el.animate { scrollTop: @$el.prop('scrollHeight') }, "slow"
+    @$el.scrollTop @$el.prop('scrollHeight')
 
   render: ->
     @$el.empty()
@@ -32,11 +32,12 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
       @append model
     @
 
-  get_unread: ->
+  get_last: ->
     window.ICRMClient.Base::ajax
-      url: @conversation_url + '/get_unread'
-      success: (response) ->
-        console.log "to send: [#{JSON.parse(response).count}] unread messages"
+      url: @conversation_url + '/get_last'
+      success: (response) =>
+        console.log "recieved last #{response.length} messages"
+        @collection.add( new @collection.model message ) for message in response
 
   _mark_read: (model) =>
     return unless model.get('id') and model.get('read') != true
@@ -45,5 +46,3 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
       data: model.attributes
       success: (response) ->
         console.log "message id:#{model.get('id')} | read status: #{JSON.parse(response).status}"
-
-
