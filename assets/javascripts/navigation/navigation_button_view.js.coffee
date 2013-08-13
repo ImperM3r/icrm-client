@@ -18,7 +18,10 @@ class ICRMClient.Widget.NavigationButton extends @ICRMClient.Backbone.View
 
   render: ->
     @$el.html @template(@)
-    @$el.addClass 'inactive' if @tab_view.disabled
+    if @tab_view.disabled()
+      @$el.addClass 'inactive'
+    else
+      @$el.removeClass 'inactive'
     @
 
   inactivate: ->
@@ -32,7 +35,7 @@ class ICRMClient.Widget.NavigationButton extends @ICRMClient.Backbone.View
     @render()
 
   click: ->
-    @nav_controller.selectTabView @ unless @tab_view.disabled
+    @nav_controller.selectTabView @ unless @tab_view.disabled()
     false
 
   _unreadCount: =>

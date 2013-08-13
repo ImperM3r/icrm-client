@@ -5,6 +5,9 @@ class ICRMClient.Notifications.NotificationTabView extends @ICRMClient.Backbone.
   tab_name: @.prototype.t 'widget.tab.notifications'
   id: 'convead_notifications_holder'
 
+  disabled: ->
+    @collection.length == 0
+
   initialize: (options) ->
     @parent_controller = options.parent_controller
     @list_view = new ICRMClient.Notifications.NotificationListView collection: @collection, tab_view: @
