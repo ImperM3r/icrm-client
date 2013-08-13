@@ -10,6 +10,7 @@
 #= require ./lib/faye_logger
 #= require ./lib/helpers
 #= require ./lib/i18n
+#= require ./lib/show_button
 #= require_tree ../templates
 #= require_tree ./views
 #= require_tree ./controllers

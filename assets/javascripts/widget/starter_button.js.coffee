@@ -8,7 +8,7 @@ class ICRMClient.Widget.StarterButtonView extends @ICRMClient.Backbone.View
     'click': '_toggleWindowVisibility'
 
   render: ->
-    if window.ICRM_Settings.widget || ICRMClient.Utils.gup('convead_widget')
+    if (window.ICRM_Settings.widget || ICRMClient.Utils.gup('convead_widget')) and window.ICRMClient.show_button
       @$el.html @template(@)
     @
 
