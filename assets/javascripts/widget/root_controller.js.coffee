@@ -3,8 +3,9 @@ class @ICRMClient.Widget.RootController extends @ICRMClient.Backbone.View
 
   initialize: (options) ->
     @window         = new ICRMClient.Widget.WindowView
-      visitor: options.visitor
+      visitor:       options.visitor
       notifications: options.notifications
+      messages:      options.messages
 
     @starter_button = new ICRMClient.Widget.StarterButtonView
       window: @window

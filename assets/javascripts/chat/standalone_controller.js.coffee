@@ -3,12 +3,15 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
   className: 'convead_client-standalone_chat'
 
   initialize: (options) ->
-    @chat = new ICRMClient.Chat.ChatTabView
-      sender: options.sender
-      faye:   options.faye
-      ajax:   options.ajax
-      conversation_id: options.conversation_id
-      parent_controller: @
+    sender          = options.sender
+    messages        = new ICRMClient.Chat.MessagesCollection()
+    chat_controller = new ICRMClient.Widget.ChatController
+      collection: messages
+      sender: sender
+      faye: options.faye
+    new ICRMClient.Chat.MessageObserver collection: messages, sender: sender
+
+    @chat = new ICRMClient.Chat.ChatTabView collection: messages
 
   render: ->
     @$el.html( @template(@) )

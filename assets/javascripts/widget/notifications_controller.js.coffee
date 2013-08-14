@@ -1,7 +1,7 @@
 class @ICRMClient.Widget.NotificationsController extends @ICRMClient.Base
 
   constructor: (options) ->
-    @collection = new ICRMClient.Notifications.NotificationsCollection()
+    @collection = options.collection
     @notification_url = window.ICRMClient.Assets.api_url + '/notifications/' + options.visitor.id
     @faye = options.faye
     @chanel = "/notifications/#{options.visitor.id}"

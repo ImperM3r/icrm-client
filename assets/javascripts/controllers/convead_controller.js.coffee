@@ -22,16 +22,24 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
       app_key: window.ICRMClient.app_key
       visitor: visitor
 
-    notifications_controller = new ICRMClient.Widget.NotificationsController visitor: visitor, faye: faye
+    notifications            = new ICRMClient.Notifications.NotificationsCollection()
+    notifications_controller = new ICRMClient.Widget.NotificationsController collection: notifications, visitor: visitor, faye: faye
+
+    sender                   = new ICRMClient.Chat.Chatter visitor
+    messages                 = new ICRMClient.Chat.MessagesCollection()
+    chat_controller          = new ICRMClient.Widget.ChatController collection: messages, sender: sender, faye: faye
+
+    new ICRMClient.Chat.MessageObserver collection: messages, sender: sender
 
     widget_controller = new ICRMClient.Widget.RootController
-      visitor: visitor
-      notifications: notifications_controller.collection
+      visitor:       visitor
+      notifications: notifications
+      messages:      messages
 
     #TODO run after dom ready
     @container.append widget_controller.render().$el
 
-    new ICRMClient.Notifications.NotificationObserver collection: notifications_controller.collection, widget: widget_controller
+    new ICRMClient.Notifications.NotificationObserver collection: notifications, widget: widget_controller
     new ICRMClient.Widget.ReminderController
-      notification_collection: notifications_controller.collection
-      widget: widget_controller
+      notification_collection: notifications
+      widget:                  widget_controller
