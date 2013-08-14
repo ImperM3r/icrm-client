@@ -2,7 +2,12 @@ class @ICRMClient.Widget.NotificationsController extends @ICRMClient.Base
 
   constructor: (options) ->
     @collection = new ICRMClient.Notifications.NotificationsCollection()
-    options.faye.subscribe "/notifications/#{options.visitor.id}", @_notificationHandler
+    @notification_url = window.ICRMClient.Assets.api_url + '/notifications/' + options.visitor.id
+    @faye = options.faye
+    @chanel = "/notifications/#{options.visitor.id}"
+
+    (@faye.subscribe @chanel, @_notificationHandler, @).callback =>
+      @get_unread()
 
     _id = 0
 
@@ -17,3 +22,12 @@ class @ICRMClient.Widget.NotificationsController extends @ICRMClient.Base
   _notificationHandler: (message) =>
     console.log JSON.stringify(message)
     @collection.add new ICRMClient.Notifications.NotificationModel(message.notification)
+
+  get_unread: =>
+    window.ICRMClient.Base::ajax
+      url: @notification_url + '/get_unread'
+      success: (response) =>
+        console.log "recieved unread #{response.length} notifications"
+        @collection.add (new  @collection.model(notification) for notification in response)
+
+

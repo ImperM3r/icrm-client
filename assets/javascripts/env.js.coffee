@@ -14,6 +14,7 @@
 #= require_tree ./views
 #= require_tree ./controllers
 #= require_tree ./navigation
+#= require_tree ./notifications/models
 #= require_tree ./notifications
 #= require_tree ./suggestion
 #= require_tree ./problem
