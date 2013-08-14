@@ -4,10 +4,14 @@ class ICRMClient.Chat.FormView extends @ICRMClient.Backbone.View
   conversation_url: window.ICRMClient.Assets.api_url + 'chat/conversation/'
 
   initialize: (options) ->
+    @eb = window.ICRMClient.EventBroadcaster
     @conversation_id  = options.conversation_id
     @sender           = options.sender
     @post_url         = @conversation_url + @conversation_id
     @ajax             = options.ajax || window.ICRMClient.Base::ajax
+
+    @listenTo @eb, 'window:tab:chat:shown', (e) =>
+      @$textarea().focus()
 
   events:
     'submit' : '_submitMessage'

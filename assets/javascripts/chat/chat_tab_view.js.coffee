@@ -7,6 +7,7 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
   disabled: -> false
 
   initialize: (options) ->
+    @eb = window.ICRMClient.EventBroadcaster
     @parent_controller     = options.parent_controller
     @sender          = options.sender
     @conversation_id = options.conversation_id
@@ -28,10 +29,15 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
     @messages_view = new ICRMClient.Chat.MessagesView
       conversation_id: options.conversation_id
       collection: @collection
+      sender: @sender
 
     (@faye.subscribe @channel, @_messageHandler, @).callback =>
       # callback for retrieve unread msgs only when channel is up and ready
       @messages_view.get_history()
+
+    @listenTo @eb, 'window:shown', (e) =>
+      if @button.active
+        @eb.trigger 'window:tab:chat:shown'
 
     _id = 0
 
