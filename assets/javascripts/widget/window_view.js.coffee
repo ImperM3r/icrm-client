@@ -2,6 +2,7 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
   template: JST['widget/window_view']
 
   initialize: (options) ->
+    @eb = window.ICRMClient.EventBroadcaster
     @navigation = new ICRMClient.Widget.NavigationView
       tab_views:
         chat_tab: new ICRMClient.Chat.ChatTabView(
@@ -27,19 +28,24 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
     @
 
   toggleVisibility: =>
-    @$el.toggle()
+    if @isVisible
+      @hide()
+    else
+      @show()
 
   isVisibly: ->
     @$el.is(":visible")
 
   show: =>
     @$el.show()
+    @eb.trigger 'window:shown'
 
   close: =>
     @hide()
 
   hide: =>
     @$el.hide()
+    @eb.trigger 'window:hidden'
 
   switchHeaderClass: (from, to) =>
     @$('.convead-client-lightbox').removeClass(from).addClass(to)
