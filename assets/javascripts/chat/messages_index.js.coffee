@@ -53,4 +53,5 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
         console.log "message id:#{model.get('id')} | read status: #{JSON.parse(response).status}"
 
   _getPrevMsgs: ->
-    @get_history @collection.first().get('id')
+    since_id = if first = @collection.first() then first.get('id') else undefined
+    @get_history since_id
