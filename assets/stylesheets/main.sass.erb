@@ -117,7 +117,13 @@
       display: block
     &.problem .problem-text
       display: block
+    
+    .notification-list
+      @extend .icrm_chat_messages_list
 
+    .convead-notification-message
+      @extend .convead-message
+    
     #convead_client_navigation_tabset
       padding: 0
       margin: 0 0 15px
@@ -177,16 +183,9 @@
       margin: 0 0 9px
       list-style: none
       font: 13px/16px Arial, Helvetica, sans-serif
-      border: 1px solid $borderColor
       height: 250px
       position: relative
       overflow-y: auto
-
-      li
-        border-top: 1px solid $borderColor
-
-        &:first-child
-          border-top: 0
 
       .open
         display: block
@@ -227,7 +226,7 @@
         color: #003cff
 
       .notification-unread .open
-        background: #d9d9d9
+        background: #eee
 
     .popup
       padding: 0

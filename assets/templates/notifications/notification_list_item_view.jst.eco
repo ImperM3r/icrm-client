@@ -1,5 +1,12 @@
-<a class="open" href="#">
-  <strong class="author"><%= @manager.name %></strong>
-  <span class="text-holder"><%= @subject %></span>
-  <em class="date"><%= @msgDate @created_at %></em>
+<a class="convead-notification-message open" href="#">
+  <span class="convead-message-owner pull-left">
+    <%= @manager.name %>
+  </span>
+  <small class="convead-message-datetime pull-right">
+    <%= @msgDate @created_at %>
+  </small>
+  <span class="clearfix"></span>
+  <span class="content">
+    <%= @subject %>
+  </div>
 </a>
