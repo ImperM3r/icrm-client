@@ -36,6 +36,3 @@ class ICRMClient.Widget.NavigationView extends @ICRMClient.Backbone.View
   showNotification: (model) =>
     @tab_views.notification_tab.button.click()
     @tab_views.notification_tab.showNotification model
-
-  showMessage: =>
-    @tab_views.chat_tab.button.click()

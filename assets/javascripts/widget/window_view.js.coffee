@@ -11,6 +11,11 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
         suggestion_tab:   new ICRMClient.Suggestion.SuggestionTabView()
         problem_tab:      new ICRMClient.Problem.ProblemTabView()
 
+    @listenTo @eb, 'message:show', =>
+      return false if @isVisibly()
+      @show()
+      @eb.trigger 'window:tab:chat:show'
+
   events:
     'click a.window_close' : 'close'
 
@@ -46,8 +51,3 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
     return false if @isVisibly()
     @show()
     @navigation.showNotification model
-
-  showMessage: =>
-    return false if @isVisibly()
-    @show()
-    @navigation.showMessage()

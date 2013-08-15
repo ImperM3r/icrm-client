@@ -1,59 +1,41 @@
-class @ICRMClient.Widget.ChatController extends @ICRMClient.Base
+class ICRMClient.Chat.ChatController extends @ICRMClient.Base
 
   constructor: (options) ->
     _.extend @, ICRMClient.Backbone.Events
 
-    @eb               = options.eb
-    @collection       = options.collection
-    @sender           = options.sender
-    @faye             = options.faye
+    @conversation_open = false
+
+    @eb                = options.eb
+    @collection        = options.collection
+    @sender            = options.sender
+    @faye              = options.faye
 
     if @sender.get('type') == 'Visitor'
-      conversation_id = @sender.get('id')
+      visitor_id = @sender.get('id')
     else
-      conversation_id  = options.conversation_id
+      visitor_id = options.visitor_id
 
-    @conversation_url = "#{@assets.api_url}chat/conversation/#{conversation_id}"
-    @channel          = "/conversations/#{conversation_id}"
+    @service_channel  = "/service/#{visitor_id}"
 
-    @listenTo @eb, 'messages:history:get', (e) =>
-      since_id = if first = @collection.first() then first.get('id') else undefined
-      @_getHistory since_id
+    @faye.subscribe @service_channel, @_serviceHandler
 
-    # callback for retrieve unread msgs only when channel is up and ready
-    (@faye.subscribe @channel, @_messageHandler).callback => @_getHistory()
+    @listenTo @eb, 'window:shown standalone:shown', =>
+      return if @conversation_open
+      @ajax
+        url: "#{@assets.api_url}chat/service/#{visitor_id}"
+        data: { sender: @sender.attributes }
+        success: => console.log "establish conversation attempt successfull"
+        error: => console.log "establish conversation attempt failed"
 
-  _messageHandler: (msg) =>
-    switch msg.method
-      when 'create' then @_createMessage msg.message
-      when 'modify' then @_modifyMessage msg.message
-      else console.log "Unknown message method: #{msg.method}"
+  _serviceHandler: (msg) =>
+    switch msg.entity
+      when 'conversation' then @_newConversation msg.conversation
+      else console.log msg
 
-  _createMessage: (m) =>
-    # Collection is smart to detect the existed message
-    if m.sender.id == @sender.get('id') && m.sender.type == @sender.get('type')
-      console.log "Got retranslated message"
-    else
-      @collection.add new @collection.model(m)
-
-  _modifyMessage: (m) =>
-    if message = @collection.get(m.id)
-      console.log message
-      message.set m
-    else
-      console.log "message does not exist in collection, id: #{m.id}"
-
-  _makeCall: (model) =>
-    if !@call_sent and @sender.get('type') == 'Visitor'
-      @call_sent = true
-      @faye.client.publish @faye.org_path + @channel,
-        method: 'call',
-        conversation_id: @sender.get('id')
-
-  _getHistory: (since_id) ->
-    @ajax
-      url: @conversation_url + '/messages'
-      data: { since_id: since_id, count: window.ICRMClient.history_count }
-      success: (response) =>
-        console.log "recieved last #{response.length} messages"
-        @collection.add( new @collection.model message ) for message in response by -1
+  _newConversation: (conversation) =>
+    return if @conversation_open
+    @conversation_open = true
+    options = eb: @eb, conversation: conversation, collection: @collection, sender: @sender, faye: @faye
+    new ICRMClient.Chat.ConversationController options,
+      success: => new ICRMClient.Chat.MessageObserver options
+      error: => @conversation_open = false

@@ -24,7 +24,7 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
 
     sender                   = new ICRMClient.Chat.Chatter visitor
     messages                 = new ICRMClient.Chat.MessagesCollection()
-    chat_controller          = new ICRMClient.Widget.ChatController collection: messages, sender: sender, faye: faye, eb: eb
+    chat_controller          = new ICRMClient.Chat.ChatController collection: messages, sender: sender, faye: faye, eb: eb
 
     notifications            = new ICRMClient.Notifications.NotificationsCollection()
     notifications_controller = new ICRMClient.Widget.NotificationsController collection: notifications, visitor: visitor, faye: faye
@@ -35,8 +35,6 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
 
       widget_controller = new ICRMClient.Widget.RootController visitor: visitor, notifications: notifications, messages: messages, eb: eb
       container.append widget_controller.render().$el
-
-      new ICRMClient.Chat.MessageObserver collection: messages, sender: sender, widget: widget_controller
 
       new ICRMClient.Notifications.NotificationObserver collection: notifications, widget: widget_controller
       new ICRMClient.Widget.ReminderController notification_collection: notifications,  widget: widget_controller
