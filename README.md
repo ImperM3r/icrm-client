@@ -15,7 +15,7 @@ Development
 
     url: 'http://localhost:9292/'               # Текущий адрес на котором запущен клиент
     faye_url: 'http://icrm.icfdev.ru:8809/faye' # Стейджевый faye-сервер, путь он работает
-    api_url: 'http://localhost:9292/v1/'        # Загляшка для серверных запросов
+    api_url: 'http://localhost:9292/v1/'        # Заглушка для серверных запросов. 
 
 Запуск
 ------
