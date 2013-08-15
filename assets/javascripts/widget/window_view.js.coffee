@@ -2,12 +2,12 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
   template: JST['widget/window_view']
 
   initialize: (options) ->
-    @eb = window.ICRMClient.EventBroadcaster
+    @eb = options.eb
     @navigation = new ICRMClient.Widget.NavigationView
       parent: @
       tab_views:
-        chat_tab:         new ICRMClient.Chat.ChatTabView collection: options.messages
-        notification_tab: new ICRMClient.Notifications.NotificationTabView collection: options.notifications
+        chat_tab:         new ICRMClient.Chat.ChatTabView collection: options.messages, eb: @eb
+        notification_tab: new ICRMClient.Notifications.NotificationTabView collection: options.notifications, eb: @eb
         suggestion_tab:   new ICRMClient.Suggestion.SuggestionTabView()
         problem_tab:      new ICRMClient.Problem.ProblemTabView()
 

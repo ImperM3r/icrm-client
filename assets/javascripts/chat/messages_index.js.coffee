@@ -6,7 +6,7 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
   template: JST['chat/message_index']
 
   initialize: (options) ->
-    @eb = window.ICRMClient.EventBroadcaster
+    @eb = options.eb
     @$last = null
 
     @listenTo @collection, 'add', (model) =>

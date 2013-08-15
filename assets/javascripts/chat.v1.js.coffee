@@ -7,4 +7,5 @@
 #= require ./lib/i18n
 #= require_tree ./views
 #= require_tree ../templates
+#= require_tree ./chat/models
 #= require_tree ./chat

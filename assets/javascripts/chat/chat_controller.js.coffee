@@ -3,7 +3,7 @@ class @ICRMClient.Widget.ChatController extends @ICRMClient.Base
   constructor: (options) ->
     _.extend @, ICRMClient.Backbone.Events
 
-    @eb               = window.ICRMClient.EventBroadcaster
+    @eb               = options.eb
     @collection       = options.collection
     @sender           = options.sender
     @faye             = options.faye
