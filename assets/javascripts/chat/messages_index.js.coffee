@@ -6,16 +6,14 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
   template: JST['chat/message_index']
 
   initialize: (options) ->
-    scrolled = false
     @eb = window.ICRMClient.EventBroadcaster
+    @$last = null
 
     @listenTo @collection, 'add', (model) =>
       @append model
 
-    @listenTo @eb, 'window:tab:chat:shown', =>
-      unless scrolled
-        scrolled = true
-        @$el.scrollTop @$el.prop('scrollHeight')
+    @listenTo @eb, 'window:tab:chat:shown standalone:shown', =>
+      @_scrollToLast() and @$last = null
 
   events:
     'click li.get-prev-messages': '_getPrevMsgs'
@@ -30,9 +28,8 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
     else
       @$('li.get-prev-messages').after $msg_el
 
-    scrollY = $msg_el.position().top - @$('li.get-prev-messages').position().top
-    if scrollY <= @$('li.get-prev-messages').outerHeight() then scrollY = 0
-    @$el.scrollTop scrollY
+    @$last = $msg_el
+    @_scrollToLast()
 
   render: ->
     @$el.html @template(@)
@@ -45,3 +42,8 @@ class ICRMClient.Chat.MessagesView extends @ICRMClient.Backbone.View
   _getPrevMsgs: ->
     @eb.trigger 'messages:history:get'
 
+  _scrollToLast: =>
+    if @$last
+      scrollY = @$last.position().top - @$('li.get-prev-messages').position().top
+      if scrollY <= @$('li.get-prev-messages').outerHeight() then scrollY = 0
+      @$el.scrollTop scrollY

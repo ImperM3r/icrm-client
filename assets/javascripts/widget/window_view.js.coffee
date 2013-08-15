@@ -4,18 +4,12 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
   initialize: (options) ->
     @eb = window.ICRMClient.EventBroadcaster
     @navigation = new ICRMClient.Widget.NavigationView
-      tab_views:
-        chat_tab: new ICRMClient.Chat.ChatTabView(
-          collection:        options.messages,
-          parent_controller: @
-        )
-        notification_tab: new ICRMClient.Notifications.NotificationTabView(
-          collection:        options.notifications,
-          parent_controller: @
-        )
-        suggestion_tab: new ICRMClient.Suggestion.SuggestionTabView()
-        problem_tab: new ICRMClient.Problem.ProblemTabView()
       parent: @
+      tab_views:
+        chat_tab:         new ICRMClient.Chat.ChatTabView collection: options.messages
+        notification_tab: new ICRMClient.Notifications.NotificationTabView collection: options.notifications
+        suggestion_tab:   new ICRMClient.Suggestion.SuggestionTabView()
+        problem_tab:      new ICRMClient.Problem.ProblemTabView()
 
   events:
     'click a.window_close' : 'close'
@@ -26,7 +20,7 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
     @
 
   toggleVisibility: =>
-    if @isVisible
+    if @isVisibly()
       @hide()
     else
       @show()
@@ -52,3 +46,8 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
     return false if @isVisibly()
     @show()
     @navigation.showNotification model
+
+  showMessage: =>
+    return false if @isVisibly()
+    @show()
+    @navigation.showMessage()

@@ -1,12 +1,17 @@
 class ICRMClient.Chat.MessageObserver extends @ICRMClient.Base
 
-  conversation_url: window.ICRMClient.Assets.api_url + 'chat/conversation/'
-
   constructor: (options) ->
     _.extend @, window.ICRMClient.Backbone.Events
 
-    @collection = options.collection
-    @sender     = options.sender
+    @widget          = options.widget
+    @collection      = options.collection
+    @sender          = options.sender
+    if @sender.get('type') == 'Visitor'
+      conversation_id = @sender.get('id')
+    else
+      conversation_id = options.conversation_id
+
+    @conversation_url = "#{@assets.api_url}chat/conversation/#{conversation_id}"
 
     @listenTo @collection, 'add', @_msgHandler
 
@@ -16,12 +21,13 @@ class ICRMClient.Chat.MessageObserver extends @ICRMClient.Base
     else if @_msgIsUnread model then @_markRead    model
 
   _msgIsNew: (model) ->
-    !model.get('id') and model.get('from_type') == 'Visitor'
+    !model.get('id')
 
   _msgIsUnread: (model) ->
     model.get('id') and model.get('read') != true and model.get('sender').id != @sender.get('id')
 
   _markRead: (model) =>
+    @widget.showMessage() if @widget
     @ajax
       url: "#{@conversation_url}/message/#{model.get('id')}/mark_read"
       data: model.attributes
@@ -31,7 +37,7 @@ class ICRMClient.Chat.MessageObserver extends @ICRMClient.Base
   _postMessage: (model) =>
     model.set('sender', @sender.attributes)
     @ajax
-      url: @conversation_url + @sender.get('id')
+      url: @conversation_url
       data: model.attributes
       success: (response) =>
         model.set response

@@ -26,12 +26,12 @@ class ICRMClient.Widget.NavigationButton extends @ICRMClient.Backbone.View
 
   inactivate: ->
     @active = false
-    @tab_view.$el.hide()
+    @tab_view.hide()
     @render()
 
   activate: ->
     @active = true
-    @tab_view.$el.show()
+    @tab_view.show()
     @render()
 
   click: ->

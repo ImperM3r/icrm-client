@@ -23,4 +23,4 @@ class ICRMClient.Chat.FormView extends @ICRMClient.Backbone.View
     false
 
   _postMessage: (content) =>
-    @collection.add  new @collection.model(created_at: 'sending...', content: content, from_type: 'Visitor')
+    @collection.add  new @collection.model(created_at: 'sending...', content: content)
