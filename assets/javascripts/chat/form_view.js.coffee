@@ -3,14 +3,14 @@ class ICRMClient.Chat.FormView extends @ICRMClient.Backbone.View
 
   initialize: (options) ->
     @eb = window.ICRMClient.EventBroadcaster
-    @listenTo @eb, 'window:tab:chat:shown', (e) =>
+    @listenTo @eb, 'window:tab:chat:shown standalone:shown', (e) =>
       @$textarea().focus()
 
   events:
     'submit' : '_submitMessage'
 
   $textarea: ->
-    @$el.find('textarea[name=content]')
+    @$('textarea[name=content]')
 
   render: ->
     @$el.html @template(@)

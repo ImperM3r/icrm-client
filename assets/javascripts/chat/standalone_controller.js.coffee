@@ -43,7 +43,10 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
     @$el.is(":visible")
 
   toggleVisibility: ->
-    @$el.toggle()
+    if @isVisible()
+      @hide()
+    else
+      @show()
 
   events:
     'click .window_close' : 'close'
@@ -61,12 +64,13 @@ window.ICRMClient.Chat.Start = (conversation_id) ->
       type: 'User'
       name: 'Danil Pismenny'
 
-    window.ICRMClient.standalone_chat = new window.ICRMClient.Chat.StandaloneController
+    chat = window.ICRMClient.standalone_chat = new window.ICRMClient.Chat.StandaloneController
       event_broadcaster: window.ICRMClient.EventBroadcaster
       conversation_id:   ICRMClient.visitor.id
       sender:            sender
       faye:              window.ICRMClient.faye
 
-    ICRMClient.$('#convead_client_container').append window.ICRMClient.standalone_chat.render().$el
+    ICRMClient.$('#convead_client_container').append chat.render().$el
+    chat.show()
 
   false
