@@ -1,6 +1,6 @@
 class ICRMClient.Notifications.NotificationListView extends @ICRMClient.Backbone.View
   tagName: 'ul'
-  className: 'listing'
+  className: 'convead-listing'
 
   initialize: (options) ->
     @tab_view = options.tab_view
