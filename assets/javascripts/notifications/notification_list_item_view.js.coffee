@@ -3,7 +3,7 @@ class ICRMClient.Notifications.NotificationListItemView extends @ICRMClient.Back
 
   tagName: 'li'
   attributes: ->
-    class: 'popup-section notification-' + if @model.get('read') then 'read' else 'unread'
+    class: 'convead-popup-section convead-notification-' + if @model.get('read') then 'read' else 'unread'
 
   initialize: (options) ->
     @tab_view = options.tab_view

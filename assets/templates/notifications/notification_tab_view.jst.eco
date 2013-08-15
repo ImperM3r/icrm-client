@@ -1,2 +1,2 @@
-<div class="notification-container"></div>
-<div class="notification-list"></div>
+<div class="convead-notifications-container" id="convead-notifications-container"></div>
+<div class="convead-notifications-list" id="convead-notifications-list"></div>

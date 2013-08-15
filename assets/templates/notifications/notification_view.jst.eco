@@ -1,8 +1,8 @@
-<div class="popup">
-  <header class="title">
-    <h2><%= @subject %></h2>
-    <em class="date"><%= @msgDate @created_at %></em>
-  </header>
+<div class="convead-popup">
+  <h2 class="convead-popup-subject pull-left"><%= @subject %></h2>
+  <div class="convead-popup-datetime pull-right"><%= @msgDate @created_at %></div>
+  <div class="clearfix"></div>
   <p><%- @linkify @escape(@content) %></p>
-  <a href="#" class="j-go-back"><%= @t 'notification.go_back' %></a>
+  <br/>
+  <a href="#" class="convead-popup-back-link j-go-back">&larr; <%= @t 'notification.go_back' %></a>
 </div>
