@@ -7,10 +7,10 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
   disabled: -> false
 
   initialize: (options) ->
-    @eb = window.ICRMClient.EventBroadcaster
+    @eb = options.eb
 
-    @form_view     = new ICRMClient.Chat.FormView     collection: @collection
-    @messages_view = new ICRMClient.Chat.MessagesView collection: @collection
+    @form_view     = new ICRMClient.Chat.FormView     collection: @collection, eb: @eb
+    @messages_view = new ICRMClient.Chat.MessagesView collection: @collection, eb: @eb
 
     @listenTo @eb, 'window:shown', (e) =>
       if @button and @button.active

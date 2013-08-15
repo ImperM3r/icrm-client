@@ -21,7 +21,3 @@
 #= require_tree ./chat/models
 #= require_tree ./chat
 #= require_tree ./widget
-
-# Create root DOM node
-window.ICRMClient.container = new window.ICRMClient.ConveadClientContainer
-window.ICRMClient.container.injectToBody()

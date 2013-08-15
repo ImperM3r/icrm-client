@@ -20,9 +20,11 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
       app_key: window.ICRMClient.app_key
       visitor: visitor
 
+    eb = _.extend {}, ICRMClient.Backbone.Events
+
     sender                   = new ICRMClient.Chat.Chatter visitor
     messages                 = new ICRMClient.Chat.MessagesCollection()
-    chat_controller          = new ICRMClient.Widget.ChatController collection: messages, sender: sender, faye: faye
+    chat_controller          = new ICRMClient.Widget.ChatController collection: messages, sender: sender, faye: faye, eb: eb
 
     notifications            = new ICRMClient.Notifications.NotificationsCollection()
     notifications_controller = new ICRMClient.Widget.NotificationsController collection: notifications, visitor: visitor, faye: faye
@@ -31,7 +33,7 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
       container = window.ICRMClient.container = new window.ICRMClient.ConveadClientContainer
       container.injectToBody()
 
-      widget_controller = new ICRMClient.Widget.RootController visitor: visitor, notifications: notifications, messages: messages
+      widget_controller = new ICRMClient.Widget.RootController visitor: visitor, notifications: notifications, messages: messages, eb: eb
       container.append widget_controller.render().$el
 
       new ICRMClient.Chat.MessageObserver collection: messages, sender: sender, widget: widget_controller

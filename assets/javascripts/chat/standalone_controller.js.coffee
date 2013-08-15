@@ -3,21 +3,23 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
   className: 'convead_client-standalone_chat'
 
   initialize: (options) ->
-    @eb             = options.event_broadcaster
+    @eb = _.extend {}, ICRMClient.Backbone.Events
     sender          = options.sender
     messages        = new ICRMClient.Chat.MessagesCollection()
     chat_controller = new ICRMClient.Widget.ChatController
+      eb:              @eb
       collection:      messages
       conversation_id: options.conversation_id
       sender:          sender
       faye:            options.faye
 
     new ICRMClient.Chat.MessageObserver
-      collection: messages
-      sender: sender
+      collection:      messages
+      sender:          sender
       conversation_id: options.conversation_id
+      widget:          @
 
-    @chat = new ICRMClient.Chat.ChatTabView collection: messages
+    @chat = new ICRMClient.Chat.ChatTabView collection: messages, eb: @eb
 
   render: ->
     @$el.html( @template(@) )
@@ -26,6 +28,9 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
     if @$el.draggable?
       @$('.chat-standalone').draggable(containment: 'window').css position: "fixed", top: "10px", left: "10px"
     @
+
+  showMessage: =>
+    @show()
 
   # The stub for incoming messages
   show: ->
@@ -43,7 +48,10 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
     @$el.is(":visible")
 
   toggleVisibility: ->
-    @$el.toggle()
+    if @isVisible()
+      @hide()
+    else
+      @show()
 
   events:
     'click .window_close' : 'close'
@@ -61,12 +69,12 @@ window.ICRMClient.Chat.Start = (conversation_id) ->
       type: 'User'
       name: 'Danil Pismenny'
 
-    window.ICRMClient.standalone_chat = new window.ICRMClient.Chat.StandaloneController
-      event_broadcaster: window.ICRMClient.EventBroadcaster
+    chat = window.ICRMClient.standalone_chat = new window.ICRMClient.Chat.StandaloneController
       conversation_id:   ICRMClient.visitor.id
       sender:            sender
       faye:              window.ICRMClient.faye
 
-    ICRMClient.$('#convead_client_container').append window.ICRMClient.standalone_chat.render().$el
+    ICRMClient.$('#convead_client_container').append chat.render().$el
+    chat.show()
 
   false
