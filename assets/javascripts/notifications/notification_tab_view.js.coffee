@@ -9,7 +9,6 @@ class ICRMClient.Notifications.NotificationTabView extends @ICRMClient.Backbone.
     @collection.length == 0
 
   initialize: (options) ->
-    @parent_controller = options.parent_controller
     @list_view = new ICRMClient.Notifications.NotificationListView collection: @collection, tab_view: @
 
   render: ->
@@ -25,3 +24,9 @@ class ICRMClient.Notifications.NotificationTabView extends @ICRMClient.Backbone.
     @$('.notification-list').hide()
     @$('.notification-container').html notification.render().el
     true
+
+  show: ->
+    @$el.show()
+
+  hide: ->
+    @$el.hide()

@@ -1,8 +1,8 @@
 class @ICRMClient.InformerController extends @ICRMClient.Base
-  logger_url: window.ICRMClient.Assets.api_url + 'logger'
 
   constructor: (after_callback) ->
     @after_callback = after_callback
+    @logger_url = @assets.api_url + 'logger'
 
     @perform()
 
