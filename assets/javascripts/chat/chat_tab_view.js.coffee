@@ -16,6 +16,9 @@ class ICRMClient.Chat.ChatTabView extends @ICRMClient.Backbone.View
       if @button and @button.active
         @eb.trigger 'window:tab:chat:shown'
 
+    @listenTo @eb, 'window:tab:chat:show', =>
+      @show()
+
   render: ->
     @$el.append @messages_view.render().$el
     @$el.append @form_view.render().$el

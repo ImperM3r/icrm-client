@@ -6,20 +6,16 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
     @eb = _.extend {}, ICRMClient.Backbone.Events
     sender          = options.sender
     messages        = new ICRMClient.Chat.MessagesCollection()
-    chat_controller = new ICRMClient.Widget.ChatController
-      eb:              @eb
-      collection:      messages
-      conversation_id: options.conversation_id
-      sender:          sender
-      faye:            options.faye
-
-    new ICRMClient.Chat.MessageObserver
-      collection:      messages
-      sender:          sender
-      conversation_id: options.conversation_id
-      widget:          @
+    chat_controller = new ICRMClient.Chat.ChatController
+      visitor_id: options.visitor_id
+      eb:         @eb
+      collection: messages
+      sender:     sender
+      faye:       options.faye
 
     @chat = new ICRMClient.Chat.ChatTabView collection: messages, eb: @eb
+
+    @listenTo @eb, 'message:show', => @show()
 
   render: ->
     @$el.html( @template(@) )
@@ -28,9 +24,6 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
     if @$el.draggable?
       @$('.chat-standalone').draggable(containment: 'window').css position: "fixed", top: "10px", left: "10px"
     @
-
-  showMessage: =>
-    @show()
 
   # The stub for incoming messages
   show: ->
@@ -65,14 +58,14 @@ window.ICRMClient.Chat.Start = (conversation_id) ->
   else
     # Fake Manager for testing
     sender = new window.ICRMClient.Chat.Chatter
-      id: 1
+      id: 10
       type: 'User'
       name: 'Danil Pismenny'
 
     chat = window.ICRMClient.standalone_chat = new window.ICRMClient.Chat.StandaloneController
-      conversation_id:   ICRMClient.visitor.id
-      sender:            sender
-      faye:              window.ICRMClient.faye
+      visitor_id: ICRMClient.visitor.id
+      sender:     sender
+      faye:       window.ICRMClient.faye
 
     ICRMClient.$('#convead_client_container').append chat.render().$el
     chat.show()
