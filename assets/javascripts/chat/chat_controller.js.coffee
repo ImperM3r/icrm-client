@@ -25,7 +25,14 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
         url: "#{@assets.api_url}chat/service/#{visitor_id}"
         data: { sender: @sender.attributes }
         success: => console.log "establish conversation attempt successfull"
-        error: => console.log "establish conversation attempt failed"
+        error: (response) =>
+          msg = response.responseJSON.error
+          @collection.add @collection.model
+            content: msg
+            created_at: new Date
+            id: 0
+            read: true
+          console.log "establish conversation attempt failed"
 
   _serviceHandler: (msg) =>
     switch msg.entity
