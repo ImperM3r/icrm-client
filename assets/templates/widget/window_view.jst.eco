@@ -3,7 +3,7 @@
     <a href="#" class="window_close"></a>
     <div class="j-convead-client-widget-window-content"></div>
   </div>
-  <div class="convead-powered-by"><a href="http://www.convead.com" data-link-external="true">Powered by Convead.com</a></div>
+  <div class="convead-powered-by"><a href="http://www.convead.com" target="_blank" data-link-external="true">Powered by Convead.com</a></div>
 </div>
 <div class="convead-client-backdrop">
 </div>
