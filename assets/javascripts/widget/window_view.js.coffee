@@ -8,8 +8,8 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
       tab_views:
         chat_tab:         new ICRMClient.Chat.ChatTabView collection: options.messages, eb: @eb
         notification_tab: new ICRMClient.Notifications.NotificationTabView collection: options.notifications, eb: @eb
-        suggestion_tab:   new ICRMClient.Suggestion.SuggestionTabView()
-        problem_tab:      new ICRMClient.Problem.ProblemTabView()
+        #suggestion_tab:   new ICRMClient.Suggestion.SuggestionTabView()
+        #problem_tab:      new ICRMClient.Problem.ProblemTabView()
 
     @listenTo @eb, 'message:show', =>
       return false if @isVisibly()
