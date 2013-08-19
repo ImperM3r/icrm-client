@@ -23,6 +23,7 @@ class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
   initClose: (options) =>
     @ajax
       url: @conversation_url + '/close'
+      data: { sender: @sender.attributes }
       success: => options.success.call() if options.success
       error: => options.error.call() if options.error
 
