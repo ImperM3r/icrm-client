@@ -10,6 +10,8 @@ class ICRMClient.Chat.MessageObserver extends @ICRMClient.Base
     @conversation_url = "#{@assets.api_url}chat/conversation/#{options.conversation.id}"
     @listenTo @collection, 'add', @_msgHandler
 
+  close: => @stopListening()
+
   _msgHandler: (model) =>
     # assume msg is new if no id present
     if @_msgIsNew model then @_postMessage model
