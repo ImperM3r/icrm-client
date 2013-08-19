@@ -15,10 +15,6 @@ class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
     conv_sub = @faye.subscribe @conversation_channel, @_messageHandler
     conv_sub.callback =>
       console.log "conversation id: #{@conversation.id} established"
-      @_getHistory()
-      @listenTo @eb, 'messages:history:get', (e) =>
-        since_id = if first = @collection.first() then first.get('id') else undefined
-        @_getHistory since_id
       callbacks.success.call() if callbacks.success
 
     conv_sub.errback => callbacks.error.call() if callbacks.error
@@ -42,11 +38,3 @@ class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
       message.set m
     else
       console.log "message does not exist in collection, id: #{m.id}"
-
-  _getHistory: (since_id) ->
-    @ajax
-      url: @conversation_url + '/messages'
-      data: { since_id: since_id, count: window.ICRMClient.history_count }
-      success: (response) =>
-        console.log "recieved last #{response.length} messages"
-        @collection.add( new @collection.model message ) for message in response by -1

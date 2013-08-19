@@ -16,20 +16,41 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
       visitor_id = options.visitor_id
 
     @service_channel  = "/service/#{visitor_id}"
+    @service_url      = "#{@assets.api_url}chat/service/#{visitor_id}"
 
-    @faye.subscribe @service_channel, @_serviceHandler
+    @_getHistory()
+
+    service_channel = @faye.subscribe @service_channel, @_serviceHandler
+    service_channel.callback =>
+      @ajax
+        url: @service_url + '/check'
+        data: { sender: @sender.attributes }
+        success: => console.log 'check for open conversations'
+
+    @listenTo @collection, 'add', @_markRead
+
+    @listenTo @eb, 'messages:history:get', (e) =>
+      since_id = if first = @collection.first() then first.get('id') else undefined
+      @_getHistory since_id
 
     @listenTo @eb, 'window:shown standalone:shown', =>
       return if @conversation_open
       @ajax
-        url: "#{@assets.api_url}chat/service/#{visitor_id}"
+        url: @service_url
         data: { sender: @sender.attributes }
         success: => console.log "establish conversation attempt successfull"
-        error: => console.log "establish conversation attempt failed"
+        error: (response) =>
+          msg = response.responseJSON.error
+          @collection.add @collection.model
+            content: msg
+            created_at: new Date
+            id: 0
+            read: true
+          console.log "establish conversation attempt failed"
 
   _serviceHandler: (msg) =>
-    switch msg.entity
-      when 'conversation' then @_newConversation msg.conversation
+    switch msg.event
+      when 'open_conversation' then @_newConversation msg.conversation
       else console.log msg
 
   _newConversation: (conversation) =>
@@ -37,5 +58,28 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
     @conversation_open = true
     options = eb: @eb, conversation: conversation, collection: @collection, sender: @sender, faye: @faye
     new ICRMClient.Chat.ConversationController options,
-      success: => new ICRMClient.Chat.MessageObserver options
+      success: =>
+        new ICRMClient.Chat.MessageObserver options
+        @eb.trigger 'message:show'
       error: => @conversation_open = false
+
+  _getHistory: (since_id) =>
+    @ajax
+      url: @service_url + '/messages'
+      data: { since_id: since_id, count: window.ICRMClient.history_count }
+      success: (response) =>
+        console.log "recieved last #{response.length} messages"
+        @collection.add( new @collection.model message ) for message in response by -1
+
+  _msgIsUnread: (model) =>
+    model.get('id') and model.get('read') != true and model.get('sender').id != @sender.get('id')
+
+  _markRead: (model) =>
+    if @_msgIsUnread(model)
+      @eb.trigger 'message:show'
+      @ajax
+        url: "#{@service_url}/message/#{model.get('id')}/mark_read"
+        data: model.attributes
+        success: (response) ->
+          if response.status != false then model.set response.message
+          console.log "message id:#{model.get('id')} | read status: #{response.status}"
