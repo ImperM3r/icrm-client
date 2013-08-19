@@ -14,10 +14,21 @@ class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
 
     conv_sub = @faye.subscribe @conversation_channel, @_messageHandler
     conv_sub.callback =>
+      @message_observer = new ICRMClient.Chat.MessageObserver options
       console.log "conversation id: #{@conversation.id} established"
       callbacks.success.call() if callbacks.success
 
     conv_sub.errback => callbacks.error.call() if callbacks.error
+
+  initClose: (options) =>
+    @ajax
+      url: @conversation_url + '/close'
+      success: => options.success.call() if options.success
+      error: => options.error.call() if options.error
+
+  close: =>
+    @stopListening()
+    @message_observer.close()
 
   _messageHandler: (msg) =>
     switch msg.method

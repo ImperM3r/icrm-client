@@ -16,6 +16,9 @@ class ICRMClient.Widget.WindowView extends @ICRMClient.Backbone.View
       @show()
       @eb.trigger 'window:tab:chat:show'
 
+    @listenTo @eb, 'window:close', =>
+      @hide()
+
   events:
     'click a.window_close' : 'close'
 

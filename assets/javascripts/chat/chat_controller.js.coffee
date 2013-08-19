@@ -48,20 +48,38 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
             read: true
           console.log "establish conversation attempt failed"
 
+    @listenTo @eb, 'window:hidden', @_initCloseConversation
+
   _serviceHandler: (msg) =>
     switch msg.event
       when 'open_conversation' then @_newConversation msg.conversation
+      when 'close_conversation' then @_closeConversation(); @eb.trigger 'window:close'
       else console.log msg
 
   _newConversation: (conversation) =>
     return if @conversation_open
     @conversation_open = true
     options = eb: @eb, conversation: conversation, collection: @collection, sender: @sender, faye: @faye
-    new ICRMClient.Chat.ConversationController options,
+    @conversation_controller = new ICRMClient.Chat.ConversationController options,
       success: =>
-        new ICRMClient.Chat.MessageObserver options
         @eb.trigger 'message:show'
+        console.log "new conversation initialized #{JSON.stringify(conversation)}"
       error: => @conversation_open = false
+
+  _initCloseConversation: =>
+    return unless @conversation_open
+    @conversation_open = false
+    if @conversation_controller
+      @conversation_controller.initClose
+        error: =>
+          @conversation_open = true
+          console.log 'cannot close conversation'
+
+  _closeConversation: =>
+    @conversation_open = false
+    @conversation_controller.close()
+    delete @conversation_controller
+    console.log 'conversation closed'
 
   _getHistory: (since_id) =>
     @ajax
