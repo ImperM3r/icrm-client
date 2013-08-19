@@ -15,7 +15,7 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
     else
       visitor_id = options.visitor_id
 
-    @service_channel  = "/service/#{visitor_id}"
+    @service_channel  = "/service/visitor/#{visitor_id}"
     @service_url      = "#{@assets.api_url}chat/service/#{visitor_id}"
 
     @_getHistory()
