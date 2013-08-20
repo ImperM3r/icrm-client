@@ -1,7 +1,7 @@
 class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
 
   constructor: (options, callbacks) ->
-    _.extend @, ICRMClient.Backbone.Events
+    @_.extend @, ICRMClient.Backbone.Events
 
     @conversation = options.conversation
     @eb           = options.eb

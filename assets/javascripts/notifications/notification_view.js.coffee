@@ -14,7 +14,7 @@ class ICRMClient.Notifications.NotificationView extends @ICRMClient.Backbone.Vie
 
   _presentation: =>
     presentation = @model.toJSON()
-    _.extend presentation, window.ICRMClient.Helpers, @
+    @_.extend presentation, window.ICRMClient.Helpers, @
     presentation
 
   _close: =>

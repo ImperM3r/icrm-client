@@ -3,7 +3,7 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
   className: 'convead_client-standalone_chat'
 
   initialize: (options) ->
-    @eb = _.extend {}, ICRMClient.Backbone.Events
+    @eb = @_.extend {}, ICRMClient.Backbone.Events
     sender          = options.sender
     messages        = new ICRMClient.Chat.MessagesCollection()
     chat_controller = new ICRMClient.Chat.ChatController

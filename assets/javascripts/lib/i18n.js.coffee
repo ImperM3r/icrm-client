@@ -5,7 +5,7 @@
 fallback_dict = @ICRMClient.I18n.en
 dict = @ICRMClient.I18n['ru'] #[@ICRMClient.locale]
 
-_.extend @ICRMClient.Backbone.View.prototype, {
+@ICRMClient.underscore.extend @ICRMClient.Backbone.View.prototype, {
   t: (key) =>
     tr = dict[key] or fallback_dict[key] or ''
     unless tr
