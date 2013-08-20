@@ -19,7 +19,7 @@ class @ICRMClient.Base
 
   ajax: (options) =>
 
-    data = _.extend options,
+    data = @_.extend options,
       headers:
         'X-Convead-Appkey': window.ICRMClient.app_key
       crossDomain: true

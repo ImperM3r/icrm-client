@@ -20,7 +20,7 @@ class ICRMClient.Notifications.NotificationListItemView extends @ICRMClient.Back
 
   presentation: ->
     p = @model.toJSON()
-    _.extend p, window.ICRMClient.Helpers, @
+    @_.extend p, window.ICRMClient.Helpers, @
     p
 
   _showNotification: ->

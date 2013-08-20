@@ -1,7 +1,7 @@
 class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
 
   constructor: (options, callbacks) ->
-    _.extend @, ICRMClient.Backbone.Events
+    @_.extend @, ICRMClient.Backbone.Events
 
     @conversation = options.conversation
     @eb           = options.eb
@@ -12,16 +12,15 @@ class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
     @conversation_url     = "#{@assets.api_url}chat/conversation/#{@conversation.id}"
     @conversation_channel = "/conversations/#{@conversation.id}"
 
-
     conv_sub = @faye.subscribe @conversation_channel, @_messageHandler
     conv_sub.callback =>
       @message_observer = new ICRMClient.Chat.MessageObserver options
       @listenTo @eb, 'messages:history:get', (e) =>
         since_id = if first = @collection.first() then first.get('id') else undefined
         @_getHistory since_id
+      @listenTo @eb, 'window:hidden', @_initClose
       @_getHistory()
       console.log "conversation id: #{@conversation.id} established"
-
       callbacks.success.call() if callbacks.success
 
     conv_sub.errback => callbacks.error.call() if callbacks.error
@@ -30,8 +29,6 @@ class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
     @ajax
       url: @conversation_url + '/close'
       data: { sender: @sender.attributes }
-      success: => options.success.call() if options.success
-      error: => options.error.call() if options.error
 
   _close: =>
     @stopListening()

@@ -1,9 +1,6 @@
 class ICRMClient.Chat.ChatController extends @ICRMClient.Base
-
   constructor: (options) ->
-    _.extend @, ICRMClient.Backbone.Events
-
-    @conversation_open = false
+    @_.extend @, ICRMClient.Backbone.Events
 
     @eb                = options.eb
     @collection        = options.collection
@@ -26,7 +23,7 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
         success: => console.log 'check for open conversations'
 
     @listenTo @eb, 'window:shown standalone:shown', =>
-      return if @conversation_open
+      return if @conversation_controller
       @ajax
         url: @service_url + '/calling'
         data: { sender: @sender.attributes }
@@ -40,8 +37,6 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
             read: true
           console.log "establish conversation attempt failed"
 
-    @listenTo @eb, 'window:hidden', @_initCloseConversation
-
   _serviceHandler: (msg) =>
     switch msg.event
       when 'calling' then @_newConversation msg.conversation
@@ -49,11 +44,10 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
       else console.log msg
 
   _newConversation: (conversation) =>
-    return if @conversation_open
-    @conversation_open = true
+    return if @conversation_controller
     options = eb: @eb, conversation: conversation, collection: @collection, sender: @sender, faye: @faye
     @conversation_controller = new ICRMClient.Chat.ConversationController options,
       success: =>
         @eb.trigger 'message:show'
         console.log "new conversation initialized #{JSON.stringify(conversation)}"
-      error: => @conversation_open = false
+      error: => @conversation_controller = false

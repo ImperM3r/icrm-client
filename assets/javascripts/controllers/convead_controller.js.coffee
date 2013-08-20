@@ -20,7 +20,7 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
       app_key: window.ICRMClient.app_key
       visitor: visitor
 
-    eb = _.extend {}, ICRMClient.Backbone.Events
+    eb = @_.extend {}, ICRMClient.Backbone.Events
 
     sender                   = new ICRMClient.Chat.Chatter visitor
     messages                 = new ICRMClient.Chat.MessagesCollection()
