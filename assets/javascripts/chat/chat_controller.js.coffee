@@ -40,8 +40,8 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
         data: { sender: @sender.attributes }
         success: => console.log "establish conversation attempt successfull"
         error: (response) =>
-          msg = response.responseJSON.error
-          @collection.add @collection.model
+          msg = response.responseText
+          @collection.add new @collection.model
             content: msg
             created_at: new Date
             id: 0
