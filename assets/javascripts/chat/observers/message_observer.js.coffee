@@ -1,7 +1,7 @@
 class ICRMClient.Chat.MessageObserver extends @ICRMClient.Base
 
   constructor: (options) ->
-    _.extend @, window.ICRMClient.Backbone.Events
+    @_.extend @, window.ICRMClient.Backbone.Events
 
     @eb         = options.eb
     @collection = options.collection
