@@ -12,22 +12,28 @@ class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
     @conversation_url     = "#{@assets.api_url}chat/conversation/#{@conversation.id}"
     @conversation_channel = "/conversations/#{@conversation.id}"
 
+
     conv_sub = @faye.subscribe @conversation_channel, @_messageHandler
     conv_sub.callback =>
       @message_observer = new ICRMClient.Chat.MessageObserver options
+      @listenTo @eb, 'messages:history:get', (e) =>
+        since_id = if first = @collection.first() then first.get('id') else undefined
+        @_getHistory since_id
+      @_getHistory()
       console.log "conversation id: #{@conversation.id} established"
+
       callbacks.success.call() if callbacks.success
 
     conv_sub.errback => callbacks.error.call() if callbacks.error
 
-  initClose: (options) =>
+  _initClose: (options) =>
     @ajax
       url: @conversation_url + '/close'
       data: { sender: @sender.attributes }
       success: => options.success.call() if options.success
       error: => options.error.call() if options.error
 
-  close: =>
+  _close: =>
     @stopListening()
     @message_observer.close()
 
@@ -50,3 +56,11 @@ class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
       message.set m
     else
       console.log "message does not exist in collection, id: #{m.id}"
+
+  _getHistory: (since_id) =>
+    @ajax
+      url: @conversation_url + '/messages'
+      data: { since_id: since_id, count: window.ICRMClient.history_count }
+      success: (response) =>
+        console.log "recieved last #{response.length} messages"
+        @collection.add( new @collection.model message ) for message in response by -1

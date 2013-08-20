@@ -3,8 +3,8 @@ class ICRMClient.Chat.MessagesCollection extends @ICRMClient.Backbone.Collection
   model: ICRMClient.Chat.Message
 
   comparator: (model) ->
-    #new Date(model.get('created_at')).getTime()
-    model.get('id')
+    new Date(model.get('created_at')).getTime()
+    #model.get('id')
 
   next: (model) =>
     index = @indexOf model
