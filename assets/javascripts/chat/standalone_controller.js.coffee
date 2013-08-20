@@ -29,6 +29,7 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
   show: ->
     @$el.show()
     @eb.trigger 'standalone:shown'
+    @button.trigger 'show' if @button
 
   close: ->
     @hide()
@@ -36,6 +37,7 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
   hide: ->
     @$el.hide()
     @eb.trigger 'standalone:hidden'
+    @button.trigger 'hide' if @button
 
   isVisible: ->
     @$el.is(":visible")
