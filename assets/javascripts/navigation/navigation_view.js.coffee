@@ -10,14 +10,13 @@ class ICRMClient.Widget.NavigationView extends @ICRMClient.Backbone.View
       @buttons.push new ICRMClient.Widget.NavigationButton nav_controller: @, tab_view: tab_view
 
   selectTabView: (button)->
-    if button != @current_button
-      current_header_class = ''
-      if @current_button
-        @current_button.inactivate()
-        current_header_class = @current_button.tab_view.header_class
+    current_header_class = ''
+    if @current_button
+      @current_button.inactivate()
+      current_header_class = @current_button.tab_view.header_class
 
-      @widget_view.switchHeaderClass current_header_class, button.tab_view.header_class
-      @current_button = button.activate()
+    @widget_view.switchHeaderClass current_header_class, button.tab_view.header_class
+    @current_button = button.activate()
 
   render: ->
     @$el.html @template(@)
