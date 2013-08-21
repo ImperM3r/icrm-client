@@ -8,16 +8,16 @@ class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
     @sender       = options.sender
     @collection   = options.collection
 
-    @url     = "#{@assets.api_url}chat/#{@sender.ident}/conversations/#{@conversation.id}"
-    channel = "/chat/#{@sender.ident}/conversations/#{@conversation.id}"
+    @url     = "#{@assets.chat_api_url}#{@sender.get('to_ident')}/conversations/#{@conversation.id}"
+    channel = "/chat/#{@sender.get('to_ident')}/conversations/#{@conversation.id}"
 
     conv_sub = @faye.subscribe channel, @_messageHandler
     conv_sub.callback =>
-      @_channelReady()
+      @_channelReady options
       callbacks.success.call() if callbacks.success
     conv_sub.errback => callbacks.error.call() if callbacks.error
 
-  _channelReady: =>
+  _channelReady: (options) =>
       @message_observer = new ICRMClient.Chat.MessageObserver options
       @_sendOpen()
       @listenTo @eb, 'messages:history:get', =>
@@ -49,7 +49,7 @@ class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
         @collection.add new @collection.model(message)
 
   _getHistory: (since_id) =>
-    @ajax
+    @ajax_get
       url: @url + '/messages'
       data: { since_id: since_id, count: window.ICRMClient.history_count }
       success: (messages) =>

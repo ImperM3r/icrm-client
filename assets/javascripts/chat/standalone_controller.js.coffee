@@ -63,6 +63,7 @@ window.ICRMClient.Chat.Start = (conversation_id) ->
       id: 10
       type: 'User'
       name: 'Danil Pismenny'
+      to_ident: 'Manager:10'
 
     chat = window.ICRMClient.standalone_chat = new window.ICRMClient.Chat.StandaloneController
       recipient_ident: ICRMClient.visitor.ident

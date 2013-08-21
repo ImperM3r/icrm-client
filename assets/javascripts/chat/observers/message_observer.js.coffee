@@ -7,7 +7,7 @@ class ICRMClient.Chat.MessageObserver extends @ICRMClient.Base
     @collection = options.collection
     @sender     = options.sender
 
-    @url = "#{@assets.api_url}chat/#{@sender.ident}/conversations/#{options.conversation.id}/messages"
+    @url = "#{@assets.chat_api_url}#{@sender.get('to_ident')}/conversations/#{options.conversation.id}/messages"
     @listenTo @collection, 'add', @_msgHandler
 
   close: => @stopListening()
@@ -21,7 +21,7 @@ class ICRMClient.Chat.MessageObserver extends @ICRMClient.Base
     !model.get('id')
 
   _postMessage: (model) =>
-    @ajax url: @url, data: model.attributes
+    @ajax url: @url, data: model.attributes, success: (msg) -> model.set msg
 
   _msgIsUnread: (model) =>
     model.get('id') and model.get('read') != true and model.get('sender').id != @sender.get('id')

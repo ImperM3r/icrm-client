@@ -2,7 +2,7 @@ class @ICRMClient.InformerController extends @ICRMClient.Base
 
   constructor: (after_callback) ->
     @after_callback = after_callback
-    @logger_url = @assets.api_url + 'logger'
+    @logger_url = @assets.basic_api_url + 'logger'
 
     @perform()
 

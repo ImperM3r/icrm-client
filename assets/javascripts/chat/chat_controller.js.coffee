@@ -7,8 +7,8 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
     @sender            = options.sender
     @faye              = options.faye
 
-    @url     = "#{@assets.api_url}chat/#{@sender.ident}"
-    channel  = "/chat/#{@sender.ident}"
+    @url     = "#{@assets.chat_api_url}#{@sender.get('to_ident')}"
+    channel  = "/chat/#{@sender.get('to_ident')}"
 
     serv_sub = @faye.subscribe channel, @_serviceHandler
     serv_sub.callback => @ajax url: @url + '/online'
@@ -18,7 +18,6 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
       @ajax
         url: @url + '/call'
         data: { recipient: options.recipient_ident }
-        success: => console.log "establish conversation attempt successfull"
         error: (response) => @collection.addServiceMsg response.message
 
   _serviceHandler: (msg) =>

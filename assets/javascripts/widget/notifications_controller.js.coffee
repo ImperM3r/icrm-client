@@ -2,7 +2,7 @@ class @ICRMClient.Widget.NotificationsController extends @ICRMClient.Base
 
   constructor: (options) ->
     @collection = options.collection
-    @notification_url = window.ICRMClient.Assets.api_url + '/notifications/' + options.visitor.id
+    @notification_url = window.ICRMClient.Assets.basic_api_url + 'notifications/' + options.visitor.id
     @faye = options.faye
     @chanel = "/notifications/#{options.visitor.id}"
 
@@ -29,5 +29,3 @@ class @ICRMClient.Widget.NotificationsController extends @ICRMClient.Base
       success: (response) =>
         console.log "recieved unread #{response.length} notifications"
         @collection.add (new  @collection.model(notification) for notification in response)
-
-

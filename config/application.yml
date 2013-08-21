@@ -1,14 +1,17 @@
 development: # use application.local.yml for custom settings
-  url:         'http://3007.vkontraste.ru/'
-  faye_url:    'http://3009.vkontraste.ru:8808/faye'
-  api_url:     'http://api.3009.vkontraste.ru/v1/'
+  url:           'http://3007.vkontraste.ru/'
+  faye_url:      'http://3009.vkontraste.ru:8808/faye'
+  basic_api_url: 'http://api.3009.vkontraste.ru/v1/'
+  chat_api_url:  'http://api.3009.vkontraste.ru/chat/v1/'
 
 production:
-  url:         'http://widget.convead.com/'
-  faye_url:    'http://convead.com:8809/faye'
-  api_url:     'http://api.convead.com/v1/'
+  url:           'http://widget.convead.com/'
+  faye_url:      'http://convead.com:8809/faye'
+  basic_api_url: 'http://api.convead.com/v1/'
+  chat_api_url:  'http://api.convead.com/chat/v1/'
 
 stage:
-  url:         'http://widget.icrm.icfdev.ru/'
-  faye_url:    'http://icrm.icfdev.ru:8809/faye'
-  api_url:     'http://api.icrm.icfdev.ru/v1/'
+  url:           'http://widget.icrm.icfdev.ru/'
+  faye_url:      'http://icrm.icfdev.ru:8809/faye'
+  basic_api_url: 'http://api.icrm.icfdev.ru/v1/'
+  chat_api_url:  'http://api.icrm.icfdev.ru/chat/v1/'

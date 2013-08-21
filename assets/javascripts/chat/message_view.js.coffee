@@ -5,8 +5,7 @@ class ICRMClient.Chat.MessageView extends @ICRMClient.Backbone.View
     class: @_class()
 
   initialize: (options) ->
-    @listenTo @model, 'change', (model) =>
-      @render()
+    @listenTo @model, 'change', (model) => @render()
 
   template: JST['chat/message_view']
 

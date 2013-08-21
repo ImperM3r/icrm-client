@@ -1,5 +1,5 @@
 class ICRMClient.Notifications.NotificationModel extends @ICRMClient.Backbone.Model
-  read_url: window.ICRMClient.Assets.api_url + 'notifications/mark_read'
+  read_url: window.ICRMClient.Assets.basic_api_url + 'notifications/mark_read'
 
   markRead: =>
     return if @get('read')
