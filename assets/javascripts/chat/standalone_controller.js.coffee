@@ -7,11 +7,11 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
     sender          = options.sender
     messages        = new ICRMClient.Chat.MessagesCollection()
     chat_controller = new ICRMClient.Chat.ChatController
-      visitor_id: options.visitor_id
-      eb:         @eb
-      collection: messages
-      sender:     sender
-      faye:       options.faye
+      recipient_ident: options.recipient_ident
+      eb:              @eb
+      collection:      messages
+      sender:          sender
+      faye:            options.faye
 
     @chat = new ICRMClient.Chat.ChatTabView collection: messages, eb: @eb
 
@@ -65,9 +65,9 @@ window.ICRMClient.Chat.Start = (conversation_id) ->
       name: 'Danil Pismenny'
 
     chat = window.ICRMClient.standalone_chat = new window.ICRMClient.Chat.StandaloneController
-      visitor_id: ICRMClient.visitor.id
-      sender:     sender
-      faye:       window.ICRMClient.faye
+      recipient_ident: ICRMClient.visitor.ident
+      sender:          sender
+      faye:            window.ICRMClient.faye
 
     ICRMClient.$('#convead_client_container').append chat.render().$el
     chat.show()

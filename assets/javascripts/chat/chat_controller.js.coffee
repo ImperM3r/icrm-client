@@ -7,40 +7,23 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
     @sender            = options.sender
     @faye              = options.faye
 
-    if @sender.get('type') == 'Visitor'
-      visitor_id = @sender.get('id')
-    else
-      visitor_id = options.visitor_id
+    @url     = "#{@assets.api_url}chat/#{@sender.ident}"
+    channel  = "/chat/#{@sender.ident}"
 
-    @service_channel  = "/service/visitor/#{visitor_id}"
-    @service_url      = "#{@assets.api_url}chat/service/#{visitor_id}"
-
-    service_channel = @faye.subscribe @service_channel, @_serviceHandler
-    service_channel.callback =>
-      @ajax
-        url: @service_url + '/online'
-        data: { sender: @sender.attributes }
-        success: => console.log 'check for open conversations'
+    serv_sub = @faye.subscribe channel, @_serviceHandler
+    serv_sub.callback => @ajax url: @url + '/online'
 
     @listenTo @eb, 'window:shown standalone:shown', =>
       return if @conversation_controller
       @ajax
-        url: @service_url + '/calling'
-        data: { sender: @sender.attributes }
+        url: @url + '/call'
+        data: { recipient: options.recipient_ident }
         success: => console.log "establish conversation attempt successfull"
-        error: (response) =>
-          msg = response.responseText
-          @collection.add new @collection.model
-            content: msg
-            created_at: new Date
-            id: 0
-            read: true
-          console.log "establish conversation attempt failed"
+        error: (response) => @collection.addServiceMsg response.message
 
   _serviceHandler: (msg) =>
     switch msg.event
-      when 'calling' then @_newConversation msg.conversation
-      when 'close_conversation' then @_closeConversation(); @eb.trigger 'window:close'
+      when 'call' then @_newConversation msg.conversation
       else console.log msg
 
   _newConversation: (conversation) =>
@@ -49,5 +32,8 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
     @conversation_controller = new ICRMClient.Chat.ConversationController options,
       success: =>
         @eb.trigger 'message:show'
+        @listenTo @conversation_controller, 'close', @_closeConversation
         console.log "new conversation initialized #{JSON.stringify(conversation)}"
-      error: => @conversation_controller = false
+      error: @_closeConversation
+
+  _closeConversation: => delete @conversation_controller

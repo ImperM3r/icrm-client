@@ -7,7 +7,7 @@ class ICRMClient.Chat.MessageObserver extends @ICRMClient.Base
     @collection = options.collection
     @sender     = options.sender
 
-    @conversation_url = "#{@assets.api_url}chat/conversation/#{options.conversation.id}"
+    @url = "#{@assets.api_url}chat/#{@sender.ident}/conversations/#{options.conversation.id}/messages"
     @listenTo @collection, 'add', @_msgHandler
 
   close: => @stopListening()
@@ -21,12 +21,7 @@ class ICRMClient.Chat.MessageObserver extends @ICRMClient.Base
     !model.get('id')
 
   _postMessage: (model) =>
-    model.set('sender', @sender.attributes)
-    @ajax
-      url: @conversation_url
-      data: model.attributes
-      success: (response) =>
-        model.set response
+    @ajax url: @url, data: model.attributes
 
   _msgIsUnread: (model) =>
     model.get('id') and model.get('read') != true and model.get('sender').id != @sender.get('id')
@@ -35,6 +30,6 @@ class ICRMClient.Chat.MessageObserver extends @ICRMClient.Base
     if @_msgIsUnread(model)
       @eb.trigger 'message:show'
       @ajax
-        url: "#{@converation_url}/message/#{model.get('id')}/mark_read"
+        url: "#{@url}/#{model.get('id')}/mark_read"
         data: model.attributes
         success: (response) -> console.log "message id:#{model.get('id')} | read status: #{response.status}"

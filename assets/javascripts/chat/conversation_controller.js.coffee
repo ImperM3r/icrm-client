@@ -1,5 +1,4 @@
 class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
-
   constructor: (options, callbacks) ->
     @_.extend @, ICRMClient.Backbone.Events
 
@@ -9,55 +8,50 @@ class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
     @sender       = options.sender
     @collection   = options.collection
 
-    @conversation_url     = "#{@assets.api_url}chat/conversation/#{@conversation.id}"
-    @conversation_channel = "/conversations/#{@conversation.id}"
+    @url     = "#{@assets.api_url}chat/#{@sender.ident}/conversations/#{@conversation.id}"
+    channel = "/chat/#{@sender.ident}/conversations/#{@conversation.id}"
 
-    conv_sub = @faye.subscribe @conversation_channel, @_messageHandler
+    conv_sub = @faye.subscribe channel, @_messageHandler
     conv_sub.callback =>
-      @message_observer = new ICRMClient.Chat.MessageObserver options
-      @listenTo @eb, 'messages:history:get', (e) =>
-        since_id = if first = @collection.first() then first.get('id') else undefined
-        @_getHistory since_id
-      @listenTo @eb, 'window:hidden', @_initClose
-      @_getHistory()
-      console.log "conversation id: #{@conversation.id} established"
+      @_channelReady()
       callbacks.success.call() if callbacks.success
-
     conv_sub.errback => callbacks.error.call() if callbacks.error
 
-  _initClose: (options) =>
-    @ajax
-      url: @conversation_url + '/close'
-      data: { sender: @sender.attributes }
+  _channelReady: =>
+      @message_observer = new ICRMClient.Chat.MessageObserver options
+      @_sendOpen()
+      @listenTo @eb, 'messages:history:get', =>
+        since_id = if first = @collection.first() then first.get('id') else undefined
+        @_getHistory since_id
+      @listenTo @eb, 'window:hidden', @_sendClose
+      console.log "conversation id: #{@conversation.id} established"
 
-  _close: =>
-    @stopListening()
-    @message_observer.close()
+  _sendOpen: => @ajax url: @url + '/open'
+  _sendClose: => @ajax url: @url + '/close'
 
   _messageHandler: (msg) =>
-    switch msg.method
-      when 'create' then @_createMessage msg.message
-      when 'modify' then @_modifyMessage msg.message
+    switch msg.event
+      when 'messages' then @_addMessages msg.messages
+      when 'close' then @_closeConversation msg.message
       else console.log "Unknown message method: #{msg.method}"
 
-  _createMessage: (m) =>
-    # Collection is smart to detect the existed message
-    if m.sender.id == @sender.get('id') && m.sender.type == @sender.get('type')
-      console.log "Got retranslated message"
-    else
-      @collection.add new @collection.model(m)
+  _closeConversation: (message) =>
+    @collection.addServiceMsg message
+    @message_observer.close()
+    @stopListening()
+    @trigger 'close'
 
-  _modifyMessage: (m) =>
-    if message = @collection.get(m.id)
-      console.log message
-      message.set m
-    else
-      console.log "message does not exist in collection, id: #{m.id}"
+  _addMessages: (messages) =>
+    @_.each messages, (message) =>
+      if msg = @collection.get(message.id)
+        msg.set message
+      else
+        @collection.add new @collection.model(message)
 
   _getHistory: (since_id) =>
     @ajax
-      url: @conversation_url + '/messages'
+      url: @url + '/messages'
       data: { since_id: since_id, count: window.ICRMClient.history_count }
-      success: (response) =>
-        console.log "recieved last #{response.length} messages"
-        @collection.add( new @collection.model message ) for message in response by -1
+      success: (messages) =>
+        @collection.add( new @collection.model message ) for message in messages by -1
+        console.log "recieved last #{messages.length} messages"
