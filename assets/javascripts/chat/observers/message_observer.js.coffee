@@ -32,4 +32,5 @@ class ICRMClient.Chat.MessageObserver extends @ICRMClient.Base
       @ajax
         url: "#{@url}/#{model.get('id')}/mark_read"
         data: model.attributes
+        type: 'PUT'
         success: (response) -> console.log "message id:#{model.get('id')} | read status: #{response.status}"

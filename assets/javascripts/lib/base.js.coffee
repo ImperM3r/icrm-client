@@ -25,7 +25,8 @@ class @ICRMClient.Base
       crossDomain: true
       xhrFields:
         withCredentials: true
-      type: 'POST'
+
+    data.type = options.type or 'POST'
 
     console.log "Sending ajax: " + JSON.stringify(data)
 

@@ -49,9 +49,10 @@ class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
         @collection.add new @collection.model(message)
 
   _getHistory: (since_id) =>
-    @ajax_get
+    @ajax
       url: @url + '/messages'
       data: { since_id: since_id, count: window.ICRMClient.history_count }
+      type: 'GET'
       success: (messages) =>
         @collection.add( new @collection.model message ) for message in messages by -1
         console.log "recieved last #{messages.length} messages"
