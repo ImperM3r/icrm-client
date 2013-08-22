@@ -19,13 +19,14 @@ class @ICRMClient.Base
 
   ajax: (options) =>
 
-    data = _.extend options,
+    data = @_.extend options,
       headers:
         'X-Convead-Appkey': window.ICRMClient.app_key
       crossDomain: true
       xhrFields:
         withCredentials: true
-      type: 'POST'
+
+    data.type = options.type or 'POST'
 
     console.log "Sending ajax: " + JSON.stringify(data)
 

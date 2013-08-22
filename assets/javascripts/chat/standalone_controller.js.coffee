@@ -3,15 +3,15 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
   className: 'convead_client-standalone_chat'
 
   initialize: (options) ->
-    @eb = _.extend {}, ICRMClient.Backbone.Events
-    sender          = options.sender
+    @eb = @_.extend {}, ICRMClient.Backbone.Events
+    author          = options.author
     messages        = new ICRMClient.Chat.MessagesCollection()
     chat_controller = new ICRMClient.Chat.ChatController
-      visitor_id: options.visitor_id
-      eb:         @eb
-      collection: messages
-      sender:     sender
-      faye:       options.faye
+      recipient_ident: options.recipient_ident
+      eb:              @eb
+      collection:      messages
+      author:          author
+      faye:            options.faye
 
     @chat = new ICRMClient.Chat.ChatTabView collection: messages, eb: @eb
 
@@ -59,15 +59,16 @@ window.ICRMClient.Chat.Start = (conversation_id) ->
     window.ICRMClient.standalone_chat.toggleVisibility()
   else
     # Fake Manager for testing
-    sender = new window.ICRMClient.Chat.Chatter
+    author = new window.ICRMClient.Chat.Chatter
       id: 10
       type: 'User'
       name: 'Danil Pismenny'
+      to_ident: 'Manager-10'
 
     chat = window.ICRMClient.standalone_chat = new window.ICRMClient.Chat.StandaloneController
-      visitor_id: ICRMClient.visitor.id
-      sender:     sender
-      faye:       window.ICRMClient.faye
+      recipient_ident: ICRMClient.visitor.to_ident
+      author:          author
+      faye:            window.ICRMClient.faye
 
     ICRMClient.$('#convead_client_container').append chat.render().$el
     chat.show()

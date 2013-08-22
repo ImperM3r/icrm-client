@@ -1,5 +1,5 @@
 <span class="convead-message-owner pull-left">
-  <%= if @sender then @sender.name %>
+  <%= if @author then @author.name %>
 </span>
 <span class="convead-message-datetime pull-right">
   <%= @msgDate @created_at %>
