@@ -4,11 +4,11 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
 
     @eb                = options.eb
     @collection        = options.collection
-    @sender            = options.sender
+    @author            = options.author
     @faye              = options.faye
 
-    @url     = "#{@assets.chat_api_url}#{@sender.get('to_ident')}"
-    channel  = "/chat/#{@sender.get('to_ident')}"
+    @url     = "#{@assets.chat_api_url}#{@author.get('to_ident')}"
+    channel  = "/chat/#{@author.get('to_ident')}"
 
     serv_sub = @faye.subscribe channel, @_serviceHandler
     serv_sub.callback => @ajax url: @url + '/online'
@@ -27,7 +27,7 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
 
   _newConversation: (conversation) =>
     return if @conversation_controller
-    options = eb: @eb, conversation: conversation, collection: @collection, sender: @sender, faye: @faye
+    options = eb: @eb, conversation: conversation, collection: @collection, author: @author, faye: @faye
     @conversation_controller = new ICRMClient.Chat.ConversationController options,
       success: =>
         @eb.trigger 'message:show'

@@ -5,11 +5,11 @@ class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
     @conversation = options.conversation
     @eb           = options.eb
     @faye         = options.faye
-    @sender       = options.sender
+    @author       = options.author
     @collection   = options.collection
 
-    @url     = "#{@assets.chat_api_url}#{@sender.get('to_ident')}/conversations/#{@conversation.id}"
-    channel = "/chat/#{@sender.get('to_ident')}/conversations/#{@conversation.id}"
+    @url     = "#{@assets.chat_api_url}#{@author.get('to_ident')}/conversations/#{@conversation.id}"
+    channel = "/chat/#{@author.get('to_ident')}/conversations/#{@conversation.id}"
 
     conv_sub = @faye.subscribe channel, @_messageHandler
     conv_sub.callback =>
@@ -43,6 +43,7 @@ class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
 
   _addMessages: (messages) =>
     @_.each messages, (message) =>
+      console.log "addMessages msg: #{JSON.stringify(message)}"
       if msg = @collection.get(message.id)
         msg.set message
       else
