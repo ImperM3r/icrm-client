@@ -14,7 +14,7 @@ class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
     conv_sub = @faye.subscribe channel, @_messageHandler
     conv_sub.callback =>
       @_channelReady options
-      callbacks.success.call() if callbacks.success
+      callbacks.success.call(@, @) if callbacks.success
     conv_sub.errback => callbacks.error.call() if callbacks.error
 
   _channelReady: (options) =>

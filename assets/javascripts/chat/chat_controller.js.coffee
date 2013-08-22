@@ -29,9 +29,9 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
     return if @conversation_controller
     options = eb: @eb, conversation: conversation, collection: @collection, author: @author, faye: @faye
     @conversation_controller = new ICRMClient.Chat.ConversationController options,
-      success: =>
+      success: (controller) =>
         @eb.trigger 'message:show'
-        @listenTo @conversation_controller, 'close', @_closeConversation
+        @listenTo controller, 'close', @_closeConversation
         console.log "new conversation initialized #{JSON.stringify(conversation)}"
       error: @_closeConversation
 
