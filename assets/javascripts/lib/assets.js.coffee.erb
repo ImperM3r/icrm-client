@@ -1,9 +1,10 @@
 @ICRMClient.Assets =
-  css_root:          "<%= Settings.url + '/assets' %>"
+  css_root:      "<%= Settings.url + '/assets' %>"
 
   # Faye
-  faye_js:      "<%= Settings.faye_url + '/client.js' %>"
-  faye_url:     "<%= Settings.faye_url %>"
+  faye_js:       "<%= Settings.faye_url + '/faye-browser-min.js?ver=' + SemVer.find.to_s %>"
+  faye_url:      "<%= Settings.faye_url %>"
 
   # API
-  api_url:      "<%= Settings.api_url %>"
+  basic_api_url: "<%= Settings.basic_api_url %>"
+  chat_api_url:  "<%= Settings.chat_api_url %>"

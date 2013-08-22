@@ -25,10 +25,8 @@ class @ICRMClient.Base
       crossDomain: true
       xhrFields:
         withCredentials: true
-      type: 'POST'
-      error: (e) ->
-        console.log "error while making cors ajax: #{e}"
-        #throw 'error'
+
+    data.type = options.type or 'POST'
 
     console.log "Sending ajax: " + JSON.stringify(data)
 

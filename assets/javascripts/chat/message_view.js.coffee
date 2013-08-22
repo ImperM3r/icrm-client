@@ -5,8 +5,7 @@ class ICRMClient.Chat.MessageView extends @ICRMClient.Backbone.View
     class: @_class()
 
   initialize: (options) ->
-    @listenTo @model, 'change', (model) =>
-      @render()
+    @listenTo @model, 'change', (model) => @render()
 
   template: JST['chat/message_view']
 
@@ -20,6 +19,6 @@ class ICRMClient.Chat.MessageView extends @ICRMClient.Backbone.View
     'convead-message-' + @model.get('id')
 
   _class: =>
-    type = if @model.get('sender') then @model.get('sender').type else 'Visitor'
+    type = if @model.get('author') then @model.get('author').type else 'Visitor'
     state = if @model.get('read') == true then 'read' else 'unread'
-    "convead-message convead-sender-#{type} convead-message-#{state}"
+    "convead-message convead-author-#{type} convead-message-#{state}"

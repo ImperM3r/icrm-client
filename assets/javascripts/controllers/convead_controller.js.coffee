@@ -22,9 +22,9 @@ class @ICRMClient.ConveadController extends @ICRMClient.Base
 
     eb = @_.extend {}, ICRMClient.Backbone.Events
 
-    sender                   = new ICRMClient.Chat.Chatter visitor
+    author                   = new ICRMClient.Chat.Chatter visitor
     messages                 = new ICRMClient.Chat.MessagesCollection()
-    chat_controller          = new ICRMClient.Chat.ChatController collection: messages, sender: sender, faye: faye, eb: eb
+    chat_controller          = new ICRMClient.Chat.ChatController collection: messages, author: author, faye: faye, eb: eb
 
     notifications            = new ICRMClient.Notifications.NotificationsCollection()
     notifications_controller = new ICRMClient.Widget.NotificationsController collection: notifications, visitor: visitor, faye: faye

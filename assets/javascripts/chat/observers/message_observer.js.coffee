@@ -5,34 +5,33 @@ class ICRMClient.Chat.MessageObserver extends @ICRMClient.Base
 
     @eb         = options.eb
     @collection = options.collection
-    @sender     = options.sender
+    @author     = options.author
 
-    @conversation_url = "#{@assets.api_url}chat/conversation/#{options.conversation.id}"
-    @listenTo @collection, 'add', @_msgHandler
+    @url = "#{@assets.chat_api_url}#{@author.get('to_ident')}/conversations/#{options.conversation.id}/messages"
+    @listenTo @collection, 'add change', @_msgHandler
+
+  close: => @stopListening()
 
   _msgHandler: (model) =>
     # assume msg is new if no id present
-    if      @_msgIsNew    model then @_postMessage model
-    else if @_msgIsUnread model then @_markRead    model
+    if @_msgIsUnread model then @_markRead model
+    if @_msgIsNew model then @_postMessage model
 
   _msgIsNew: (model) =>
     !model.get('id')
 
+  _postMessage: (model) =>
+    return unless model.get('content')
+    @ajax url: @url, data: model.attributes, success: (msg) -> 
+      model.set msg.message
+      console.log "renew msg: #{JSON.stringify msg}"
+
   _msgIsUnread: (model) =>
-    model.get('id') and model.get('read') != true and model.get('sender').id != @sender.get('id')
+    model.get('id') and model.get('read') != true
 
   _markRead: (model) =>
     @eb.trigger 'message:show'
     @ajax
-      url: "#{@conversation_url}/message/#{model.get('id')}/mark_read"
+      url: "#{@url}/#{model.get('id')}/mark_read"
       data: model.attributes
-      success: (response) ->
-        console.log "message id:#{model.get('id')} | read status: #{JSON.parse(response).status}"
-
-  _postMessage: (model) =>
-    model.set('sender', @sender.attributes)
-    @ajax
-      url: @conversation_url
-      data: model.attributes
-      success: (response) =>
-        model.set response
+      success: (msg) -> console.log "message id:#{model.get('id')} | read status: #{msg.state}"
