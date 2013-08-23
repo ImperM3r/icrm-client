@@ -11,11 +11,11 @@ class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
     @url     = "#{@assets.chat_api_url}#{@author.get('to_ident')}/conversations/#{@conversation.id}"
     channel = "/chat/#{@author.get('to_ident')}/conversations/#{@conversation.id}"
 
-    conv_sub = @faye.subscribe channel, @_messageHandler
-    conv_sub.callback =>
+    @conv_sub = @faye.subscribe channel, @_messageHandler
+    @conv_sub.callback =>
       @_channelReady options
       callbacks.success.call(@, @) if callbacks.success
-    conv_sub.errback => callbacks.error.call() if callbacks.error
+    @conv_sub.errback => callbacks.error.call() if callbacks.error
 
   _channelReady: (options) =>
       @message_observer = new ICRMClient.Chat.MessageObserver options
@@ -39,6 +39,7 @@ class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
     @collection.addServiceMsg message
     @message_observer.close()
     @stopListening()
+    @conv_sub.cancel()
     @trigger 'close'
 
   _addMessages: (messages) =>

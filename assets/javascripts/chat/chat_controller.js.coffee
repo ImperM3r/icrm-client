@@ -13,12 +13,17 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
     serv_sub = @faye.subscribe channel, @_serviceHandler
     serv_sub.callback => @ajax url: @url + '/online'
 
+    @listenTo @eb, 'conversation:status', =>
+      @eb.trigger if @conversation_controller then 'conversation:opened' else 'conversation:closed'
     @listenTo @eb, 'window:shown standalone:shown', =>
       return if @conversation_controller
       @ajax
         url: @url + '/call'
         data: { recipient: options.recipient_ident }
-        error: (response) => @collection.addServiceMsg response.message
+        error: (response) =>
+          unless json = response.responseJSON
+            json = JSON.parse response.responseText
+          @collection.addServiceMsg json.message
 
   _serviceHandler: (msg) =>
     switch msg.event
@@ -30,9 +35,11 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
     options = eb: @eb, conversation: conversation, collection: @collection, author: @author, faye: @faye
     @conversation_controller = new ICRMClient.Chat.ConversationController options,
       success: (controller) =>
-        @eb.trigger 'message:show'
+        @eb.trigger 'message:show conversation:opened'
         @listenTo controller, 'close', @_closeConversation
         console.log "new conversation initialized #{JSON.stringify(conversation)}"
       error: @_closeConversation
 
-  _closeConversation: => delete @conversation_controller
+  _closeConversation: =>
+    delete @conversation_controller
+    @eb.trigger 'conversation:closed'

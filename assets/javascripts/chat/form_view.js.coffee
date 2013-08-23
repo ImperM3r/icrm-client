@@ -3,8 +3,10 @@ class ICRMClient.Chat.FormView extends @ICRMClient.Backbone.View
 
   initialize: (options) ->
     @eb = options.eb
-    @listenTo @eb, 'window:tab:chat:shown standalone:shown', (e) =>
-      @$textarea().focus()
+
+    @listenTo @eb, 'window:tab:chat:shown standalone:shown', => @$textarea().focus()
+    @listenTo @eb, 'conversation:opened', @_enableForm
+    @listenTo @eb, 'conversation:closed', @_disableForm
 
   events:
     'submit' : '_submitMessage'
@@ -15,6 +17,7 @@ class ICRMClient.Chat.FormView extends @ICRMClient.Backbone.View
   render: ->
     @$el.html @template(@)
     @$textarea().submitByEnter()
+    @eb.trigger 'conversation:status'
     @
 
   _submitMessage: =>
@@ -24,3 +27,11 @@ class ICRMClient.Chat.FormView extends @ICRMClient.Backbone.View
 
   _postMessage: (content) =>
     @collection.add  new @collection.model(created_at: 'sending...', content: content)
+
+  _disableForm: =>
+    @$textarea().attr 'disabled', 'disabled'
+    @$('input[type="submit"]').attr 'disabled', 'disabled'
+
+  _enableForm: =>
+    @$('input[type="submit"]').removeAttr 'disabled'
+    @$textarea().removeAttr('disabled').focus()
