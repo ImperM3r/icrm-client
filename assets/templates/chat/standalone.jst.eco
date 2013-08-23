@@ -1,5 +1,6 @@
 <div class="convead-client-widget-window chat-standalone">
   <div class="convead-client-lightbox conversation">
+    <a href="#" class="window_minimize"></a>
     <a href="#" class="window_close"></a>
     <div class="j-convead-client-widget-window-content">
 

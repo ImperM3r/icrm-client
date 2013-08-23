@@ -428,14 +428,21 @@
     font-size: 14px
     margin-bottom: 4px
 
-  .window_close
+  .window_close,
+  .window_minimize
     position: absolute
     z-index: 9999
     width: 12px
     height: 12px
+  .window_close
     top: 20px
     right: 19px
     background: url(<%= Settings.url %>images/#{$imgDir}/sprite.png) no-repeat -1px -19px
+  .window_minimize
+    top: 20px
+    right: 39px
+    background: url(<%= Settings.url %>images/#{$imgDir}/sprite.png) no-repeat -21px -19px
+
 
   .pull-right
     float: right

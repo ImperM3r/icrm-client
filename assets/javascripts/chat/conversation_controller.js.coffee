@@ -23,7 +23,7 @@ class ICRMClient.Chat.ConversationController extends @ICRMClient.Base
       @listenTo @eb, 'messages:history:get', =>
         since_id = if first = @collection.first() then first.get('id') else undefined
         @_getHistory since_id
-      @listenTo @eb, 'window:hidden', @_sendClose
+      @listenTo @eb, 'window:hidden standalone:close', @_sendClose
       console.log "conversation id: #{@conversation.id} established"
 
   _sendOpen: => @ajax url: @url + '/open'
