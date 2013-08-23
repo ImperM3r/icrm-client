@@ -31,7 +31,7 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
     @eb.trigger 'standalone:shown'
     @button.trigger 'show' if @button
 
-  close: ->
+  minimize: ->
     @hide()
 
   hide: ->
@@ -48,8 +48,14 @@ class ICRMClient.Chat.StandaloneController extends @ICRMClient.Backbone.View
     else
       @show()
 
+  close: ->
+    @eb.trigger 'standalone:close'
+    @stopListening()
+    @$el.remove()
+
   events:
     'click .window_close' : 'close'
+    'click .window_minimize' : 'minimize'
 
 
 # Debugging helpers

@@ -10,8 +10,8 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
     @url     = "#{@assets.chat_api_url}#{@author.get('to_ident')}"
     channel  = "/chat/#{@author.get('to_ident')}"
 
-    serv_sub = @faye.subscribe channel, @_serviceHandler
-    serv_sub.callback => @ajax url: @url + '/online'
+    @serv_sub = @faye.subscribe channel, @_serviceHandler
+    @serv_sub.callback => @ajax url: @url + '/online'
 
     @listenTo @eb, 'conversation:status', =>
       @eb.trigger if @conversation_controller then 'conversation:opened' else 'conversation:closed'
@@ -24,6 +24,10 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
           unless json = response.responseJSON
             json = JSON.parse response.responseText
           @collection.addServiceMsg json.message
+
+    @listenTo @eb, 'standalone:close', =>
+      @stopListening()
+      @serv_sub.cancel()
 
   _serviceHandler: (msg) =>
     switch msg.event
