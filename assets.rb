@@ -18,6 +18,8 @@ class Assets < Sinatra::Base
       if ENV["RACK_ENV"] == "production" || ENV["RACK_ENV"] == "stage"
         env.js_compressor  = YUI::JavaScriptCompressor.new
         env.css_compressor = YUI::CssCompressor.new
+        uid = Digest::MD5.hexdigest(File.dirname(__FILE__))[0,8]
+        env.cache = Sprockets::Cache::FileStore.new("./tmp/sinatra-#{uid}")
       end
     })
   end
