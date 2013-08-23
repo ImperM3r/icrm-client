@@ -21,8 +21,10 @@ end
 
 use Rack::Cache,
   :verbose     => true,
-  :metastore   => "memcached://localhost:11211/convead_client/meta",
-  :entitystore => "memcached://localhost:11211/convead_client/body"
+  :metastore   => 'file:./tmp/cache/rack/meta',
+  :entitystore => 'file:./tmp/cache/rack/body'
+  #:metastore   => "memcached://localhost:11211/convead_client/meta",
+  #:entitystore => "memcached://localhost:11211/convead_client/body"
 
 use Assets
 run Application
