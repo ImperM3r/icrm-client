@@ -6,6 +6,7 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
     @collection        = options.collection
     @author            = options.author
     @faye              = options.faye
+    @recipient_ident   = options.recipient_ident
 
     @url     = "#{@assets.chat_api_url}#{@author.get('to_ident')}"
     channel  = "/chat/#{@author.get('to_ident')}"
@@ -15,6 +16,7 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
 
     @listenTo @eb, 'conversation:status', =>
       @eb.trigger if @conversation_controller then 'conversation:opened' else 'conversation:closed'
+
     @listenTo @eb, 'window:shown standalone:shown', =>
       return if @conversation_controller
       @ajax
@@ -35,7 +37,7 @@ class ICRMClient.Chat.ChatController extends @ICRMClient.Base
       else console.log msg
 
   _newConversation: (conversation) =>
-    return if @conversation_controller
+    return if @conversation_controller or (@recipient_ident and conversation.visitor.to_ident != @recipient_ident)
     options = eb: @eb, conversation: conversation, collection: @collection, author: @author, faye: @faye
     @conversation_controller = new ICRMClient.Chat.ConversationController options,
       success: (controller) =>
