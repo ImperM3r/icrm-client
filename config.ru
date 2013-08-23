@@ -21,6 +21,9 @@ end
 
 use Rack::Cache,
   :verbose     => true,
+  :default_ttl => 60,
+  #:metastore   => 'heap:/',
+  #:entitystore => 'heap:/'
   :metastore   => 'file:./tmp/cache/rack/meta',
   :entitystore => 'file:./tmp/cache/rack/body'
   #:metastore   => "memcached://localhost:11211/convead_client/meta",

@@ -32,6 +32,6 @@ class @ICRMClient.InformerController extends @ICRMClient.Base
     else
       @debug "Informer response #{JSON.stringify(response)}"
       window.ICRMClient.visitor = response.visitor
-      new window.ICRMClient.Pinger response.ping_period
+      window.ICRMClient.pinger = new window.ICRMClient.Pinger response.ping_period
 
       @after_callback()
