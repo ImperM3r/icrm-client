@@ -34,6 +34,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
+    dalli (2.6.4)
     debug_inspector (0.0.2)
     eco (1.0.0)
       coffee-script
@@ -66,6 +67,8 @@ GEM
     pry-nav (0.2.3)
       pry (~> 0.9.10)
     rack (1.5.2)
+    rack-cache (1.2)
+      rack (>= 0.4)
     rack-contrib (1.1.0)
       rack (>= 0.9.1)
     rack-cors (0.2.8)
@@ -118,10 +121,12 @@ DEPENDENCIES
   capistrano-rbenv
   capistrano-recipes0 (>= 1.1.0)!
   coffee-script
+  dalli
   eco
   haml
   pry
   pry-nav
+  rack-cache
   rack-contrib
   rack-cors
   sass

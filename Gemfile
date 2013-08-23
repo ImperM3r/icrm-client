@@ -15,6 +15,9 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'yui-compressor'
 gem 'unicorn'
 gem 'semver2'
+gem 'rack-cache'
+gem 'dalli'
+
 
 group :development do
   gem "better_errors"
