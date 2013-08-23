@@ -8,6 +8,8 @@ class @ICRMClient.InformerController extends @ICRMClient.Base
 
   data: ->
     data =
+      client_version: window.ICRMClient.version
+      locale:         window.ICRMClient.locale
       current_url:    document.URL,
       referrer:       document.referrer,
       document_title: document.title || ''
@@ -30,5 +32,6 @@ class @ICRMClient.InformerController extends @ICRMClient.Base
     else
       @debug "Informer response #{JSON.stringify(response)}"
       window.ICRMClient.visitor = response.visitor
+      new window.ICRMClient.Pinger response.ping_period
 
       @after_callback()

@@ -14,6 +14,10 @@ class Application < Sinatra::Base
     haml :about, layout: :layout
   end
 
+  post '/v1/ping' do
+    content_type :json
+  end
+
   post '/v1/logger' do
     content_type :json
     { visitor: { id: 123 } }.to_json
