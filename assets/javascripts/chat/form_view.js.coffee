@@ -33,5 +33,5 @@ class ICRMClient.Chat.FormView extends @ICRMClient.Backbone.View
     @$('input[type="submit"]').attr 'disabled', 'disabled'
 
   _enableForm: =>
-    @$textarea().removeAttr 'disabled'
     @$('input[type="submit"]').removeAttr 'disabled'
+    @$textarea().removeAttr('disabled').focus()
