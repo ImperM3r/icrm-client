@@ -12,7 +12,9 @@ class @ICRMClient.InformerController extends @ICRMClient.Base
       locale:         window.ICRMClient.locale
       current_url:    document.URL,
       referrer:       document.referrer,
-      document_title: document.title || ''
+      document_title: document.title || '',
+      screen:         screen.width + 'x' + screen.height,
+      language:       (navigator.browserLanguage || navigator.language || "")
 
     data['user_data[' + prop + ']'] = window.ICRM_Settings[prop] for prop of window.ICRM_Settings
 
